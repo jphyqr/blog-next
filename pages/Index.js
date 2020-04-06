@@ -50,7 +50,7 @@ const Index = () => {
 
   return (
     <div>
-      <h1> It Works. Now What?  </h1>
+      <h1> It works! Now What??  </h1>
       <button onClick={handleCreateClick}>Create Course</button>
       {courses.map(course => (
         <Carousel key={course.id} course={course} />

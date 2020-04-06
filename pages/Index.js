@@ -16,7 +16,7 @@ const Index = () => {
   const handleCreateClick = async () => {
     let newCourse = await firestore.collection("courses").add({
       creationDate: Date.now()
-    });
+    }); 
     console.log(newCourse.id);
     router.push("/[courseId]/edit", `/${newCourse.id}/edit`);
   };

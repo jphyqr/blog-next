@@ -45,7 +45,7 @@ const index = () => {
 
     loadCourses();
 
-    
+     
   }, []); //[] only run, when whats in the [] changes
 
   return (

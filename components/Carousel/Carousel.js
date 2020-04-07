@@ -1,34 +1,23 @@
 import React from "react";
-import Link from "next/link";
-import { useRouter } from "next/router";
-const videos = [
-  { id: "asdfasdf", url: "video1", parentId: "sdfasdf", title: "Title 1" },
-  { id: "asdfasdf", url: "video2", parentId: "vsadfaa", title: "Title2" }
-];
 
-const Carousel = ({ course }) => {
-  const router = useRouter();
-  //we need to get the videos just for this course
 
-  let filteredVideos = videos.filter(v => v.parentId == course.id);
+const Carousel = ({ items }) => {
 
-  const renderVideos = videos => {
-    return videos.map(video => {
+  //whats our list of courses look like
+  //will prob have a videoUrl
+  //inside a course, whats our list of videos look like
+  //previewUrl
+
+
+  //Each course should have a videoURL , title, id 
+ 
+  const renderItems = items => {
+    return items.map(item => {
       return (
-        <div className='container' key={video.id}>
-          <Link
-            href={"/[course]/[video]"}
-            as={`/${course.title.replace(" ", "")}/${video.title.replace(
-              " ",
-              ""
-            )}`}
-          >
-            <a>
-              <h3>{video.title || "no Title"}</h3>
-            </a>
-          </Link>
-
-          <video src={`${video.url}.mp4`} />
+        <div className='container' key={item.id}>
+          
+   <h1>{item.videoURL}</h1>
+         <video autoPlay src={`${item.videoURL}`}  style={{height:"100px", width:"100px"}}/>
         </div>
       );
     });
@@ -36,13 +25,9 @@ const Carousel = ({ course }) => {
 
   return (
     <div>
-      <h2>{course.title}</h2>
-      <button
-        onClick={() => router.push("/[courseId]/edit", `/${course.id}/edit`)}
-      >
-        Edit
-      </button>
-      {renderVideos(filteredVideos)}
+
+   
+      {renderItems(items)}
     </div>
   );
 };

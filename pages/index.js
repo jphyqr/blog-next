@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import Carousel from "../components/Carousel/Carousel";
 import firebase from "../firebase";
 import { useRouter } from "next/router";
+import { withRedux } from "../lib/redux";
+
 const firestore = firebase.firestore();
 
 //WHY REACT?
@@ -15,7 +17,10 @@ const index = () => {
 
   const handleCreateClick = async () => {
     let newCourse = await firestore.collection("courses").add({
-      creationDate: Date.now()
+      creationDate: Date.now(),
+      title: 'Set Title',
+      author: 'AUTHOR ONCE AUTH DONE',
+      description: 'Set Description'
     }); 
     console.log(newCourse.id);
     router.push("/[courseId]/edit", `/${newCourse.id}/edit`);
@@ -52,11 +57,11 @@ const index = () => {
     <div>
       <h1> It works! Now What??  </h1>
       <button onClick={handleCreateClick}>Create Course</button>
-      {courses.map(course => (
+      {/* {courses.map(course => (
         <Carousel key={course.id} course={course} />
-      ))}
+      ))} */}
     </div>
   );
 };
 
-export default index;
+export default withRedux(index);

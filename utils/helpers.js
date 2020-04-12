@@ -3,3 +3,14 @@ export const courseFormMap = {
     description:'description',
 
 }
+
+
+
+export const techStackWidgetMap = {
+    db:"db",
+    hosting:'hosting',
+    domain: "domain",
+    server: "server",
+    ui:"ui"
+
+}

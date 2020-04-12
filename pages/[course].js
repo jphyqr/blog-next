@@ -4,7 +4,7 @@ const Course = () => {
     return (
         <div>
           I am a  new course  
-          {process.env.react_app_firebase_key||'No key'}
+          {process.env.test||'No key'}
         </div>
     )
 }

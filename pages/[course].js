@@ -1,5 +1,7 @@
 import React from 'react'
 
+
+console.log('process.env.test', process.env.test)
 const Course = () => {
     return (
         <div>

@@ -2,7 +2,7 @@ import React from 'react'
 const env = 'undefined' !== process ? process.env.test : null
 
 
-console.log('process.env.test', process?.env)
+console.log('process.env.test', process)
 const Course = () => {
     return (
         <div>

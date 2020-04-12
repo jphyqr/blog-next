@@ -1,14 +1,27 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useMemo } from 'react'
 import { techStackWidgetMap } from '../../../utils/helpers'
 import _ from 'lodash'
 import firebase from '../../../firebase'
+import { withRedux } from '../../../lib/redux'
+import { useFirestoreConnect } from 'react-redux-firebase'
+import { useSelector } from 'react-redux'
 const Widget = ({url}) =>{
 
     const firestore = firebase.firestore()
+
+    const widgetQuery = useMemo(() => ({
+        collection: 'courses',
+        doc: url.query.course,
+        subcollections: [{collection: 'widgets', doc:url.query.widget}],
+        storeAs: 'widgetConfig'
+    }), [url.query.course, url.query.widget]);
+    useFirestoreConnect(widgetQuery);
+    const widgetConfig = useSelector(state => (state.firestore.ordered.widgetConfig && state.firestore.ordered.widgetConfig[0]) || {});
+    
     const [id, setId] = useState(url.query.course || {});
     const [editField, selectField] = useState({});
    const [widget, setWidget] = useState(url.query.widget || {})
-    const [record, setRecord] = useState({});
+    const [record, setRecord] = useState(widgetConfig|| {});
     const [loadingRecord, setLoaded] = useState(true);
     const [counter, incrementCounter] = useState(0) //force update on state when we update just a child of records state
   
@@ -134,7 +147,7 @@ useEffect(()=>{
       getRecordById();
 
 
-}, [id, widget])
+}, [widgetConfig])
 
 
 
@@ -168,4 +181,4 @@ useEffect(()=>{
 
 
 
-export default Widget
+export default withRedux(Widget)

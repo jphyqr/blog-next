@@ -9,7 +9,7 @@
     "start": "next start"
   },
   "env": {
-    "TEST": "@test"
+    "TEST": "test"
   },
   "author": "",
   "license": "ISC",

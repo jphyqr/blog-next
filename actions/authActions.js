@@ -8,7 +8,7 @@ export const sendEmailLink = async ({firebase}, email, redirectPath) =>{
 try{
 
   let rootOfPath;
-  console.log('node env', process.NODE_ENV)
+  console.log('node env', process.env.NODE_ENV)
   if(process.NODE_ENV ==='production')
    rootOfPath = 'https://itworksnowwhat.com'
    else

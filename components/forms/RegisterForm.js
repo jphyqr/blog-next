@@ -37,4 +37,4 @@ e.preventDefault()
 
 
 
-export default withRedux(RegisterForm)
+export default (RegisterForm)

@@ -70,9 +70,9 @@ const rrfConfig = {
     }
     return (
         <Provider store={store} >
-             <ReactReduxFirebaseProvider {...rrfProps}>
+             {/* <ReactReduxFirebaseProvider {...rrfProps}> */}
           <Component {...props} />
-          </ReactReduxFirebaseProvider>
+          {/* </ReactReduxFirebaseProvider> */}
           </Provider>
  
     );

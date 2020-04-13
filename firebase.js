@@ -5,6 +5,8 @@ import 'firebase/storage'
 import * as keys from './config/keys'
 
 console.log('key', keys.firebaseKey)
+console.log('key', process.env.react_app_firebase_key)
+console.log('key', process.env.REACT_APP_FIREBASE_KEY)
 const firebaseConfig = {
   apiKey: keys.firebaseKey,
 

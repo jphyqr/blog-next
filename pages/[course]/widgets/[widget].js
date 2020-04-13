@@ -5,18 +5,20 @@ import firebase from '../../../firebase'
 //import { useFirestoreConnect } from 'react-redux-firebase'
 import { useSelector } from 'react-redux'
 import { withRedux } from '../../../lib/redux'
+import { useFirestoreConnect } from 'react-redux-firebase'
 const Widget = ({router}) =>{
 
+  console.log({router})
     const firestore = firebase.firestore()
-
-    // const widgetQuery = useMemo(() => ({
-    //     collection: 'courses',
-    //     doc: url.query.course,
-    //     subcollections: [{collection: 'widgets', doc:url.query.widget}],
-    //     storeAs: 'widgetConfig'
-    // }), [url.query.course, url.query.widget]);
-    // useFirestoreConnect(widgetQuery);
-  //  const widgetConfig = useSelector(state => (state.firestore.ordered.widgetConfig && state.firestore.ordered.widgetConfig[0]) || {});
+     
+    const widgetQuery = useMemo(() => ({
+        collection: 'courses',
+        doc: router.query.course,
+        subcollections: [{collection: 'widgets', doc:router.query.widget}],
+        storeAs: 'widgetConfig'
+    }), [router.query.course, router.query.widget]);
+    useFirestoreConnect(widgetQuery);
+   const widgetConfig = useSelector(state => (state.firestore.ordered.widgetConfig && state.firestore.ordered.widgetConfig[0]) || {});
     
     const [id, setId] = useState(router?.query?.course || {});
     const [editField, selectField] = useState({});
@@ -147,7 +149,7 @@ useEffect(()=>{
       getRecordById();
 
 
-}, [widget, id])
+}, [widgetConfig])
 
 
 

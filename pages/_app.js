@@ -11,42 +11,70 @@ const rrfConfig = {
   }
 
 
-class MyApp extends App {
+// class MyApp extends App {
 
 
 
     
-  static async getInitialProps({Component, ctx}) {
-    //Preload from the server side
+//   static async getInitialProps({Component, ctx}) {
+//     //Preload from the server side
+
+//     return {
+//       pageProps: {
+//         ...(Component.getInitialProps ? await 
+//           Component.getInitialProps(ctx) : {})
+//       }
+//     }
+//   }
+//   render() {
+//     const { Component, pageProps, store } = this.props;
+//   // const store = getOrInitializeStore(initialReduxState)
    
-    return {
-      pageProps: {
-        ...(Component.getInitialProps ? await 
-          Component.getInitialProps(ctx) : {})
-      }
-    }
+//     const rrfProps = {
+//       firebase,
+//       config: rrfConfig,
+//       dispatch: store.dispatch,
+//        createFirestoreInstance // <- needed if using firestore
+//     }
+    
+//     const allProps = Object.assign(pageProps, this.props)
+//     console.log({allProps})
+//     return (
+//       <Provider store={store}>
+//         <div>
+//         <ReactReduxFirebaseProvider {...rrfProps}>
+//           <Component {...allProps} />
+//           </ReactReduxFirebaseProvider>
+//         </div>
+//       </Provider>
+//     );
+//   }
+// }
+
+
+
+
+function MyApp({Component, store,  ...props
+}){
+console.log('MyApp', props)
+
+const rrfConfig = {
+    userProfile: 'users',
+    useFirestoreForProfile: true // Firestore for Profile instead of Realtime DB
   }
-  render() {
-    const { Component, pageProps, store } = this.props;
-    
-   // const store = getOrInitializeStore(initialReduxState)
-   
     const rrfProps = {
       firebase,
       config: rrfConfig,
       dispatch: store.dispatch,
        createFirestoreInstance // <- needed if using firestore
     }
-    
     return (
-      <Provider store={store}>
-        <div>
-        <ReactReduxFirebaseProvider {...rrfProps}>
-          <Component {...pageProps} />
+        <Provider store={store} >
+             <ReactReduxFirebaseProvider {...rrfProps}>
+          <Component {...props} />
           </ReactReduxFirebaseProvider>
-        </div>
-      </Provider>
+          </Provider>
+ 
     );
-  }
 }
-export default withRedux(initializeStore)(MyApp);
+export default withRedux(initializeStore)((MyApp));

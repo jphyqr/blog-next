@@ -4,10 +4,15 @@ import _ from "lodash";
 import { courseFormMap } from "../../utils/helpers";
 import cuid from "cuid";
 import Carousel from "../../components/Carousel/Carousel";
-const edit = ({ url }) => {
+import withRedux from 'next-redux-wrapper'
+const edit = (props) => {
   const firestore = firebase.firestore();
-
-  const [id, setId] = useState(url.query.course || {});
+ console.log('edit props', props)
+ const {router} = props || {}
+ const {query} = router || {}
+ const {course} = query || {}
+ const  {url} = props || {}
+  const [id, setId] = useState(course || {});
   const [record, setRecord] = useState({});
   const [loadingRecord, setLoaded] = useState(true);
   const [editField, selectField] = useState({});
@@ -106,7 +111,7 @@ const handleSelectFile = async (e) =>{
   };
 
   useEffect(() => {
-    setId(url.query.course);
+    setId(course);
 
     const getRecordById = async () => {
       console.log("id", id);

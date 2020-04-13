@@ -4,7 +4,7 @@ import _ from 'lodash'
 import firebase from '../../../firebase'
 //import { useFirestoreConnect } from 'react-redux-firebase'
 import { useSelector } from 'react-redux'
-const Widget = ({url}) =>{
+const Widget = ({router}) =>{
 
     const firestore = firebase.firestore()
 
@@ -17,9 +17,9 @@ const Widget = ({url}) =>{
     // useFirestoreConnect(widgetQuery);
   //  const widgetConfig = useSelector(state => (state.firestore.ordered.widgetConfig && state.firestore.ordered.widgetConfig[0]) || {});
     
-    const [id, setId] = useState(url.query.course || {});
+    const [id, setId] = useState(router?.query?.course || {});
     const [editField, selectField] = useState({});
-   const [widget, setWidget] = useState(url.query.widget || {})
+   const [widget, setWidget] = useState(router?.query?.widget || {})
     const [record, setRecord] = useState({});
     const [loadingRecord, setLoaded] = useState(true);
     const [counter, incrementCounter] = useState(0) //force update on state when we update just a child of records state
@@ -126,8 +126,8 @@ const renderTextFields = (map) =>{
 
 //params: course and widget
 useEffect(()=>{
-    setId(url.query.course);
-    setWidget(url.query.widget);
+    setId(router?.query?.course);
+    setWidget(router?.query?.widget);
     
     const getRecordById = async () => {
      

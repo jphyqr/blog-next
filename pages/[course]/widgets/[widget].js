@@ -181,4 +181,4 @@ useEffect(()=>{
 
 
 
-export default withRedux(Widget)
+export default Widget

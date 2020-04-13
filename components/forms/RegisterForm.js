@@ -2,10 +2,12 @@
 import React, { useCallback } from 'react'
 import { useFirestore, useFirebase } from 'react-redux-firebase';
 import { sendEmailLink } from '../../actions/authActions';
+import { withRedux } from '../../lib/redux';
 
 const RegisterForm = () =>{
 
 const firebase = useFirebase()
+console.log({firebase})
 
     const handleLogin = useCallback(
         async email => {
@@ -35,4 +37,4 @@ e.preventDefault()
 
 
 
-export default RegisterForm
+export default withRedux(RegisterForm)

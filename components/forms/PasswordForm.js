@@ -2,6 +2,7 @@
 import React, { useCallback } from 'react'
 import { useFirestore, useFirebase } from 'react-redux-firebase';
 import { sendEmailLink } from '../../actions/authActions';
+import { withRedux } from '../../lib/redux';
 
 const PasswordForm = () =>{
 
@@ -35,4 +36,4 @@ e.preventDefault()
 
 
 
-export default PasswordForm
+export default withRedux(PasswordForm)

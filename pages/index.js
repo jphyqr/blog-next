@@ -10,6 +10,7 @@ import RegisterModal from "../components/modals/RegisterModal";
 import { modals } from "../constants/modalConstants";
 import Password from "../components/modals/Password";
 import { verificationMap } from "../constants/verificationConstants";
+import { withRedux } from "../lib/redux";
 const firestore = firebase.firestore();
 
 //WHY REACT?
@@ -166,4 +167,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default withRedux(index);

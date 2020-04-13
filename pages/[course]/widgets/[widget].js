@@ -4,6 +4,7 @@ import _ from 'lodash'
 import firebase from '../../../firebase'
 //import { useFirestoreConnect } from 'react-redux-firebase'
 import { useSelector } from 'react-redux'
+import { withRedux } from '../../../lib/redux'
 const Widget = ({router}) =>{
 
     const firestore = firebase.firestore()
@@ -180,4 +181,4 @@ useEffect(()=>{
 
 
 
-export default Widget
+export default withRedux(Widget)

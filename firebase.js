@@ -3,6 +3,8 @@ import 'firebase/firestore';
 import 'firebase/auth'
 import 'firebase/storage'
 import * as keys from './config/keys'
+
+console.log('key', keys.firebaseKey)
 const firebaseConfig = {
   apiKey: keys.firebaseKey,
 

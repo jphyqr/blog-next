@@ -1,7 +1,8 @@
 {
-  "build": {
+
     "env": {
-      "react_app_firebase_key": "@react_app_firebase_key"
+      "react_app_firebase_key": "@react_app_firebase_key",
+      "REACT_APP_FIREBASE_KEY": "@react_app_firebase_key"
     }
-  }
+
 }

@@ -3,20 +3,20 @@ import { techStackWidgetMap } from '../../../utils/helpers'
 import _ from 'lodash'
 import firebase from '../../../firebase'
 import { withRedux } from '../../../lib/redux'
-import { useFirestoreConnect } from 'react-redux-firebase'
+//import { useFirestoreConnect } from 'react-redux-firebase'
 import { useSelector } from 'react-redux'
 const Widget = ({url}) =>{
 
     const firestore = firebase.firestore()
 
-    const widgetQuery = useMemo(() => ({
-        collection: 'courses',
-        doc: url.query.course,
-        subcollections: [{collection: 'widgets', doc:url.query.widget}],
-        storeAs: 'widgetConfig'
-    }), [url.query.course, url.query.widget]);
-    useFirestoreConnect(widgetQuery);
-    const widgetConfig = useSelector(state => (state.firestore.ordered.widgetConfig && state.firestore.ordered.widgetConfig[0]) || {});
+    // const widgetQuery = useMemo(() => ({
+    //     collection: 'courses',
+    //     doc: url.query.course,
+    //     subcollections: [{collection: 'widgets', doc:url.query.widget}],
+    //     storeAs: 'widgetConfig'
+    // }), [url.query.course, url.query.widget]);
+    // useFirestoreConnect(widgetQuery);
+  //  const widgetConfig = useSelector(state => (state.firestore.ordered.widgetConfig && state.firestore.ordered.widgetConfig[0]) || {});
     
     const [id, setId] = useState(url.query.course || {});
     const [editField, selectField] = useState({});
@@ -181,4 +181,4 @@ useEffect(()=>{
 
 
 
-export default withRedux(Widget)
+export default Widget

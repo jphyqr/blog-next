@@ -9,7 +9,7 @@ try{
 
   let rootOfPath;
   console.log('node env', process.env.NODE_ENV)
-  if(process.env.NODE_ENV !== 'development')
+  if(process.env.NODE_ENV == 'production')
    rootOfPath = 'https://itworksnowwhat.com'
    else
    rootOfPath = 'http://localhost:3000'

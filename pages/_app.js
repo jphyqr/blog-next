@@ -5,7 +5,7 @@ import { initializeStore } from '../config/store';
 import firebase from '../firebase'
 import { ReactReduxFirebaseProvider } from 'react-redux-firebase'
 import {createFirestoreInstance} from 'redux-firestore'
-function MyApp({ Component, pageProps, store, ...rest }) {
+function MyApp({ Component,  store, ...rest }) {
 
 
     const rrfConfig = {
@@ -23,7 +23,7 @@ function MyApp({ Component, pageProps, store, ...rest }) {
     return (
         <Provider store={store}>
               <ReactReduxFirebaseProvider {...rrfProps}>
-            <Component {...pageProps} />
+            <Component {...rest} />
             </ReactReduxFirebaseProvider>
         </Provider>
     );

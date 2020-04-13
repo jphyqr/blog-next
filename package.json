@@ -8,9 +8,7 @@
     "build": "next build",
     "start": "next start"
   },
-  "env": {
-    "TEST": "test"
-  },
+
   "author": "",
   "license": "ISC",
   "dependencies": {

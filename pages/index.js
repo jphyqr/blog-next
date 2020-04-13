@@ -12,7 +12,7 @@ import Password from "../components/modals/Password";
 import { verificationMap } from "../constants/verificationConstants";
 import { withRedux } from "../lib/redux";
 const firestore = firebase.firestore();
-
+ 
 //WHY REACT?
 //LIFECYCLE METHOD
 //componentDidMount, compinentDidUpdate, componentWillReceiveProps

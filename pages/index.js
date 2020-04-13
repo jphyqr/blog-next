@@ -167,4 +167,4 @@ const index = () => {
   );
 };
 
-export default withRedux(index);
+export default index;

@@ -21,7 +21,7 @@ const Widget = ({url}) =>{
     const [id, setId] = useState(url.query.course || {});
     const [editField, selectField] = useState({});
    const [widget, setWidget] = useState(url.query.widget || {})
-    const [record, setRecord] = useState(widgetConfig|| {});
+    const [record, setRecord] = useState({});
     const [loadingRecord, setLoaded] = useState(true);
     const [counter, incrementCounter] = useState(0) //force update on state when we update just a child of records state
   
@@ -147,7 +147,7 @@ useEffect(()=>{
       getRecordById();
 
 
-}, [widgetConfig])
+}, [widget, id])
 
 
 

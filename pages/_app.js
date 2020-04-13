@@ -22,9 +22,9 @@ function MyApp({ Component, pageProps, store, ...rest }) {
 
     return (
         <Provider store={store}>
-            
+              <ReactReduxFirebaseProvider {...rrfProps}>
             <Component {...pageProps} />
-         
+            </ReactReduxFirebaseProvider>
         </Provider>
     );
 }

@@ -4,7 +4,6 @@ import _ from "lodash";
 import { courseFormMap } from "../../utils/helpers";
 import cuid from "cuid";
 import Carousel from "../../components/Carousel/Carousel";
-import { withRedux } from "../../lib/redux";
 const edit = ({ url }) => {
   const firestore = firebase.firestore();
 
@@ -185,4 +184,4 @@ useEffect(()=>{
   );
 };
 
-export default withRedux(edit);
+export default edit;

@@ -2,7 +2,6 @@ import React, { useEffect, useState, useMemo } from 'react'
 import { techStackWidgetMap } from '../../../utils/helpers'
 import _ from 'lodash'
 import firebase from '../../../firebase'
-import { withRedux } from '../../../lib/redux'
 //import { useFirestoreConnect } from 'react-redux-firebase'
 import { useSelector } from 'react-redux'
 const Widget = ({url}) =>{

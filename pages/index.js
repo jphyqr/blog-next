@@ -2,7 +2,6 @@ import React, { useEffect, useState, Component } from "react";
 import Carousel from "../components/Carousel/Carousel";
 import firebase from "../firebase";
 import { useRouter } from "next/router";
-import { withRedux } from "../lib/redux";
 import { useDispatch, useSelector } from "react-redux";
 import { LOGIN , LOGOUT, SET_MODAL} from "../constants/reducerConstants";
 import Modal from "../components/modals/Modal";
@@ -167,4 +166,4 @@ const index = () => {
   );
 };
 
-export default withRedux(index);
+export default index;

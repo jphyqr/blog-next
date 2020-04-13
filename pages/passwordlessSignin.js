@@ -3,7 +3,7 @@ import React, { useCallback } from "react";
 import firebase from "../firebase";
 import Router from "next/router";
 import { useDispatch } from "react-redux";
-import { withRedux } from "../lib/redux";
+
 import { useFirebase, useFirestore } from "react-redux-firebase";
 
 
@@ -105,5 +105,5 @@ const passwordlessSignin = ({ url }) => {
   return <div>Redirecting...</div>;
 };
 
-export default withRedux(passwordlessSignin);
+export default passwordlessSignin;
 

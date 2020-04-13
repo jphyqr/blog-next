@@ -72,7 +72,7 @@ const getOrInitializeStore = initialState => {
 
 
 
-function MyApp({Component, store,  ...props
+function MyApp({Component,   ...props
 }){
 console.log('MyApp', props)
 
@@ -80,12 +80,16 @@ const rrfConfig = {
     userProfile: 'users',
     useFirestoreForProfile: true // Firestore for Profile instead of Realtime DB
   }
+  
+  const store = getOrInitializeStore({})
     const rrfProps = {
       firebase,
       config: rrfConfig,
       dispatch: store.dispatch,
        createFirestoreInstance // <- needed if using firestore
     }
+
+
     return (
         <Provider store={store} >
              <ReactReduxFirebaseProvider {...rrfProps}>
@@ -95,7 +99,7 @@ const rrfConfig = {
  
     );
 }
-export default withRedux(initializeStore)((MyApp));
+export default (MyApp);
 
 
 

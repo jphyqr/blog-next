@@ -69,11 +69,9 @@ const rrfConfig = {
        createFirestoreInstance // <- needed if using firestore
     }
     return (
-        <Provider store={store} >
-             {/* <ReactReduxFirebaseProvider {...rrfProps}> */}
+
           <Component {...props} />
-          {/* </ReactReduxFirebaseProvider> */}
-          </Provider>
+      
  
     );
 }

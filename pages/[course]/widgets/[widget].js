@@ -46,26 +46,13 @@ let ShowWidget;
 
 
     return(
-        <div>
+    
 
      
     <div className='container'>
     {renderWidget()}
     </div>
-    <style jsx>
-        {`
-                   .container {
-                    height: 200px;
-                    width: 600px;
-                    background-color: gainsboro;
-                    display:flex;
-                    flex-wrap: wrap;
-                    justify-content: space-around;
-                }
-    
-    `}
-    </style>
-    </div>
+
       
     ) 
 

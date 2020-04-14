@@ -19,4 +19,4 @@ const techStackOthers = {
     problem:"problem"
 }
 
-export const techStackEditables = Object.assign(techStackWidgetMap, techStackOthers)
+export const techStackEditables = Object.assign({}, techStackWidgetMap, techStackOthers)

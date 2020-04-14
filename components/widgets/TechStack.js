@@ -50,7 +50,7 @@ const firestore = firebase.firestore()
       
       .card{
           
-          max-height:200px;
+          max-height:100px;
           display: flex;
           flex-direction: column;
           margin-right: 10px;
@@ -102,40 +102,111 @@ const firestore = firebase.firestore()
         <div>
 
         <div className='container'>
+        <span className='fixed-label'>Next Problem</span>
+        
         <div className='body'>
         {renderCards(techStackWidgetMap)} 
         </div>
-        <span className='footer'>
-    <h5>{record?.problem}</h5>
-        </span>
+
+         <span className='horizontal-scroll'>
+            <span className='scroll-item'>{record?.problem}</span>
+            </span>
+           
+     
           
         </div>
         <style jsx>
             {`
 .container{
     width:1000px;
-    height:200px;
     display:flex;
     flex-direction: column;
+    background-color: black;
+    position:relative;
+    
 }
 
                        .body {
-                        height: 150px;
-                        width: 1000px;
+                        width: 100%;
+                        padding:5px 0px 5px 0px;
                         background-color: black;
                         display:flex;
                         justify-content: center;
                         align-items: center;
                        
+                       
                     }
 
-                    .footer{
-                        height:50px;
-                        width:1000px; 
-                        text-align: center;
+
+    .footer{
+        display:flex;
+        width:100%;
+        padding:5px 0px 5px 0px;
+        font-size: 26px;
+        color: white;
+    }
+
+    .fixed-label{
+        background-color: red;
+        margin-right: 5px;
+        bottom: 0;
+        position: absolute;
+        font-size: 26px;
+
+    }
+
+
+                    .horizontal-scroll{
+                      
+                        width: 80%;
+                        transform:translateX(20%);
+                        height: 50px;	
+                       overflow: hidden;
+                       position: relative;
+
                         
 
                     }
+
+                    .scroll-item{
+                        font-size: 2em;
+                        color: white;
+                        position: absolute;
+                        width: 100%;
+                        height: 100%;
+                        margin: 0;
+                        line-height: 50px;
+                        text-align: center;
+                        /* Starting position */
+                        -moz-transform:translateX(100%);
+                        -webkit-transform:translateX(100%);	
+                        transform:translateX(100%);
+                        /* Apply animation to this element */	
+                        -moz-animation: example1 15s linear infinite;
+                        -webkit-animation: example1 15s linear infinite;
+                        animation: example1 15s linear infinite;
+
+                    }
+
+                    @-moz-keyframes example1 {
+                        0%   { -moz-transform: translateX(100%); }
+                        100% { -moz-transform: translateX(-100%); }
+                       }
+                       @-webkit-keyframes example1 {
+                        0%   { -webkit-transform: translateX(100%); }
+                        100% { -webkit-transform: translateX(-100%); }
+                       }
+                       @keyframes example1 {
+                        0%   { 
+                        -moz-transform: translateX(100%); /* Firefox bug fix */
+                        -webkit-transform: translateX(100%); /* Firefox bug fix */
+                        transform: translateX(100%); 		
+                        }
+                        100% { 
+                        -moz-transform: translateX(-100%); /* Firefox bug fix */
+                        -webkit-transform: translateX(-100%); /* Firefox bug fix */
+                        transform: translateX(-100%); 
+                        }
         
         `}
         </style>

@@ -2,14 +2,20 @@
 
 
 import React, { useEffect, useState, useMemo } from 'react'
-import { techStackWidgetMap } from '../../../../utils/helpers'
+import { techStackWidgetMap, techStackEditables } from '../../../../utils/helpers'
 import _ from 'lodash'
 import firebase from '../../../../firebase'
 //import { useFirestoreConnect } from 'react-redux-firebase'
 import { useSelector } from 'react-redux'
 import { useFirestoreConnect } from 'react-redux-firebase'
+import  Router  from 'next/router'
 const EditWidget = ({router}) =>{
 
+    const auth = useSelector(state=>state.firebase.auth|| {})
+    
+    if(auth.isLoaded&&auth.isEmpty)
+      Router.push('/')
+    
 
     const firestore = firebase.firestore() //in prod this would have failed
      
@@ -28,7 +34,7 @@ const EditWidget = ({router}) =>{
     const [record, setRecord] = useState({});
     const [loadingRecord, setLoaded] = useState(true);
     const [counter, incrementCounter] = useState(0) //force update on state when we update just a child of records state
-  
+    
 
 const handleInputBlur = async () => {
     
@@ -160,7 +166,7 @@ useEffect(()=>{
 
      
     <div className='container'>
-  {renderTextFields(techStackWidgetMap)}
+  {renderTextFields(techStackEditables)}
 
     </div>
     <style jsx>

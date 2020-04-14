@@ -102,18 +102,39 @@ const firestore = firebase.firestore()
         <div>
 
         <div className='container'>
-        {renderCards(techStackWidgetMap)}   
+        <div className='body'>
+        {renderCards(techStackWidgetMap)} 
+        </div>
+        <span className='footer'>
+    <h5>{record?.problem}</h5>
+        </span>
+          
         </div>
         <style jsx>
             {`
-                       .container {
-                        height: 200px;
-                        width: 1800px;
+.container{
+    width:1000px;
+    height:200px;
+    display:flex;
+    flex-direction: column;
+}
+
+                       .body {
+                        height: 150px;
+                        width: 1000px;
                         background-color: black;
                         display:flex;
                         justify-content: center;
                         align-items: center;
                        
+                    }
+
+                    .footer{
+                        height:50px;
+                        width:1000px; 
+                        text-align: center;
+                        
+
                     }
         
         `}

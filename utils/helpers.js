@@ -14,3 +14,9 @@ export const techStackWidgetMap = {
     ui:"ui"
 
 }
+
+const techStackOthers = {
+    problem:"problem"
+}
+
+export const techStackEditables = Object.assign(techStackWidgetMap, techStackOthers)

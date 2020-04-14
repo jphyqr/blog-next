@@ -1,3 +1,19 @@
+
+//#1 Production vs Development with firebase API key
+//Our HOC (withRedux) wasnt available on the page
+
+//why api keys? we use the Keys file, 
+//1) npm install -save dotenv //turns on process.env.
+//1b) create your next.config.js in root
+//2) npm install -g now //CLI for ZEIT give us access to some deploy methods for ZEIT
+//3) now secrets add react_app_firebase_key 'safdfdsafsafd'
+//4) now secrets ls --show your keys
+//5) add a now.json file 
+//6) now --prod  (pushes to production)
+
+//Now for Redux available
+
+
 import React, { useEffect, useState, useMemo } from 'react'
 import { techStackWidgetMap } from '../../../utils/helpers'
 import _ from 'lodash'
@@ -9,7 +25,7 @@ import { useFirestoreConnect } from 'react-redux-firebase'
 const Widget = ({router}) =>{
 
   console.log({router})
-    const firestore = firebase.firestore()
+    const firestore = firebase.firestore() //in prod this would have failed
      
     const widgetQuery = useMemo(() => ({
         collection: 'courses',
@@ -183,4 +199,4 @@ useEffect(()=>{
 
 
 
-export default withRedux(Widget)
+export default Widget

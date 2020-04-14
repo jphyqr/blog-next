@@ -38,10 +38,6 @@ const index = () => {
 
 
    const renderModal = () =>{
-     //If someone clicks to show a model.. then show it
-
-
-   
 
   let ShowModal;
      if(!_.isEmpty(modal)){

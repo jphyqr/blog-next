@@ -108,7 +108,7 @@ const firestore = firebase.firestore()
             {`
                        .container {
                         height: 200px;
-                        width: 1000px;
+                        width: 1800px;
                         background-color: black;
                         display:flex;
                         justify-content: center;

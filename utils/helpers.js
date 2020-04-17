@@ -45,7 +45,7 @@ export const tickerManagerHeights ={
 
 export const widgetHeights ={
     Small:50,
-    Medium:100,
+    Medium:130,
     Tall:200,
 }
 

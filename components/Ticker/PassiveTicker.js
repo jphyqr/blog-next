@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react'
 
 
-const Ticker = ({ name, color, widgetHeight, height, scrollTime, calculateScrollTime, renderScrollItems}) => {
+const PassiveTicker = ({ name, color, widgetHeight, height, scrollTime, calculateScrollTime, renderScrollItems}) => {
     const scrollItemRef = useRef(null)
 
 
@@ -28,9 +28,8 @@ const Ticker = ({ name, color, widgetHeight, height, scrollTime, calculateScroll
         <style jsx>
             {`
                   .horizontal-scroll{
-                      font-family: arial;
                       
-                    transform:translateX(0%);
+                    
                     display:flex;
                     height: ${tickerHeight}px;	
                     width: auto;
@@ -38,7 +37,7 @@ const Ticker = ({ name, color, widgetHeight, height, scrollTime, calculateScroll
                    opacity: 1;
                    animation: fade 3s linear;
                    background-color:${color};
-                    
+                    z-index: 10;
 
                 }
 
@@ -46,24 +45,25 @@ const Ticker = ({ name, color, widgetHeight, height, scrollTime, calculateScroll
 
                 .scroll-item{
                     display:flex;
+                    width: 100%;
                     align-items: center;
-                    justify-content: center;
-                    width:100%;
+                    justify-content:center;
+                    
+                    text-align: center;
                     font-size: 2em;
                     color: white;
                     position: absolute;
                     height: ${tickerHeight}px;	
+                   
                     margin: 0;
                     white-space: nowrap;
                     text-align: center;
                     /* Starting position */
-                    -moz-transform:translateX(100%);
-                    -webkit-transform:translateX(100%);	
-                    transform:translateX(100%);
+                    -moz-transform:translateX(0%);
+                    -webkit-transform:translateX(0%);	
+                    transform:translateX(0%);
                     /* Apply animation to this element */	
-                    -moz-animation:  example1 ${scrollTime}s linear infinite ;
-                    -webkit-animation: example1 ${scrollTime}s linear infinite;
-                    animation:   example1 ${scrollTime}s linear infinite;
+          
                     
 
                 }
@@ -71,28 +71,42 @@ const Ticker = ({ name, color, widgetHeight, height, scrollTime, calculateScroll
             
 
                 @-moz-keyframes example1 {
-                    0%   { -moz-transform: translateX(100%); }
-              
-                    100% { -moz-transform: translateX(-100%); }
+                    0%   { -moz-transform: translateX(0%); }
+                    10%   { -moz-transform: translateX(0%); }
+                    100% { -moz-transform: translateX(-130%); }
                    }
                    @-webkit-keyframes example1 {
-                    0%   { -moz-transform: translateX(100%); }
-                 
-                    100% { -moz-transform: translateX(-100%); }
+                    0%   { -webkit-transform: translateX(0%); }
+                    10%   { -webkit-transform: translateX(0%); }
+                    100% { -webkit-transform: translateX(-130%); }
                    }
                    @keyframes example1 {
                     0%   { 
-                    -moz-transform: translateX(100%); /* Firefox bug fix */
-                    -webkit-transform: translateX(100%); /* Firefox bug fix */
-                    transform: translateX(100%); 	
-                 	
-                    }
-               
-                    100% { 
                     -moz-transform: translateX(0%); /* Firefox bug fix */
                     -webkit-transform: translateX(0%); /* Firefox bug fix */
-                    transform: translateX(-100%); 
-                 
+                    transform: translateX(0%); 	
+                    opacity: 0	
+                    }
+                    10%   { 
+                       
+                        opacity: 1
+                        -moz-transform: translateX(0%); /* Firefox bug fix */
+                        -webkit-transform: translateX(0%); /* Firefox bug fix */
+                        transform: translateX(0%); 		
+                        }
+                        50%   { 
+                       
+                            opacity: 	1
+                            }
+                            90%   { 
+                       
+                                opacity: 	.9
+                                }
+                    100% { 
+                    -moz-transform: translateX(-130%); /* Firefox bug fix */
+                    -webkit-transform: translateX(-130%); /* Firefox bug fix */
+                    transform: translateX(-130%); 
+                    opacity: .9;
                     }
             
             `}
@@ -103,4 +117,4 @@ const Ticker = ({ name, color, widgetHeight, height, scrollTime, calculateScroll
 
 }
 
-export default Ticker
+export default PassiveTicker

@@ -9,15 +9,15 @@ const Card = ({key, heading, body, color}) => {
     return (
         <div className='card' key={key}>
                 
-        <label className='heading'>{heading}</label>
+        <div className='heading'>{heading}</div>
        
  
- <div> 
-   <label className='body' >
+
+   <div className='body' >
      
      {body}
-   </label>
- </div>
+   </div>
+
 
   
 
@@ -30,24 +30,33 @@ const Card = ({key, heading, body, color}) => {
 .card{
 
 display: flex;
-flex-direction: column;
+border: 2px solid ${color};  
+align-items: stretch;
+padding: 1px;
+border-radius: 3px;
 margin-right: 10px;
-border-radius: 5px;
-padding: 5px; 
-background-color: ${color};      
+font-size: 18px;
+justify-content:space-around;
+
 
 }
 .heading{    
 
 width: 100%;
+background-color: ${color};
+color: white;
 text-align: center;
 text-transform: uppercase;
 white-space: nowrap;
+font-weight: lighter;
+
 }
 
 .body{
-font-style: italic; 
 white-space: nowrap;
+font-weight: bolder;
+padding: 0 0 5px 5px;
+color: white;
 }
 `}</style>     
  </div>  

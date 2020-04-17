@@ -5,37 +5,30 @@ import Ticker from './Ticker'
 import { themeColors } from '../../utils/helpers'
 
 
-const FocusesTicker = ({record, ...props}) => {
+const ScheduleTicker = ({record, ...props}) => {
 
     const renderFocuses = () =>{
         //return one scroll item, which has all the cards
             //build up a new array from our others
-            const {focus, not_a_focus} = record || []
+            const {schedule} = record || []
              
             let allCards = [];
            
      
-            focus?.forEach(f=>{
+            schedule.forEach(f=>{
                allCards.push({
-                   value:f,
-                   label:'Focus',
-                   color: themeColors.Positive
+                   value:f.time,
+                   label:f.day,
+                   color: themeColors.Secondary
                })
             })
         
        
-            not_a_focus?.forEach(f=>{
-                allCards.push({
-                    label:'Not a Focus',
-                    value:f,
-                    style:"block-negative",
-                    color: themeColors.Grey
-                })
-             })
+     
         
                 return allCards.map((item, i)=>{
                     return(
-                    <Card key={i} color={item.color} body={item.value} heading={`${item.label}#${i}`} />
+                    <Card key={i} color={item.color} body={item.value} heading={item.label} />
            
                     )
                    })     
@@ -50,4 +43,4 @@ const FocusesTicker = ({record, ...props}) => {
 
 }
 
-export default FocusesTicker
+export default ScheduleTicker

@@ -3,16 +3,53 @@ export const courseFormMap = {
     description:'description',
 
 }
+export const newsTickerMap = {
+    ProfileTicker:"ProfileTicker",
+    ScheduleTicker: "ScheduleTicker"
+ }
 
 export const techTickerMap = {
    TechStackTicker:"TechStackTicker",
    FocusesTicker:"FocusesTicker"
 }
 
-export const newsTickerMap = {
-    ProblemTicker:"ProblemTicker",
-    ProfileTicker:"ProfileTicker"
+export const highPriorityTickerMap = {
+    ProblemTicker:"ProblemTicker"
  }
+ 
+
+export const themeColors={
+    Positive: "green",
+    Background: "black",
+    Negative: "red",
+    Grey: "lightgrey",
+    Secondary: "gold"
+
+}
+
+export const tickerSpeeds = {
+    Crawl:25,
+    Slow:50,
+    Medium:75,
+    Fast:100
+}
+
+
+export const tickerManagerHeights ={
+    Full:90,
+    Half:45,
+    Third:31,
+    TwoThirds:60,
+    Quarter: 22
+}
+
+export const widgetHeights ={
+    Small:50,
+    Medium:100,
+    Tall:200,
+}
+
+
 
 export const techStackWidgetMap = {
     db:"db",

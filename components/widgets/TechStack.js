@@ -2,31 +2,31 @@ import React, { useMemo, useState, useEffect } from 'react'
 import { useFirestoreConnect, isLoaded, isEmpty } from 'react-redux-firebase';
 import { useSelector } from 'react-redux';
 import firebase from '../../firebase'
-import { techStackWidgetMap, techTickerMap, newsTickerMap } from '../../utils/helpers';
-import Ticker from '../Ticker/Ticker';
-import Card from '../common/Cards/Card';
+import { techTickerMap,highPriorityTickerMap, newsTickerMap, tickerSpeeds, tickerManagerHeights, widgetHeights, themeColors } from '../../utils/helpers';
+
 import TickerManager from '../Ticker/TickerManager';
 import FocusesTicker from '../Ticker/FocusesTicker';
 import TechStackTicker from '../Ticker/TeckStackTicker';
 import ProblemTicker from '../Ticker/ProblemTicker';
 import ProfileTicker from '../Ticker/ProfileTicker';
+import ScheduleTicker from '../Ticker/ScheduleTicker';
 
 
 const TechStack = ({id, widget}) =>{
 
 
+console.log({highPriorityTickerMap})
 
 
-
-
+     const widgetHeight=widgetHeights.Medium;
 
     let tickerComponent = {};
   
     tickerComponent[techTickerMap.FocusesTicker] = FocusesTicker;
     tickerComponent[techTickerMap.TechStackTicker] = TechStackTicker;
-    tickerComponent[newsTickerMap.ProblemTicker] = ProblemTicker;
+    tickerComponent[highPriorityTickerMap.ProblemTicker] = ProblemTicker;
     tickerComponent[newsTickerMap.ProfileTicker] = ProfileTicker
-     
+    tickerComponent[newsTickerMap.ScheduleTicker] = ScheduleTicker
  
 
 
@@ -78,7 +78,7 @@ Object.keys(original).map(key=>{
       
  })
 
- console.log('after filter', filtered)
+ console.log(`after filter of ${Object.keys(filter)[0]} from ${original}`, filtered)
 
  return filtered
 
@@ -114,15 +114,25 @@ Object.keys(original).map(key=>{
         <div>
 
         <div className='container'>
-        <span className='fixed-label'>Next Problem</span>
-        
-       {!loadingRecord && !_.isEmpty(record)&&
-       <div className='test'>
-       <TickerManager key={1} name={'TechTicker'} record={record} filteredTickers={filterObjFromObj(tickerComponent, techTickerMap)} />
+
+       {!loadingRecord && !_.isEmpty(record)&&(
+       <div className='compound-row'>
+
+        <div className='logo-square'>
+          <img  className='logo' src={'/File.jpg'}/>
+            </div>
+       <div className='ticker-column'>
+           <div className='fade-to-black'/>
+           
+           <TickerManager widgetHeight={widgetHeight} color={themeColors.Negative} height={tickerManagerHeights.Third} key={0} speed={tickerSpeeds.Slow}   name={'HighPriorityStaticTicker'} record={record} filteredTickers={filterObjFromObj(tickerComponent, highPriorityTickerMap)} />
+     
+       <TickerManager widgetHeight={widgetHeight} color={themeColors.Background} height={tickerManagerHeights.Third} key={1} speed={tickerSpeeds.Slow} name={'TechTicker'} autoScroll record={record} filteredTickers={filterObjFromObj(tickerComponent, techTickerMap)} />
      
 
-    <TickerManager key={2} name={'NewsTicker'} record={record} filteredTickers={filterObjFromObj(tickerComponent, newsTickerMap)}/>
+    <TickerManager widgetHeight={widgetHeight} color={themeColors.Background} height={tickerManagerHeights.Third} key={2} speed={tickerSpeeds.Medium} name={'NewsTicker'} autoScroll record={record} filteredTickers={filterObjFromObj(tickerComponent, newsTickerMap)}/>
     </div>
+     </div>
+    )
        }
     
         
@@ -135,20 +145,64 @@ Object.keys(original).map(key=>{
         <style jsx>
             {`
 
-
-.test{
+.compound-row{
     display:flex;
-    flex-direction: column;
+    width:100%;
+    
+}
+
+
+.logo{
+    height:100%;
     width: 100%;
 }
+
+.logo-square{
+    display:flex;
+    align-items: center;
+    justify-content:center;
+    height:100%;
+    width:${widgetHeight}px;
+    background-color: grey;
+    border: 2px solid red;
+    box-sizing: border-box;
+}
+
+.ticker-column{
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    overflow: hidden;
+    position:relative;
+
+}
+
+.fade-to-black{
+
+   
+      height:  ${widgetHeight}px;
+      position: absolute;
+      width: ${widgetHeight}px;
+      left: 0px;
+         max-width:25%;
+      background-image: linear-gradient(to left, rgba(255,255,255, 0) 0%, rgba(0,0,0, 1) 100%);
+     z-index: 5;
+ 
+
+
+
+}
+
+
 .container{
     
     display:flex;
-    flex-direction: column;
     background-color: black;
     position:relative;
+    height:${widgetHeight}px;
     
-    overflow: hidden;
+    
     
 }
 

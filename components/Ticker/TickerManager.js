@@ -3,11 +3,12 @@ import { techTickerMap } from '../../utils/helpers';
 
 import _ from 'lodash'
 
-const TickerManager = ({record, filteredTickers}) => {
+const TickerManager = ({ speed,filteredTickers, record, ...otherProps}) => {
 
     const [currentTickerName, setCurrentTickerName] = useState({})
     const [scrollTimeMap, updateScrollTimeMap] = useState({})
-
+     const [forceRerender, takeOff] = useState(false)
+   
  
 
 const getNextPropertyOfObject = (obj, currentKey) =>{
@@ -37,6 +38,7 @@ const getNextPropertyOfObject = (obj, currentKey) =>{
      console.log({ShowTicker})
      if(typeof(ShowTicker)!='undefined')
      return <ShowTicker 
+     {...otherProps}
      record={record}
      name={currentTickerName}
      scrollTime={scrollTimeMap[`${currentTickerName}`]}
@@ -58,7 +60,14 @@ const getNextPropertyOfObject = (obj, currentKey) =>{
 
 
 
+   useEffect(()=>{
+  
+     
+       setCurrentTickerName(currentTickerName)
+    
+      
 
+   },[])
 
 
 
@@ -85,8 +94,11 @@ const getNextPropertyOfObject = (obj, currentKey) =>{
   console.log('calculate scroll time name', tickerName)
   
         const updatedMap = scrollTimeMap;
-        updatedMap[`${tickerName}`] = currentRef.offsetWidth/200
+        updatedMap[`${tickerName}`] = currentRef.offsetWidth/speed
         updateScrollTimeMap(updatedMap)
+
+         takeOff(!forceRerender)
+   
     
     }
 

@@ -2,7 +2,7 @@
 
 
 import React, { useEffect, useState, useMemo } from 'react'
-import { techStackWidgetMap, techStackEditables } from '../../../../utils/helpers'
+import { techStackWidgetMap, techStackEditables, themeColors } from '../../../../utils/helpers'
 import _ from 'lodash'
 import firebase from '../../../../firebase'
 //import { useFirestoreConnect } from 'react-redux-firebase'
@@ -88,7 +88,6 @@ const renderTextFields = (map) =>{
 
 
             <div className='card' key={i}>
-               <h1>EDIT</h1>
                    <label className='label'>{field}</label>
                    {editField == field ? (
             <div>
@@ -102,9 +101,9 @@ const renderTextFields = (map) =>{
             </div>
           ) : (
             <div> 
-              <h3 onDoubleClick={() => selectField(field)}>
+              <span onDoubleClick={() => selectField(field)}>
                 {record[`${field}`]}
-              </h3>
+              </span>
             </div>
           )}
              
@@ -114,16 +113,26 @@ const renderTextFields = (map) =>{
                    <style jsx>{`
   
                  .card{
-                     background-color:green;
-                     max-height:200px;
+                     
                      display: flex;
-                     flex-direction: column;
                      
                  }
+
+                  .card:nth-child(odd){
+                    background-color:lightgrey;
+                  }
+
+                  input{
+                    width:100%;
+                    flex-grow: 1;
+                  }
+
                  .label{    
-                     background-color: yellow;
-                     width: 100%;
-                     text-align: center;
+                  background-color: ${themeColors.Secondary};
+                     width: 150px;
+                   color:white;
+                   font-weight: bold;
+                   padding: 5px;
                  }
                 `}</style>    
             </div>
@@ -164,7 +173,7 @@ useEffect(()=>{
     return(
         <div>
 
-     
+    <h1>Edit {widget} for course: {record?.courseTitle}</h1>
     <div className='container'>
   {renderTextFields(techStackEditables)}
 
@@ -172,11 +181,9 @@ useEffect(()=>{
     <style jsx>
         {`
                    .container {
-                    height: 200px;
-                    width: 600px;
                     background-color: gainsboro;
                     display:flex;
-                    flex-wrap: wrap;
+                    flex-direction:column;
                     justify-content: space-around;
                 }
     

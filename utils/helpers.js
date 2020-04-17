@@ -14,6 +14,7 @@ export const techTickerMap = {
 }
 
 export const highPriorityTickerMap = {
+    TitleTicker: "TitleTicker",
     ProblemTicker:"ProblemTicker"
  }
  
@@ -23,7 +24,7 @@ export const themeColors={
     Background: "black",
     Negative: "red",
     Grey: "lightgrey",
-    Secondary: "gold"
+    Secondary: "purple"
 
 }
 
@@ -61,7 +62,11 @@ export const techStackWidgetMap = {
 }
 
 const techStackOthers = {
-    problem:"problem"
+    
+    courseTitle:"courseTitle",
+    courseCaedence: "courseCaedence",
+    problem:"problem",
+
 }
 
 export const techStackEditables = Object.assign({}, techStackWidgetMap, techStackOthers)

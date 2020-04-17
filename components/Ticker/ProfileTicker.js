@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from 'react'
 import Ticker from './Ticker'
+import PassiveTicker from './PassiveTicker'
 
 
 
@@ -26,7 +27,7 @@ const ProfileTicker = ({record, ...props}) => {
             }
 
 
-    return <Ticker renderScrollItems={renderScrollItems} {...props} />
+    return <PassiveTicker renderScrollItems={renderScrollItems} {...props} />
 
 
 }

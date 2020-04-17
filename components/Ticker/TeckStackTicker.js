@@ -1,27 +1,54 @@
 import React, { useRef, useEffect } from 'react'
-import { techStackWidgetMap } from '../../utils/helpers'
+import { techStackWidgetMap, themeColors } from '../../utils/helpers'
 import Card from '../common/Cards/Card'
 import Ticker from './Ticker'
 
 
 const TechStackTicker = ({record, ...props}) => {
 
-    const renderCards = () =>{
-     
-        return Object.keys(techStackWidgetMap).map((field,i)=>{
-            console.log({field})
-            return(
+
+
+
+    const renderFocuses = () =>{
+        //return one scroll item, which has all the cards
+            //build up a new array from our others
+            const {focus, not_a_focus} = record || []
+             
+            let allCards = [];
+            allCards.push({
+                label:"Tech Stack",
+                value: ":",
+                color: themeColors.Positive
+            })      
+
+ Object.keys(techStackWidgetMap).map((field,i)=>{
+
+    allCards.push({
+        label:field,
+        value:record[`${field}`],
+        color: themeColors.Grey
+    })
+
+ })
+         
+        
     
-                <Card key={i} color={'green'}  heading={field} body={record[`${field}`]} />
- 
-    
-            )
-        })
-    }
+      return allCards.map((item, i)=>{
+                    return(
+                    <Card key={i} color={item.color} body={item.value} heading={item.label} />
+           
+                    )
+                   })     
+        
+               
+           }
+        
+        
 
 
 
-    return <Ticker renderScrollItems={renderCards} {...props} />
+
+    return <Ticker renderScrollItems={renderFocuses} {...props} />
 
 
 }

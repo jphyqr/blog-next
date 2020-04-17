@@ -3,6 +3,7 @@ import React, { useRef, useEffect, useState } from 'react'
 import Card from '../common/Cards/Card'
 import Ticker from './Ticker'
 import { themeColors } from '../../utils/helpers'
+import PassiveTicker from './PassiveTicker'
 
 
 const ScheduleTicker = ({record, ...props}) => {
@@ -14,6 +15,12 @@ const ScheduleTicker = ({record, ...props}) => {
              
             let allCards = [];
            
+
+            allCards.push({
+                label:"Schedule",
+                value: ":",
+                color: themeColors.Secondary
+            })
      
             schedule.forEach(f=>{
                allCards.push({
@@ -38,7 +45,7 @@ const ScheduleTicker = ({record, ...props}) => {
         
         
 
-    return <Ticker renderScrollItems={renderFocuses} {...props} />
+    return <PassiveTicker renderScrollItems={renderFocuses} {...props} />
 
 
 }

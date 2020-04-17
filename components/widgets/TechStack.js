@@ -10,6 +10,7 @@ import TechStackTicker from '../Ticker/TeckStackTicker';
 import ProblemTicker from '../Ticker/ProblemTicker';
 import ProfileTicker from '../Ticker/ProfileTicker';
 import ScheduleTicker from '../Ticker/ScheduleTicker';
+import TitleTicker from '../Ticker/TitleTicker';
 
 
 const TechStack = ({id, widget}) =>{
@@ -24,11 +25,13 @@ console.log({highPriorityTickerMap})
   
     tickerComponent[techTickerMap.FocusesTicker] = FocusesTicker;
     tickerComponent[techTickerMap.TechStackTicker] = TechStackTicker;
+    
+    tickerComponent[highPriorityTickerMap.TitleTicker] = TitleTicker
     tickerComponent[highPriorityTickerMap.ProblemTicker] = ProblemTicker;
     tickerComponent[newsTickerMap.ProfileTicker] = ProfileTicker
     tickerComponent[newsTickerMap.ScheduleTicker] = ScheduleTicker
- 
 
+ 
 
 
 
@@ -124,7 +127,7 @@ Object.keys(original).map(key=>{
        <div className='ticker-column'>
            <div className='fade-to-black-left'/>
            <div className='fade-to-black-right'/>
-           <TickerManager widgetHeight={widgetHeight} color={themeColors.Negative} height={tickerManagerHeights.Third} key={0} speed={tickerSpeeds.Crawl}   name={'HighPriorityStaticTicker'} record={record} filteredTickers={filterObjFromObj(tickerComponent, highPriorityTickerMap)} />
+           <TickerManager widgetHeight={widgetHeight} color={themeColors.Secondary} height={tickerManagerHeights.Third} key={0} speed={tickerSpeeds.Crawl}   name={'HighPriorityStaticTicker'} record={record} filteredTickers={filterObjFromObj(tickerComponent, highPriorityTickerMap)} />
      
        <TickerManager widgetHeight={widgetHeight} color={themeColors.Background} height={tickerManagerHeights.Third} key={1} speed={tickerSpeeds.Slow} name={'TechTicker'} autoScroll record={record} filteredTickers={filterObjFromObj(tickerComponent, techTickerMap)} />
      
@@ -164,7 +167,7 @@ Object.keys(original).map(key=>{
     height:100%;
     width:${widgetHeight}px;
     background-color: grey;
-    border: 2px solid red;
+    border: 2px solid ${themeColors.Secondary};
     box-sizing: border-box;
 }
 
@@ -179,7 +182,7 @@ Object.keys(original).map(key=>{
 
 }
 
-.fade-to-blac-left{
+.fade-to-black-left{
 
    
       height:  ${widgetHeight}px;

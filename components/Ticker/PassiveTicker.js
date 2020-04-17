@@ -58,12 +58,9 @@ const PassiveTicker = ({ name, color, widgetHeight, height, scrollTime, calculat
                     margin: 0;
                     white-space: nowrap;
                     text-align: center;
-                    /* Starting position */
-                    -moz-transform:translateX(0%);
-                    -webkit-transform:translateX(0%);	
-                    transform:translateX(0%);
-                    /* Apply animation to this element */	
-          
+                    -moz-animation:  example1 15s ease infinite ;
+                    -webkit-animation: example1 15s ease infinite;
+                    animation:   example1 15s ease infinite;
                     
 
                 }
@@ -81,33 +78,28 @@ const PassiveTicker = ({ name, color, widgetHeight, height, scrollTime, calculat
                     100% { -webkit-transform: translateX(-130%); }
                    }
                    @keyframes example1 {
-                    0%   { 
+                    0%, 100%   { 
                     -moz-transform: translateX(0%); /* Firefox bug fix */
                     -webkit-transform: translateX(0%); /* Firefox bug fix */
                     transform: translateX(0%); 	
                     opacity: 0	
                     }
-                    10%   { 
+                 
+
+                    20%   { 
                        
-                        opacity: 1
-                        -moz-transform: translateX(0%); /* Firefox bug fix */
-                        -webkit-transform: translateX(0%); /* Firefox bug fix */
-                        transform: translateX(0%); 		
+                        opacity: 	1
                         }
+
                         50%   { 
                        
                             opacity: 	1
                             }
-                            90%   { 
+                           
+                            80%   { 
                        
-                                opacity: 	.9
+                                opacity: 	1
                                 }
-                    100% { 
-                    -moz-transform: translateX(-130%); /* Firefox bug fix */
-                    -webkit-transform: translateX(-130%); /* Firefox bug fix */
-                    transform: translateX(-130%); 
-                    opacity: .9;
-                    }
             
             `}
         </style>

@@ -15,11 +15,11 @@ const FocusesTicker = ({record, ...props}) => {
             let allCards = [];
            
      
-            focus?.forEach(f=>{
+            focus?.forEach((f,i)=>{
                allCards.push({
                    value:f,
-                   label:'Focus',
-                   color: themeColors.Positive
+                   label: `Focus#${i+1}`,
+                   color: themeColors.Grey
                })
             })
         
@@ -29,13 +29,15 @@ const FocusesTicker = ({record, ...props}) => {
                     label:'Not a Focus',
                     value:f,
                     style:"block-negative",
-                    color: themeColors.Grey
+                    color: themeColors.Grey,
+                    inverted:true,
+                    dimmed:true
                 })
              })
         
                 return allCards.map((item, i)=>{
                     return(
-                    <Card key={i} color={item.color} body={item.value} heading={`${item.label}#${i}`} />
+                    <Card key={i} dimmed={item.dimmed} inverted={item.inverted}  color={item.color} body={item.value} heading={item.label} />
            
                     )
                    })     

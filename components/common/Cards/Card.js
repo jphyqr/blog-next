@@ -31,8 +31,7 @@ const Card = ({key, heading, body, color}) => {
 
 display: flex;
 border: 2px solid ${color};  
-align-items: stretch;
-padding: 1px;
+align-items: center;
 border-radius: 3px;
 margin-right: 10px;
 font-size: 18px;
@@ -47,6 +46,7 @@ background-color: ${color};
 color: white;
 text-align: center;
 text-transform: uppercase;
+padding: 0 5px;
 white-space: nowrap;
 font-weight: lighter;
 
@@ -55,7 +55,7 @@ font-weight: lighter;
 .body{
 white-space: nowrap;
 font-weight: bolder;
-padding: 0 0 5px 5px;
+padding: 0 5px;
 color: white;
 }
 `}</style>     

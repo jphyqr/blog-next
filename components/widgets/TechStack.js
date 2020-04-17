@@ -124,7 +124,7 @@ Object.keys(original).map(key=>{
        <div className='ticker-column'>
            <div className='fade-to-black-left'/>
            <div className='fade-to-black-right'/>
-           <TickerManager widgetHeight={widgetHeight} color={themeColors.Negative} height={tickerManagerHeights.Third} key={0} speed={tickerSpeeds.Slow}   name={'HighPriorityStaticTicker'} record={record} filteredTickers={filterObjFromObj(tickerComponent, highPriorityTickerMap)} />
+           <TickerManager widgetHeight={widgetHeight} color={themeColors.Negative} height={tickerManagerHeights.Third} key={0} speed={tickerSpeeds.Crawl}   name={'HighPriorityStaticTicker'} record={record} filteredTickers={filterObjFromObj(tickerComponent, highPriorityTickerMap)} />
      
        <TickerManager widgetHeight={widgetHeight} color={themeColors.Background} height={tickerManagerHeights.Third} key={1} speed={tickerSpeeds.Slow} name={'TechTicker'} autoScroll record={record} filteredTickers={filterObjFromObj(tickerComponent, techTickerMap)} />
      

@@ -13,8 +13,7 @@ const ProblemTicker = ({record, ...props}) => {
     <style jsx>
         {`
         .scroll-text{
-            font-size: 18px;
-            font-weight: bold;
+            font-size: 22px;
         }
         `}
     </style>
@@ -28,7 +27,7 @@ const ProblemTicker = ({record, ...props}) => {
 
 
 
-           return <PassiveTicker renderScrollItems={renderScrollItems} {...props} />
+           return <Ticker renderScrollItems={renderScrollItems} {...props} />
 
 
 

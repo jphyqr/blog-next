@@ -28,7 +28,7 @@ export const themeColors={
 }
 
 export const tickerSpeeds = {
-    Crawl:25,
+    Crawl:30,
     Slow:50,
     Medium:75,
     Fast:100

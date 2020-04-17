@@ -4,6 +4,7 @@ import { authReducer } from './authReducer';
 import { modalReducer } from './modalReducer';
 import { firestoreReducer } from 'redux-firestore';
 import { firebaseReducer } from 'react-redux-firebase';
+import { scrollItemReducer } from './scrollItemReducer';
 
 
 const rootReducer = combineReducers({
@@ -11,7 +12,8 @@ const rootReducer = combineReducers({
     auth: authReducer,
     modal: modalReducer,
     firestore: firestoreReducer,
-    firebase : firebaseReducer
+    firebase : firebaseReducer,
+    scrollItem: scrollItemReducer
 })
 
 

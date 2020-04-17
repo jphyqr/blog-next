@@ -4,7 +4,15 @@ export const courseFormMap = {
 
 }
 
+export const techTickerMap = {
+   TechStackTicker:"TechStackTicker",
+   FocusesTicker:"FocusesTicker"
+}
 
+export const newsTickerMap = {
+    ProblemTicker:"ProblemTicker",
+    ProfileTicker:"ProfileTicker"
+ }
 
 export const techStackWidgetMap = {
     db:"db",

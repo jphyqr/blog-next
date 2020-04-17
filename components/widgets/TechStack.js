@@ -1,11 +1,43 @@
 import React, { useMemo, useState, useEffect } from 'react'
-import { useFirestoreConnect } from 'react-redux-firebase';
+import { useFirestoreConnect, isLoaded, isEmpty } from 'react-redux-firebase';
 import { useSelector } from 'react-redux';
 import firebase from '../../firebase'
-import { techStackWidgetMap } from '../../utils/helpers';
+import { techStackWidgetMap, techTickerMap, newsTickerMap } from '../../utils/helpers';
+import Ticker from '../Ticker/Ticker';
+import Card from '../common/Cards/Card';
+import TickerManager from '../Ticker/TickerManager';
+import FocusesTicker from '../Ticker/FocusesTicker';
+import TechStackTicker from '../Ticker/TeckStackTicker';
+import ProblemTicker from '../Ticker/ProblemTicker';
+import ProfileTicker from '../Ticker/ProfileTicker';
 
 
 const TechStack = ({id, widget}) =>{
+
+
+
+
+
+
+
+    let tickerComponent = {};
+  
+    tickerComponent[techTickerMap.FocusesTicker] = FocusesTicker;
+    tickerComponent[techTickerMap.TechStackTicker] = TechStackTicker;
+    tickerComponent[newsTickerMap.ProblemTicker] = ProblemTicker;
+    tickerComponent[newsTickerMap.ProfileTicker] = ProfileTicker
+     
+ 
+
+
+
+
+
+
+
+
+
+
 
 const firestore = firebase.firestore()
 
@@ -19,64 +51,44 @@ const firestore = firebase.firestore()
    const widgetConfig = useSelector(state => (state.firestore.ordered.widgetConfig && state.firestore.ordered.widgetConfig[0]) || {});
     
      const [record, setRecord] = useState(widgetConfig);
+     console.log('record is loaded',isLoaded(record))
+     console.log('record is empty',isEmpty(record))
      const [loadingRecord, setLoaded] = useState(true);
-   
-     const renderCards = (map) =>{
-     
-        return Object.keys(map).map((field,i)=>{
-            console.log({field})
-            return(
-    
-    <div>
-                <div className='card' key={i}>
-                
-                       <label className='label'>{field}</label>
-                      
-                
-                <div> 
-                  <label className='info' >
-                    
-                    {record[`${field}`]}
-                  </label>
-                </div>
-             
-                 
-    
-                
-       
-           
-                </div>
-                <style jsx>{`
-      
-      .card{
-          
-          max-height:100px;
-          display: flex;
-          flex-direction: column;
-          margin-right: 10px;
-          border-radius: 5px;
-          padding: 5px; 
-          background-color: gainsboro;      
-          
-      }
-      .label{    
-         
-          width: 100%;
-          text-align: center;
-          text-transform: uppercase;
-      }
+     //should wego ShowStack ? [ShowFocuses]
 
-      .info{
-          font-style: italic; 
-      }
-     `}</style>     
-                </div>
-                  
-              
-    
-            )
-        })
-    }
+
+
+
+ const filterObjFromObj = (original, filter) =>{
+
+console.log({original})
+console.log({filter})
+
+
+//loop over the original, and if the filter has that property,
+//do nothing, if not delete it.
+let filtered = {}
+
+Object.keys(original).map(key=>{
+     console.log({key})
+     if(filter.hasOwnProperty(key)){
+  console.log('filter has', key)
+        filtered[`${key}`] = original[`${key}`]
+     }
+      
+ })
+
+ console.log('after filter', filtered)
+
+ return filtered
+
+ }
+  
+
+
+   
+
+
      useEffect(()=>{
  
         const getRecordById = async () => {
@@ -104,25 +116,39 @@ const firestore = firebase.firestore()
         <div className='container'>
         <span className='fixed-label'>Next Problem</span>
         
-        <div className='body'>
-        {renderCards(techStackWidgetMap)} 
-        </div>
+       {!loadingRecord && !_.isEmpty(record)&&
+       <div className='test'>
+       <TickerManager key={1} name={'TechTicker'} record={record} filteredTickers={filterObjFromObj(tickerComponent, techTickerMap)} />
+     
 
-         <span className='horizontal-scroll'>
-            <span className='scroll-item'>{record?.problem}</span>
-            </span>
-           
+    <TickerManager key={2} name={'NewsTicker'} record={record} filteredTickers={filterObjFromObj(tickerComponent, newsTickerMap)}/>
+    </div>
+       }
+    
+        
+{/*         
+         <Ticker  name={'problem'} scrollTime={scrollTimeMap[`problem`]} calculateScrollTime={calculateScrollTime} handleRenderItems={()=>{return record?.problem}} />
+     */}
      
           
         </div>
         <style jsx>
             {`
+
+
+.test{
+    display:flex;
+    flex-direction: column;
+    width: 100%;
+}
 .container{
-    width:1000px;
+    
     display:flex;
     flex-direction: column;
     background-color: black;
     position:relative;
+    
+    overflow: hidden;
     
 }
 
@@ -133,6 +159,8 @@ const firestore = firebase.firestore()
                         display:flex;
                         justify-content: center;
                         align-items: center;
+                        
+                       overflow: hidden;
                        
                        
                     }
@@ -144,6 +172,8 @@ const firestore = firebase.firestore()
         padding:5px 0px 5px 0px;
         font-size: 26px;
         color: white;
+        
+        overflow: hidden;
     }
 
     .fixed-label{
@@ -156,57 +186,7 @@ const firestore = firebase.firestore()
     }
 
 
-                    .horizontal-scroll{
-                      
-                        width: 80%;
-                        transform:translateX(20%);
-                        height: 50px;	
-                       overflow: hidden;
-                       position: relative;
-
-                        
-
-                    }
-
-                    .scroll-item{
-                        font-size: 2em;
-                        color: white;
-                        position: absolute;
-                        width: 100%;
-                        height: 100%;
-                        margin: 0;
-                        line-height: 50px;
-                        text-align: center;
-                        /* Starting position */
-                        -moz-transform:translateX(100%);
-                        -webkit-transform:translateX(100%);	
-                        transform:translateX(100%);
-                        /* Apply animation to this element */	
-                        -moz-animation: example1 15s linear infinite;
-                        -webkit-animation: example1 15s linear infinite;
-                        animation: example1 15s linear infinite;
-
-                    }
-
-                    @-moz-keyframes example1 {
-                        0%   { -moz-transform: translateX(100%); }
-                        100% { -moz-transform: translateX(-100%); }
-                       }
-                       @-webkit-keyframes example1 {
-                        0%   { -webkit-transform: translateX(100%); }
-                        100% { -webkit-transform: translateX(-100%); }
-                       }
-                       @keyframes example1 {
-                        0%   { 
-                        -moz-transform: translateX(100%); /* Firefox bug fix */
-                        -webkit-transform: translateX(100%); /* Firefox bug fix */
-                        transform: translateX(100%); 		
-                        }
-                        100% { 
-                        -moz-transform: translateX(-100%); /* Firefox bug fix */
-                        -webkit-transform: translateX(-100%); /* Firefox bug fix */
-                        transform: translateX(-100%); 
-                        }
+                  
         
         `}
         </style>

@@ -18,6 +18,9 @@ export const LOGOUT = 'LOGOUT'
 //COURSES
 
 
+//SCROLL ITEM
+export const SET_SCROLL_ITEM_WIDTH = 'SET_SCROLL_ITEM_WIDTH'
+
 //big thing to think about...  
 //How important is it to keep the UI in sync with the DB.
 //What is in our Store is what we are going to show...

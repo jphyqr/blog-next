@@ -122,8 +122,8 @@ Object.keys(original).map(key=>{
           <img  className='logo' src={'/File.jpg'}/>
             </div>
        <div className='ticker-column'>
-           <div className='fade-to-black'/>
-           
+           <div className='fade-to-black-left'/>
+           <div className='fade-to-black-right'/>
            <TickerManager widgetHeight={widgetHeight} color={themeColors.Negative} height={tickerManagerHeights.Third} key={0} speed={tickerSpeeds.Slow}   name={'HighPriorityStaticTicker'} record={record} filteredTickers={filterObjFromObj(tickerComponent, highPriorityTickerMap)} />
      
        <TickerManager widgetHeight={widgetHeight} color={themeColors.Background} height={tickerManagerHeights.Third} key={1} speed={tickerSpeeds.Slow} name={'TechTicker'} autoScroll record={record} filteredTickers={filterObjFromObj(tickerComponent, techTickerMap)} />
@@ -171,14 +171,15 @@ Object.keys(original).map(key=>{
 .ticker-column{
     display:flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
     width: 100%;
+    height:100%;
     overflow: hidden;
     position:relative;
 
 }
 
-.fade-to-black{
+.fade-to-blac-left{
 
    
       height:  ${widgetHeight}px;
@@ -194,6 +195,22 @@ Object.keys(original).map(key=>{
 
 }
 
+
+.fade-to-black-right{
+
+   
+    height:  ${widgetHeight}px;
+    position: absolute;
+    width: ${widgetHeight/1.5}px;
+    right: 0px;
+       max-width:25%;
+    background-image: linear-gradient(to right, rgba(255,255,255, 0) 0%, rgba(0,0,0, 1) 100%);
+   z-index: 15;
+
+
+
+
+}
 
 .container{
     

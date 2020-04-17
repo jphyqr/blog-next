@@ -43,6 +43,7 @@ const getNextPropertyOfObject = (obj, currentKey) =>{
      name={currentTickerName}
      scrollTime={scrollTimeMap[`${currentTickerName}`]}
       calculateScrollTime={calculateScrollTime}
+      speed={speed}
      
      />
       }
@@ -88,15 +89,25 @@ const getNextPropertyOfObject = (obj, currentKey) =>{
     
 
 
-    const calculateScrollTime = (currentRef, tickerName) =>{
-
-  console.log('calculate scroll time', currentRef)
-  console.log('calculate scroll time name', tickerName)
-  
+    const calculateScrollTime = (currentRef, tickerName, fixedTime) =>{
         const updatedMap = scrollTimeMap;
-        updatedMap[`${tickerName}`] = currentRef.offsetWidth/speed
-        updateScrollTimeMap(updatedMap)
 
+        if(fixedTime)
+        {
+            console.log('FIXED TIME UPDATE')
+            updatedMap[`${tickerName}`] = fixedTime
+          
+    
+
+        } else {
+
+            updatedMap[`${tickerName}`] = currentRef.offsetWidth/speed
+         
+    
+        }
+        updateScrollTimeMap(updatedMap)
+     
+     
          takeOff(!forceRerender)
    
     

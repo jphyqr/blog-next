@@ -4,18 +4,26 @@ import PassiveTicker from './PassiveTicker'
 
 
 
-const TitleTicker = ({record, ...props}) => {
+const TeachingTicker = ({record, ...props}) => {
  
 
     const renderScrollItems = () =>{
        
-    return (<span className='scroll-text'>{`${record?.courseTitle}`}
+    return (<span className='scroll-text'><span className='label'>Teaching: </span><span className='body'>{record?.teaching}</span>
     <style jsx>
         {`
         .scroll-text{
-            font-size: 26px;
-            font-weight: bold;
+            font-size: 20px;
+         
+        }
+
+        .label{
+
             text-transform:uppercase;
+        }
+
+        .body{
+            font-style: italic;
         }
         `}
     </style>
@@ -36,4 +44,4 @@ const TitleTicker = ({record, ...props}) => {
 
 }
 
-export default TitleTicker
+export default TeachingTicker

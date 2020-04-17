@@ -11,6 +11,8 @@ import ProblemTicker from '../Ticker/ProblemTicker';
 import ProfileTicker from '../Ticker/ProfileTicker';
 import ScheduleTicker from '../Ticker/ScheduleTicker';
 import TitleTicker from '../Ticker/TitleTicker';
+import TeachingTicker from '../Ticker/TeachingTicker';
+import LearningTicker from '../Ticker/LearningTicker';
 
 
 const TechStack = ({id, widget}) =>{
@@ -28,6 +30,8 @@ console.log({highPriorityTickerMap})
     
     tickerComponent[highPriorityTickerMap.TitleTicker] = TitleTicker
     tickerComponent[highPriorityTickerMap.ProblemTicker] = ProblemTicker;
+    tickerComponent[highPriorityTickerMap.TeachingTicker] = TeachingTicker;
+    tickerComponent[highPriorityTickerMap.LearningTicker] = LearningTicker;
     tickerComponent[newsTickerMap.ProfileTicker] = ProfileTicker
     tickerComponent[newsTickerMap.ScheduleTicker] = ScheduleTicker
 
@@ -127,12 +131,12 @@ Object.keys(original).map(key=>{
        <div className='ticker-column'>
            <div className='fade-to-black-left'/>
            <div className='fade-to-black-right'/>
-           <TickerManager widgetHeight={widgetHeight} color={themeColors.Secondary} height={tickerManagerHeights.Third} key={0} speed={tickerSpeeds.Crawl}   name={'HighPriorityStaticTicker'} record={record} filteredTickers={filterObjFromObj(tickerComponent, highPriorityTickerMap)} />
+           <TickerManager widgetHeight={widgetHeight} color={themeColors.Secondary} height={tickerManagerHeights.Third} key={0} speed={tickerSpeeds.Fixed15}   name={'HighPriorityStaticTicker'} record={record} filteredTickers={filterObjFromObj(tickerComponent, highPriorityTickerMap)} />
      
        <TickerManager widgetHeight={widgetHeight} color={themeColors.Background} height={tickerManagerHeights.Third} key={1} speed={tickerSpeeds.Slow} name={'TechTicker'} autoScroll record={record} filteredTickers={filterObjFromObj(tickerComponent, techTickerMap)} />
      
 
-    <TickerManager widgetHeight={widgetHeight} color={themeColors.Background} height={tickerManagerHeights.Third} key={2} speed={tickerSpeeds.Medium} name={'NewsTicker'} autoScroll record={record} filteredTickers={filterObjFromObj(tickerComponent, newsTickerMap)}/>
+    <TickerManager widgetHeight={widgetHeight} color={themeColors.Background} height={tickerManagerHeights.Third} key={2} speed={tickerSpeeds.Fixed20} name={'NewsTicker'} autoScroll record={record} filteredTickers={filterObjFromObj(tickerComponent, newsTickerMap)}/>
     </div>
      </div>
     )

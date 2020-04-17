@@ -15,8 +15,13 @@ export const techTickerMap = {
 
 export const highPriorityTickerMap = {
     TitleTicker: "TitleTicker",
-    ProblemTicker:"ProblemTicker"
+    ProblemTicker:"ProblemTicker",
+    TeachingTicker: "TeachingTicker",
+    LearningTicker: "LearningTicker",
+    
  }
+
+
  
 
 export const themeColors={
@@ -32,14 +37,16 @@ export const tickerSpeeds = {
     Crawl:30,
     Slow:50,
     Medium:75,
-    Fast:100
+    Fast:100,
+    Fixed15: 15,
+    Fixed20: 20
 }
 
 
 export const tickerManagerHeights ={
     Full:90,
     Half:45,
-    Third:31,
+    Third:33.3,
     TwoThirds:60,
     Quarter: 22
 }

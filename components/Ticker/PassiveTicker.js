@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react'
 
 
-const PassiveTicker = ({ name, color, widgetHeight, height, scrollTime, calculateScrollTime, renderScrollItems}) => {
+const PassiveTicker = ({ name, color, speed, widgetHeight, height, scrollTime, calculateScrollTime, renderScrollItems}) => {
     const scrollItemRef = useRef(null)
 
 
@@ -14,7 +14,7 @@ const PassiveTicker = ({ name, color, widgetHeight, height, scrollTime, calculat
 
 
     useEffect(()=>{
-     calculateScrollTime(scrollItemRef?.current, name)
+     calculateScrollTime(scrollItemRef?.current, name, speed)
     }, [scrollItemRef?.current?.offsetWidth])
 
 
@@ -58,9 +58,9 @@ const PassiveTicker = ({ name, color, widgetHeight, height, scrollTime, calculat
                     margin: 0;
                     white-space: nowrap;
                     text-align: center;
-                    -moz-animation:  example1 15s ease infinite ;
-                    -webkit-animation: example1 15s ease infinite;
-                    animation:   example1 15s ease infinite;
+                    -moz-animation:  example1 ${speed}s ease infinite ;
+                    -webkit-animation: example1 ${speed}s ease infinite;
+                    animation:   example1 ${speed}s ease infinite;
                     
 
                 }

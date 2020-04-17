@@ -45,7 +45,7 @@ opacity: ${dimmed? 0.7: 1};
 
 width: 100%;
 background-color:  ${ inverted ? "white" : color};
-color: ${inverted? "black" : "white"};
+color: ${inverted? "black" : "black"};
 text-align: center;
 text-transform: uppercase;
 padding: 0 5px;

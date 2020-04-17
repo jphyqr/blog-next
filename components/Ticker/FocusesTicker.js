@@ -14,6 +14,8 @@ const FocusesTicker = ({record, ...props}) => {
              
             let allCards = [];
            
+
+            
      
             focus?.forEach((f,i)=>{
                allCards.push({

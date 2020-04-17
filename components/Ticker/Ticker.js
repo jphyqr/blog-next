@@ -73,12 +73,12 @@ const Ticker = ({ name, color, widgetHeight, height, scrollTime, calculateScroll
                 @-moz-keyframes example1 {
                     0%   { -moz-transform: translateX(100%); }
               
-                    100% { -moz-transform: translateX(-100%); }
+                    100% { -moz-transform: translateX(-150%); }
                    }
                    @-webkit-keyframes example1 {
                     0%   { -moz-transform: translateX(100%); }
                  
-                    100% { -moz-transform: translateX(-100%); }
+                    100% { -moz-transform: translateX(-150%); }
                    }
                    @keyframes example1 {
                     0%   { 
@@ -91,7 +91,7 @@ const Ticker = ({ name, color, widgetHeight, height, scrollTime, calculateScroll
                     100% { 
                     -moz-transform: translateX(0%); /* Firefox bug fix */
                     -webkit-transform: translateX(0%); /* Firefox bug fix */
-                    transform: translateX(-100%); 
+                    transform: translateX(-150%); 
                  
                     }
             

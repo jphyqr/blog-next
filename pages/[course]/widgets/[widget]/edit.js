@@ -83,64 +83,73 @@ const handleInputBlur = async () => {
 
 const renderTextFields = (map) =>{
 
-    return Object.keys(map).map((field,i)=>{
+    return map&&Object.keys(map).map((field,i)=>{
+      console.log({field})
+      console.log(map[`${field}`])
+       if(typeof(map[`${field}`])=='string'){
+        console.log('1 to 1 object', field)
         return(
 
+ 
+          <div className='card' key={i}>
+                 <label className='label'>{field}</label>
+                 {editField == field ? (
+          <div>
+            <input
+              id={field}
+              type='text'
+              value={record[`${field}`]}
+              onBlur={handleInputBlur} 
+              onChange={e=>updateFormState(e)}
+            ></input>
+          </div>
+        ) : (
+          <div> 
+            <span onDoubleClick={() => selectField(field)}>
+              {record[`${field}`]}
+            </span>
+          </div>
+        )}
+           
 
-            <div className='card' key={i}>
-                   <label className='label'>{field}</label>
-                   {editField == field ? (
-            <div>
-              <input
-                id={field}
-                type='text'
-                value={record[`${field}`]}
-                onBlur={handleInputBlur} 
-                onChange={e=>updateFormState(e)}
-              ></input>
-            </div>
-          ) : (
-            <div> 
-              <span onDoubleClick={() => selectField(field)}>
-                {record[`${field}`]}
-              </span>
-            </div>
-          )}
-             
-
-            
-   
-                   <style jsx>{`
-  
-                 .card{
-                     
-                     display: flex;
-                     
-                 }
-
-                  .card:nth-child(odd){
-                    background-color:lightgrey;
-                  }
-
-                  input{
-                    width:100%;
-                    flex-grow: 1;
-                  }
-
-                 .label{    
-                  background-color: ${themeColors.Secondary};
-                     width: 150px;
-                   color:white;
-                   font-weight: bold;
-                   padding: 5px;
-                 }
-                `}</style>    
-            </div>
-            
-              
           
+ 
+                 <style jsx>{`
 
-        )
+               .card{
+                   
+                   display: flex;
+                   
+               }
+
+                .card:nth-child(odd){
+                  background-color:lightgrey;
+                }
+
+                input{
+                  width:100%;
+                  flex-grow: 1;
+                }
+
+               .label{    
+                background-color: ${themeColors.Secondary};
+                   width: 150px;
+                 color:white;
+                 font-weight: bold;
+                 padding: 5px;
+               }
+              `}</style>    
+          </div>
+          
+            
+        
+
+      )
+       } else {
+         console.log('NOT a 1:1 object', field)
+         return <div></div>
+       }
+
     })
 }
 
@@ -175,7 +184,7 @@ useEffect(()=>{
 
     <h1>Edit {widget} for course: {record?.courseTitle}</h1>
     <div className='container'>
-  {renderTextFields(techStackEditables)}
+  {renderTextFields(record)}
 
     </div>
     <style jsx>

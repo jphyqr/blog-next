@@ -8,6 +8,10 @@ export const newsTickerMap = {
     ScheduleTicker: "ScheduleTicker"
  }
 
+
+
+
+
 export const techTickerMap = {
    TechStackTicker:"TechStackTicker",
    FocusesTicker:"FocusesTicker"
@@ -21,6 +25,21 @@ export const highPriorityTickerMap = {
     
  }
 
+
+export const titleTickerMap ={
+    TitleTicker: "TitleTicker",
+    SponsorTicker: "SponsorTicker",
+} 
+
+
+export const mainTickerMap ={
+    TournamentTicker: "TournamentTicker",
+} 
+
+export const footerTickerMap ={
+    ProfileTicker:"ProfileTicker",
+    ScheduleTicker: "ScheduleTicker"
+}
 
  
 
@@ -65,6 +84,14 @@ export const techStackWidgetMap = {
     domain: "domain",
     server: "server",
     ui:"ui"
+
+}
+
+
+
+export const pokerStreamEditables = {
+    title:"db",
+    sponsor:'hosting',
 
 }
 

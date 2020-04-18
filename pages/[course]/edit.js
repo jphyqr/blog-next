@@ -8,7 +8,7 @@ import withRedux from 'next-redux-wrapper'
 const edit = ({router}) => {
   const firestore = firebase.firestore();
 
- const  {url} = props || {}
+
   const [id, setId] = useState(router?.query?.course || {});
   const [record, setRecord] = useState({});
   const [loadingRecord, setLoaded] = useState(true);

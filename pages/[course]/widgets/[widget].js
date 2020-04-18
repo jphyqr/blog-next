@@ -11,13 +11,13 @@ import { withRedux } from '../../../lib/redux'
 import {widgets} from '../../../constants/widgetConstants'
 import { useFirestoreConnect } from 'react-redux-firebase'
 import TechStack from '../../../components/widgets/TechStack'
+import PokerStream from '../../../components/widgets/PokerStream/PokerStream'
 const Widget = ({router}) =>{
 
  
   let widgetComponent = {};
  widgetComponent[widgets.TechStack] = TechStack;
- 
-   
+ widgetComponent[widgets.PokerStream] = PokerStream;
 
 
   const renderWidget = () =>{

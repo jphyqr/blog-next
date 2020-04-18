@@ -10,7 +10,7 @@ const ProfileTicker = ({record, ...props}) => {
        
         const {author, twitter, github} = record || {}
 
-     return (<span className='scroll-text'>{`Author: ${author} | twitter: ${twitter} | github: ${github}`} 
+     return (<span className='scroll-text'>{`Author: ${author} ${twitter? `| twitter: ${twitter}`   : "" } ${github? ` | github: ${github}`:``}`} 
         <style jsx>
         {`
         .scroll-text{

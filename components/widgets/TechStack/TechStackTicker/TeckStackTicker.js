@@ -1,9 +1,10 @@
 import React, { useRef, useEffect } from 'react'
-import { techStackWidgetMap, themeColors } from '../../utils/helpers'
-import Card from '../common/Cards/Card'
-import Ticker from './Ticker'
 
+import Card from '../../../common/Cards/Card'
+import Ticker from '../../components/Ticker'
+import { themeColors } from '../../../layout/themeConstants'
 
+import {techStackWidgetMap} from '../techStackConstants'
 const TechStackTicker = ({record, ...props}) => {
 
 

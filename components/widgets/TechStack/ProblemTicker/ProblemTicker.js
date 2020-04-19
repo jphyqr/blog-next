@@ -1,14 +1,16 @@
 import React, { useRef, useEffect } from 'react'
-import PassiveTicker from '../../../Ticker/PassiveTicker'
+
+import PassiveTicker from '../../components/PassiveTicker'
 
 
 
-const SponsorTicker = ({record, ...props}) => {
+
+const ProblemTicker = ({record, ...props}) => {
  
 
     const renderScrollItems = () =>{
        
-        return (<span className='scroll-text'><span className='label'>Sponsored By: </span><span className='body'>{record?.sponsor || 'John'}</span>
+        return (<span className='scroll-text'><span className='label'>Next Problem: </span><span className='body'>{record?.problem}</span>
         <style jsx>
             {`
             .scroll-text{
@@ -45,4 +47,4 @@ const SponsorTicker = ({record, ...props}) => {
 
 }
 
-export default SponsorTicker
+export default ProblemTicker

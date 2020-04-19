@@ -2,15 +2,14 @@
 
 
 import React, { useEffect, useState, useMemo } from 'react'
-import { techStackWidgetMap } from '../../../utils/helpers'
 import _ from 'lodash'
 import firebase from '../../../firebase'
 //import { useFirestoreConnect } from 'react-redux-firebase'
 import { useSelector } from 'react-redux'
 import { withRedux } from '../../../lib/redux'
-import {widgets} from '../../../constants/widgetConstants'
 import { useFirestoreConnect } from 'react-redux-firebase'
-import TechStack from '../../../components/widgets/TechStack'
+import {widgets} from '../../../components/widgets/widgetConstants'
+import TechStack from '../../../components/widgets/TechStack/TechStack'
 import PokerStream from '../../../components/widgets/PokerStream/PokerStream'
 const Widget = ({router}) =>{
 

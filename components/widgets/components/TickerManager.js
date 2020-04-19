@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { techTickerMap } from '../../utils/helpers';
 
 import _ from 'lodash'
 

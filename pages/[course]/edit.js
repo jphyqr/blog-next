@@ -1,10 +1,11 @@
 import React, { useEffect, useState, useRef } from "react";
 import firebase from "../../firebase";
 import _ from "lodash";
-import { courseFormMap } from "../../utils/helpers";
+
 import cuid from "cuid";
 import Carousel from "../../components/Carousel/Carousel";
 import withRedux from 'next-redux-wrapper'
+import { courseFormMap } from "./courseConstants";
 const edit = ({router}) => {
   const firestore = firebase.firestore();
 

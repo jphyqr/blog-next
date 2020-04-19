@@ -1,7 +1,6 @@
 import React, { useRef, useEffect } from 'react'
-import Ticker from './Ticker'
-import PassiveTicker from './PassiveTicker'
 
+import PassiveTicker from '../../components/PassiveTicker'
 
 
 const TeachingTicker = ({record, ...props}) => {

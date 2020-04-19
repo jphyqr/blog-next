@@ -1,24 +1,24 @@
 import React, { useMemo, useState, useEffect } from 'react'
 import { useFirestoreConnect, isLoaded, isEmpty } from 'react-redux-firebase';
 import { useSelector } from 'react-redux';
-import firebase from '../../firebase'
-import { techTickerMap,highPriorityTickerMap, newsTickerMap, tickerSpeeds, tickerManagerHeights, widgetHeights, themeColors } from '../../utils/helpers';
+import firebase from '../../../firebase'
+import  {widgetHeights, tickerManagerHeights, tickerSpeeds} from '../widgetConstants'
+import {techTickerMap, highPriorityTickerMap, newsTickerMap} from './techStackConstants'
 
-import TickerManager from '../Ticker/TickerManager';
-import FocusesTicker from '../Ticker/FocusesTicker';
-import TechStackTicker from '../Ticker/TeckStackTicker';
-import ProblemTicker from '../Ticker/ProblemTicker';
-import ProfileTicker from '../Ticker/ProfileTicker';
-import ScheduleTicker from '../Ticker/ScheduleTicker';
-import TitleTicker from '../Ticker/TitleTicker';
-import TeachingTicker from '../Ticker/TeachingTicker';
-import LearningTicker from '../Ticker/LearningTicker';
+import FocusesTicker from   "./FocusesTicker/FocusesTicker"
+import  TechStackTicker from   "./TechStackTicker/TeckStackTicker"
 
+import  TitleTicker from  "../common/TitleTicker/TitleTicker"
+import  ProblemTicker from   "./ProblemTicker/ProblemTicker"
+import  TeachingTicker from   "./TeachingTicker/TeachingTicker"
+import LearningTicker  from   "./LearningTicker/LearningTicker"
+import ProfileTicker from   "../common/ProfileTicker/ProfileTicker"
+import ScheduleTicker  from   "../common/ScheduleTicker/ScheduleTicker"
+import TickerManager from '../components/TickerManager';
+import { themeColors } from '../../layout/themeConstants';
 
 const TechStack = ({id, widget}) =>{
 
-
-console.log({highPriorityTickerMap})
 
 
      const widgetHeight=widgetHeights.Medium;

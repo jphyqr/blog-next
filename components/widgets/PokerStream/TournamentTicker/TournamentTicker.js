@@ -1,9 +1,8 @@
 import React, { useRef, useEffect, useState } from 'react'
 
 import Card from '../../../common/Cards/Card'
-import Ticker from '../../../Ticker/Ticker'
-import { themeColors } from '../../../../utils/helpers'
-
+import Ticker from '../../components/Ticker'
+import { themeColors } from '../../../layout/themeConstants'
 
 const TournamentTicker = ({record, ...props}) => {
 

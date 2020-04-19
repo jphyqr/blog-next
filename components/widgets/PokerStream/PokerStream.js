@@ -2,16 +2,18 @@ import React, { useMemo, useState, useEffect } from 'react'
 import { useFirestoreConnect, isLoaded, isEmpty } from 'react-redux-firebase';
 import { useSelector } from 'react-redux';
 import firebase from '../../../firebase'
-import { techTickerMap,highPriorityTickerMap, newsTickerMap, tickerSpeeds, tickerManagerHeights, widgetHeights, themeColors, titleTickerMap, mainTickerMap, footerTickerMap } from '../../../utils/helpers';
 
 
-import ProfileTicker from '../../Ticker/ProfileTicker';
-import ScheduleTicker from '../../Ticker/ScheduleTicker';
-import TournamentTicker from './tickers/TournamentTicker';
-import TitleTicker from '../../Ticker/TitleTicker';
-import SponsorTicker from './tickers/SponsorTicker';
-import TickerManager from '../../Ticker/TickerManager';
+import ProfileTicker from '../common/ProfileTicker/ProfileTicker';
+import ScheduleTicker from '../common/ScheduleTicker/ScheduleTicker';
+import TournamentTicker from './TournamentTicker/TournamentTicker';
+import TitleTicker from '../common/TitleTicker/TitleTicker';
+import SponsorTicker from './SponsorTicker/SponsorTicker';
+import TickerManager from '../components/TickerManager';
+import { widgetHeights, tickerManagerHeights, tickerSpeeds } from '../widgetConstants';
+import { themeColors } from '../../layout/themeConstants';
 
+import {mainTickerMap, titleTickerMap, footerTickerMap} from './pokerStreamConstants'
 
 
 const PokerStream = ({id, widget}) =>{
@@ -38,7 +40,7 @@ const PokerStream = ({id, widget}) =>{
 
  
 
-
+console.log({tickerComponent})
 
 
 
@@ -76,7 +78,7 @@ Object.keys(original).map(key=>{
       
  })
 
-
+ console.log({filtered})
  return filtered
 
  }
@@ -89,6 +91,8 @@ Object.keys(original).map(key=>{
      useEffect(()=>{
  
         const getRecordById = async () => {
+
+            console.log('getRecordById')
          
             if ((!_.isEmpty(id))&&(!_.isEmpty(widget))) {
               const recordRef = firestore.collection("courses").doc(id).collection("widgets").doc(widget);

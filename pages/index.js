@@ -7,10 +7,9 @@ import { LOGIN , LOGOUT, SET_MODAL} from "../constants/reducerConstants";
 import Modal from "../components/modals/Modal";
 import  _ from 'lodash'
 import RegisterModal from "../components/modals/RegisterModal";
-import { modals } from "../constants/modalConstants";
 import Password from "../components/modals/Password";
-import { verificationMap } from "../constants/verificationConstants";
 import { withRedux } from "../lib/redux";
+import { modals, verificationMap } from "../components/modals/modalConstants";
 const firestore = firebase.firestore();
  
 //WHY REACT?

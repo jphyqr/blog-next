@@ -5,7 +5,7 @@ const Name = () => {
   const checkMetadata = async () => {
     var storageRef = firebase.storage().ref();
     var forestRef = storageRef.child("assets/File.jpg");
-
+    console.log({ storageRef });
     // Get metadata properties
     forestRef
       .getMetadata()

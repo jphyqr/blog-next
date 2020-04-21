@@ -1,100 +1,107 @@
-import React, { useEffect, useState } from 'react'
-import { themeColors } from '../layout/themeConstants'
-import EditableLabel from './EditableLabel'
+import React, { useEffect, useState } from "react";
+import { themeColors } from "../layout/themeConstants";
 
+import EditableProperty from "./EditableProperty";
 
-const EditableObject = ({onBlur, key, value, field, isSelected, selectField}) => {
+const EditableObject = ({
+  inList,
+  updateParent,
+  deleteObjectFromList,
+  selectIndex,
+  parentsIndex,
+  key,
+  value,
+  field,
+  parentIsSelected,
+  selectField,
+}) => {
+  const [selectedProperty, selectProperty] = useState({});
+  const [objectData, setObject] = useState(value);
+  const [counter, incrementCounter] = useState(0); //force update on state when we update just a child of records state
 
-    const [_value, setValue] = useState(value)
-    const [editProperty, selectProperty] = useState({});
-    const [objectData, updateObject] = useState(value);
-    const [counter, incrementCounter] = useState(0) //force update on state when we update just a child of records state
-   
-    useEffect(()=>{
-       setValue(value)  
-    }, [value])
+  const handleOnChange = (e) => {
+    console.log("setValue", e.target.value);
+    setValue(e.target.value);
+  };
 
+  const updateObject = async (value, property) => {
+    console.log("EDITABLEOBJECT BLUR", value);
 
-    const handleOnChange = (e) =>{
-        console.log('setValue', e.target.value) 
-        setValue(e.target.value)
-   
-    }
+    let newState = objectData;
+    newState[`${property}`] = value;
 
+    setObject(newState);
+    incrementCounter(counter + 1);
 
+    updateParent(newState, field);
 
-    const handleInputBlur = async (value) => {
-    
-        let newState = objectData;
-        newState[`${editProperty}`] = value;
-        updateObject(newState);
-         incrementCounter(counter+1);
+    selectProperty({});
+  };
 
-      // updateDocument(formData)
-   
-    
-        selectField({})
- 
-    
-    }
-    
+  const renderProperties = () => {
+    return (
+      objectData &&
+      Object.keys(objectData).map((property, index) => {
+        const propValue = value[`${property}`];
 
+        return (
+          <EditableProperty
+            inList={inList}
+            inObjectInList
+            updateObject={updateObject}
+            selectIndex={selectIndex}
+            parentsIndex={parentsIndex}
+            key={index}
+            property={property}
+            value={propValue}
+            isSelected={selectedProperty == property}
+            selectProperty={selectProperty}
+          />
+        );
+      })
+    );
+  };
 
+  return (
+    <div className="card" key={key}>
+      {renderProperties()}
+      {inList && (
+        <button onClick={() => deleteObjectFromList(parentsIndex)}>
+          Delete
+        </button>
+      )}
 
-     const renderProperties = () =>{
-        
-         return _value&&Object.keys(_value).map((f, index)=>{
-           const property = value[`${f}`]
-           console.log({f})
-           return  <EditableLabel  onBlur={handleInputBlur}  key={index} field={f}  value={property} isSelected={editProperty == f} selectField={selectProperty} /> 
+      <style jsx>{`
+        .card {
+          display: flex;
+          flex-direction: column;
+          border: ${parentIsSelected
+            ? "3px yellow solid"
+            : inList
+            ? `3px solid ${themeColors.Secondary}`
+            : ""};
+        }
 
-         })
+        .card:nth-child(odd) {
+          background-color: lightgrey;
+        }
 
-     }
+        input {
+          width: 100%;
+          flex-grow: 1;
+        }
 
-return (
+        .label {
+          background-color: ${themeColors.Secondary};
+          width: 150px;
+          color: white;
+          font-weight: bold;
+          padding: 5px;
+          text-transform: uppercase;
+        }
+      `}</style>
+    </div>
+  );
+};
 
-    <div className='card' key={key}>
-  
-
-    {renderProperties()}
-   
-
-
-
-
-    <style jsx>{`
-
-  .card{
-      
-      display: flex;
-      flex-direction:column;
-      
-  }
-
-   .card:nth-child(odd){
-     background-color:lightgrey;
-   }
-
-   input{
-     width:100%;
-     flex-grow: 1;
-   }
-
-  .label{    
-   background-color: ${themeColors.Secondary};
-      width: 150px;
-    color:white;
-    font-weight: bold;
-    padding: 5px;
-  }
- `}</style>    
-</div>
-
-
-)
-
-
-}
-
-export default EditableObject
+export default EditableObject;

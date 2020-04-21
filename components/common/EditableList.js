@@ -1,97 +1,142 @@
-import React, { useState } from 'react'
-import EditableLabel from './EditableLabel'
-import EditableString from './EditableString'
-import EditableObject from './EditableObject';
+import React, { useState } from "react";
+import EditableObject from "./EditableObject";
+import { firestore } from "firebase";
+import { themeColors } from "../layout/themeConstants";
+import EditableProperty from "./EditableProperty";
 
+const EditableList = ({
+  isSelected,
+  deleteItem,
+  updateParent,
+  label,
+  field,
+  selectField,
+  list,
+}) => {
+  const [_list, setList] = useState(list);
+  const [selectedIndex, selectIndex] = useState(-1);
 
-const EditableList = ({isSelected, updatedItem, label,field, selectField, list}) => {
+  const updateList = async (value) => {
+    console.log("LIST BLURRED");
+    let newState = _list;
+    newState[selectedIndex] = value;
+    setList(newState);
 
-    const [_list, updateList] = useState(list);
-    const [selectedIndex, selectIndex] = useState(-1)
+    updateParent(newState, field);
 
-    const listBlurred = async (value) => {
-    console.log('LIST BLURRED')
-        let newState = _list;
-        newState[selectedIndex] = value;
-        updateList(newState);
+    selectIndex(-1);
+  };
 
-        updatedItem(newState)
-   
-    
-    selectIndex(-1)
- 
-    
+  const updateObjectInList = () => {};
+
+  const deleteObjectFromList = (index) => {
+    console.log("DELETE OBJECT");
+    let newState = _list;
+    console.log("newState before", newState);
+    newState.splice(index, 1);
+    console.log("newState after", newState);
+    updateList(newState);
+
+    updateParent(newState, field);
+
+    selectIndex(-1);
+  };
+
+  const addItemToParent = () => {
+    let copyItem = {};
+    copyItem = _list[_list.length - 1];
+    let newItem = {};
+    let updatedList = _list;
+    if (typeof copyItem === "object") {
+      Object.keys(copyItem).map((field) => {
+        newItem[`${field}`] = "newItem";
+      });
+    } else {
+      newItem = "newItem";
     }
-    
-const renderItems = () =>{
 
-const editField = {}
+    updatedList.push(newItem);
 
-   return list.map((item, index) =>{
-        if(typeof(item)=='string'){
-            console.log('should show', item)
-        return(
-    
-            <EditableString onBlur={listBlurred} isSelected={isSelected&&(selectedIndex==index)} selectIndex={selectIndex}  index={index}   value={item} /> 
-    
-        
-             
-         
-    
-       )} else          if(!Array.isArray(item)&&typeof(item)=='object'){
-        console.log('is AN OBJECT', item)
-          return(
-  
-               <EditableObject  onBlur={()=>{}}   field={field}  value={item} isSelected={field} selectField={()=>{}} /> 
-    
-      
-          
-  
-        )
-         }
-    })
+    setList(updatedList);
+    updateParent(updatedList, field);
+  };
+  const renderItems = () => {
+    const editField = {};
 
-}
+    return (
+      <div className="row">
+        {list.map((item, index) => {
+          if (typeof item == "string") {
+            return (
+              <EditableProperty
+                property={field}
+                value={item}
+                inList
+                selectIndex={selectIndex}
+                updateObject={updateList}
+                key={item}
+                field={field}
+                isSelected={isSelected && selectedIndex == index}
+                selectProperty={selectIndex}
+                indexInList={index}
+              />
+            );
+          } else if (!Array.isArray(item) && typeof item == "object") {
+            console.log("is AN OBJECT", item);
+            return (
+              <EditableObject
+                inList
+                deleteObjectFromList={deleteObjectFromList}
+                selectIndex={selectIndex}
+                parentsIndex={index}
+                parentIsSelected={selectedIndex == index}
+                selectIndex={selectIndex}
+                updateParent={updateList}
+                field={field}
+                value={item}
+                isSelected={field}
+                selectField={() => {}}
+              />
+            );
+          }
+        })}
+        <button onClick={addItemToParent}>Add</button>
+        <style jsx>{`
+          .row {
+            display: flex;
+          }
+        `}</style>
+      </div>
+    );
+  };
 
+  return (
+    <div onDoubleClick={() => selectField(field)} className="wrapped-list">
+      <span className="label">{label} : </span>
+      {renderItems()}
 
-return (<div  onDoubleClick={()=>selectField(field)} className='wrapped-list'>
+      <style jsx>
+        {`
+          .label {
+            text-transform: uppercase;
+            background-color: ${themeColors.Grey};
+            color: ${themeColors.Secondary};
 
-<span className='label'>{label} : </span>
-{
+            width: 100px;
+            word-break: break-all;
 
-renderItems()
+            padding: 0 5px;
+          }
+          .wrapped-list {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            background-color: lightgrey;
+          }
+        `}
+      </style>
+    </div>
+  );
+};
 
-
-}
-
-
-
-
-
-<style jsx>
-{`
-
-.label{
-    text-transform: uppercase;
-    margin:right 5px;
-    font-size: 24px;
-}
-.wrapped-list{
-    display:flex;
-    align-items:center;
-    flex-wrap:wrap;
-    background-color: grey;
-
-}
-
-.wrapped-list:nth-child(odd){
-    background-color: yellow;
-}
-`}
-</style>
-</div>)
-
-
-}
-
-export default EditableList
+export default EditableList;

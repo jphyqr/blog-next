@@ -14,15 +14,13 @@ import DocumentEditor from '../../../../components/DocumentEditor'
 
 
 const EditWidget = ({router}) =>{
-
+  const firestore= firebase.firestore()
     const auth = useSelector(state=>state.firebase.auth|| {})
     
     if(auth.isLoaded&&auth.isEmpty)
       Router.push('/')
     
 
-    const firestore = firebase.firestore() //in prod this would have failed
-     
     const widgetQuery = useMemo(() => ({
         collection: 'courses',
         doc: router.query.course,
@@ -73,7 +71,7 @@ useEffect(()=>{
 }, [widgetConfig])
 
 const handleUpdateRecord = async (record) =>{
-  const firestore= firebase.firestore()
+
   await firestore.collection("courses").doc(id).collection('widgets').doc(widget).set(
     {
 ...record,
@@ -86,12 +84,13 @@ console.log('handleUpdateRecord', record)
 }
 
 
+
     return(
         <div>
 
     <h1>Edit {widget} for course: {record?.courseTitle}</h1>
  
-    <DocumentEditor  updateDocument={handleUpdateRecord} loading={loadingRecord} document={record} />
+    <DocumentEditor updateDatabase={handleUpdateRecord} loading={loadingRecord} document={record} />
 
       </div>
     ) 

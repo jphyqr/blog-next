@@ -1,4 +1,3 @@
-
 import React, { useCallback } from "react";
 import firebase from "../firebase";
 import Router from "next/router";
@@ -6,16 +5,14 @@ import { useDispatch } from "react-redux";
 
 import { useFirebase, useFirestore } from "react-redux-firebase";
 
-
 const passwordlessSignin = ({ url }) => {
   const dispatch = useDispatch();
 
   const { query } = url || {};
-  console.log({ query });
+
   const firestore = useFirestore();
 
-
-  const signIn = async query => {
+  const signIn = async (query) => {
     console.log("signIn", query);
     if (process.browser) {
       if (firebase.auth().isSignInWithEmailLink(window.location.href)) {
@@ -46,7 +43,7 @@ const passwordlessSignin = ({ url }) => {
             //new user
             console.log("NEW USER");
             await result.user.updateProfile({
-              displayName: result.user.email
+              displayName: result.user.email,
             });
 
             let newUser = {
@@ -55,10 +52,8 @@ const passwordlessSignin = ({ url }) => {
             };
 
             await firestore.set(`users/${result.user.uid}`, { ...newUser });
-
-       
           } else {
-            console.log('Not a new user')
+            console.log("Not a new user");
           }
 
           console.log("result", result);
@@ -67,12 +62,9 @@ const passwordlessSignin = ({ url }) => {
           // You can check if the user is new or existing:
           // result.additionalUserInfo.isNewUser
 
-          console.log("windows href", window.location.href);
+          if (typeof query == "undefined") Router.push(`/`);
 
-          if(typeof(query)=='undefined')
-          Router.push(`/`)
-
-          if (query&&query.redirect) {
+          if (query && query.redirect) {
             // await dispatch({
             //   type: "SET_PATH",
             //   // payload: {path:`${game.eventSearchable}/${game.gameSearchable}`}
@@ -82,16 +74,15 @@ const passwordlessSignin = ({ url }) => {
 
           //  if(typeof(path)!='undefined')
 
+          //   if (query&&query.courseId) {
+          //     handleGetCourse({ id: query.gameId });
+          //   }
 
-        //   if (query&&query.courseId) {
-        //     handleGetCourse({ id: query.gameId });
-        //   }
-
-          Router.push(`/`)
+          Router.push(`/`);
         } catch (error) {
-          alert(error)
+          alert(error);
           console.log({
-            error
+            error,
           });
           // Some error occurred, you can inspect the code: error.code
           // Common errors could be invalid email and invalid or expired OTPs.
@@ -100,10 +91,9 @@ const passwordlessSignin = ({ url }) => {
     }
   };
 
- signIn(query);
+  signIn(query);
 
   return <div>Redirecting...</div>;
 };
 
 export default passwordlessSignin;
-

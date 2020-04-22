@@ -2,44 +2,43 @@ import React, { useMemo, useState, useEffect } from "react";
 import { useFirestoreConnect, isLoaded, isEmpty } from "react-redux-firebase";
 import { useSelector } from "react-redux";
 import firebase from "../../../firebase";
-
-import ProfileTicker from "../common/ProfileTicker/ProfileTicker";
-import ScheduleTicker from "../common/ScheduleTicker/ScheduleTicker";
-import TournamentTicker from "./TournamentTicker/TournamentTicker";
-import TitleTicker from "../common/TitleTicker/TitleTicker";
-import SponsorTicker from "./SponsorTicker/SponsorTicker";
-import TickerManager from "../components/TickerManager";
 import {
   widgetHeights,
   tickerManagerHeights,
   tickerSpeeds,
 } from "../widgetConstants";
+import {
+  techTickerMap,
+  highPriorityTickerMap,
+  newsTickerMap,
+} from "./techStackConstants";
+
+import FocusesTicker from "./FocusesTicker/FocusesTicker";
+import TechStackTicker from "./TechStackTicker/TeckStackTicker";
+
+import TitleTicker from "../common/TitleTicker/TitleTicker";
+import ProblemTicker from "./ProblemTicker/ProblemTicker";
+import TeachingTicker from "./TeachingTicker/TeachingTicker";
+import LearningTicker from "./LearningTicker/LearningTicker";
+import ProfileTicker from "../common/ProfileTicker/ProfileTicker";
+import ScheduleTicker from "../common/ScheduleTicker/ScheduleTicker";
+import TickerManager from "../components/TickerManager";
 import { themeColors } from "../../layout/themeConstants";
 
-import {
-  mainTickerMap,
-  titleTickerMap,
-  footerTickerMap,
-} from "./pokerStreamConstants";
-
-const PokerStream = ({ id, widgetId }) => {
+const CodeStream = ({ id, widgetId }) => {
   const widgetHeight = widgetHeights.Medium;
 
   let tickerComponent = {};
 
-  tickerComponent[mainTickerMap.TournamentTicker] = TournamentTicker;
+  tickerComponent[techTickerMap.FocusesTicker] = FocusesTicker;
+  tickerComponent[techTickerMap.TechStackTicker] = TechStackTicker;
 
-  // tickerComponent[highPriorityTickerMap.TitleTicker] = TitleTicker
-  // tickerComponent[highPriorityTickerMap.ProblemTicker] = ProblemTicker;
-  // tickerComponent[highPriorityTickerMap.TeachingTicker] = TeachingTicker;
-  // tickerComponent[highPriorityTickerMap.LearningTicker] = LearningTicker;
-  tickerComponent[footerTickerMap.ProfileTicker] = ProfileTicker;
-  tickerComponent[footerTickerMap.ScheduleTicker] = ScheduleTicker;
-
-  tickerComponent[titleTickerMap.TitleTicker] = TitleTicker;
-  tickerComponent[titleTickerMap.SponsorTicker] = SponsorTicker;
-
-  console.log({ tickerComponent });
+  tickerComponent[highPriorityTickerMap.TitleTicker] = TitleTicker;
+  tickerComponent[highPriorityTickerMap.ProblemTicker] = ProblemTicker;
+  tickerComponent[highPriorityTickerMap.TeachingTicker] = TeachingTicker;
+  tickerComponent[highPriorityTickerMap.LearningTicker] = LearningTicker;
+  tickerComponent[newsTickerMap.ProfileTicker] = ProfileTicker;
+  tickerComponent[newsTickerMap.ScheduleTicker] = ScheduleTicker;
 
   const firestore = firebase.firestore();
 
@@ -47,6 +46,7 @@ const PokerStream = ({ id, widgetId }) => {
     () => ({
       collection: "all_widgets",
       doc: widgetId,
+
       storeAs: "widgetConfig",
     }),
     [id, widgetId]
@@ -60,27 +60,38 @@ const PokerStream = ({ id, widgetId }) => {
   );
 
   const [record, setRecord] = useState(widgetConfig);
-
+  console.log("record is loaded", isLoaded(record));
+  console.log("record is empty", isEmpty(record));
   const [loadingRecord, setLoaded] = useState(true);
+  //should wego ShowStack ? [ShowFocuses]
 
   const filterObjFromObj = (original, filter) => {
+    console.log({ original });
+    console.log({ filter });
+
+    //loop over the original, and if the filter has that property,
+    //do nothing, if not delete it.
     let filtered = {};
 
     Object.keys(original).map((key) => {
+      console.log({ key });
       if (filter.hasOwnProperty(key)) {
+        console.log("filter has", key);
         filtered[`${key}`] = original[`${key}`];
       }
     });
 
-    console.log({ filtered });
+    console.log(
+      `after filter of ${Object.keys(filter)[0]} from ${original}`,
+      filtered
+    );
+
     return filtered;
   };
 
   useEffect(() => {
     const getRecordById = async () => {
-      console.log("getRecordById");
-
-      if (!_.isEmpty(id) && !_.isEmpty(widget)) {
+      if (!_.isEmpty(id) && !_.isEmpty(widgetId)) {
         const recordRef = firestore.collection("all_widgets").doc(widgetId);
         let recordSnap = await recordRef.get();
         let record = recordSnap.data();
@@ -112,11 +123,11 @@ const PokerStream = ({ id, widgetId }) => {
                 height={tickerManagerHeights.Third}
                 key={0}
                 speed={tickerSpeeds.Fixed15}
-                name={"TitleTicker"}
+                name={"HighPriorityStaticTicker"}
                 record={record}
                 filteredTickers={filterObjFromObj(
                   tickerComponent,
-                  titleTickerMap
+                  highPriorityTickerMap
                 )}
               />
 
@@ -126,12 +137,12 @@ const PokerStream = ({ id, widgetId }) => {
                 height={tickerManagerHeights.Third}
                 key={1}
                 speed={tickerSpeeds.Slow}
-                name={"MainTicker"}
+                name={"TechTicker"}
                 autoScroll
                 record={record}
                 filteredTickers={filterObjFromObj(
                   tickerComponent,
-                  mainTickerMap
+                  techTickerMap
                 )}
               />
 
@@ -141,12 +152,12 @@ const PokerStream = ({ id, widgetId }) => {
                 height={tickerManagerHeights.Third}
                 key={2}
                 speed={tickerSpeeds.Fixed20}
-                name={"FooterTicker"}
+                name={"NewsTicker"}
                 autoScroll
                 record={record}
                 filteredTickers={filterObjFromObj(
                   tickerComponent,
-                  footerTickerMap
+                  newsTickerMap
                 )}
               />
             </div>
@@ -259,4 +270,4 @@ const PokerStream = ({ id, widgetId }) => {
   );
 };
 
-export default PokerStream;
+export default CodeStream;

@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { themeColors } from "../layout/themeConstants";
-
+import _ from "lodash";
 const EditableProperty = ({
   updateObject,
   selectIndex,
+  disabled,
   updateDocument,
   indexInList,
   key,
@@ -29,7 +30,7 @@ const EditableProperty = ({
       {(!inList || inObjectInList) && (
         <label className="label">{property}</label>
       )}
-      {isSelected ? (
+      {isSelected && !disabled ? (
         <div>
           <input
             id={property}
@@ -43,12 +44,16 @@ const EditableProperty = ({
       ) : (
         <div>
           <span
-            onDoubleClick={() => {
-              selectProperty(property);
-              selectIndex(indexInList);
-            }}
+            onDoubleClick={
+              disabled
+                ? () => {}
+                : () => {
+                    selectProperty(property);
+                    selectIndex(indexInList);
+                  }
+            }
           >
-            {_value}
+            {_.isEmpty(_value) ? "Edit" : _value}
           </span>
         </div>
       )}
@@ -56,6 +61,7 @@ const EditableProperty = ({
       <style jsx>{`
         .card {
           display: flex;
+          opacity: ${disabled ? 0.6 : 1};
           margin: ${inList && !inObjectInList ? "0 5px 0 0" : "0 0 0 0px"};
           border-radius: ${inList ? "5px" : "0px"};
           color: ${inList ? "white" : "black"};

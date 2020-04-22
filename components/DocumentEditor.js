@@ -4,7 +4,7 @@ import EditableList from "./common/EditableList";
 import EditableObject from "./common/EditableObject";
 import EditableProperty from "./common/EditableProperty";
 
-const DocumentEditor = ({ document, updateDatabase }) => {
+const DocumentEditor = ({ document, updateDatabase, notEditable }) => {
   const [counter, incrementCounter] = useState(0); //force update on state when we update just a child of records state
   const [editField, selectField] = useState({});
   const [formData, updateFormData] = useState(document, {});
@@ -60,6 +60,7 @@ const DocumentEditor = ({ document, updateDatabase }) => {
           return (
             <EditableProperty
               selectIndex={() => {}}
+              disabled={notEditable[`${field}`] ? true : false}
               updateObject={updateDocument}
               key={i}
               property={field}

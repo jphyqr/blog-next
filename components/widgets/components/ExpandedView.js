@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import _ from "lodash";
 import firebase from "../../../firebase";
-import { dataSourceComponents } from "../../../pages/dataConstants";
 import ExplainNext from "../../../pages/ExplainNext";
 import SQLVSNoSQL from "../../../pages/SQLVSNoSQL";
+import { dataSourceComponents } from "../../../utils/dataConstants";
 const ExpandedView = ({ showDataSource }) => {
   const [, rerender] = useState(false);
   const [_record, setRecord] = useState({});

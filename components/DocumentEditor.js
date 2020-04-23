@@ -45,7 +45,6 @@ const DocumentEditor = ({ document, updateDatabase, notEditable }) => {
             </div>
           );
         } else {
-          console.log("NOT a 1:1 object", field);
           return <div></div>;
         }
       })
@@ -70,7 +69,6 @@ const DocumentEditor = ({ document, updateDatabase, notEditable }) => {
             />
           );
         } else {
-          console.log("NOT a 1:1 object", field);
           return <div></div>;
         }
       })
@@ -94,7 +92,6 @@ const DocumentEditor = ({ document, updateDatabase, notEditable }) => {
             />
           );
         } else {
-          console.log("NOT a 1:1 object", field);
           return <div></div>;
         }
       })

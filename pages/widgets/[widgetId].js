@@ -4,23 +4,28 @@ import firebase from "../../firebase";
 import { widgets } from "../../components/widgets/widgetConstants";
 import CodeStream from "../../components/widgets/CodeStream/CodeStream";
 import PokerStream from "../../components/widgets/PokerStream/PokerStream";
+import ShowWidget from "../../components/widgets/ShowWidget";
 const WidgetComponent = ({ widgetType, widgetId }) => {
-  let widgetComponent = {};
-  widgetComponent[widgets.CodeStream] = CodeStream;
-  widgetComponent[widgets.PokerStream] = PokerStream;
+  //   let widgetComponent = {};
+  //   widgetComponent[widgets.CodeStream] = CodeStream;
+  //   widgetComponent[widgets.PokerStream] = PokerStream;
 
-  console.log({ widgetComponent });
+  //   console.log({ widgetComponent });
 
-  const renderWidget = () => {
-    let ShowWidget;
+  //   const renderWidget = () => {
+  //     let ShowWidget;
 
-    ShowWidget = widgetComponent[`${widgetType}`];
-    return <ShowWidget id={widgetId} widgetId={widgetId} />;
+  //     ShowWidget = widgetComponent[`${widgetType}`];
+  //     return <ShowWidget id={widgetId} widgetId={widgetId} />;
 
-    return <div></div>;
-  };
+  //     return <div></div>;
+  //   };
 
-  return <div className="container">{renderWidget()}</div>;
+  return (
+    <div className="container">
+      <ShowWidget widgetType={widgetType} widgetId={widgetId} />
+    </div>
+  );
 };
 
 WidgetComponent.getInitialProps = async ({ query }) => {

@@ -108,7 +108,7 @@ const CodeStream = ({ id, widgetId }) => {
 
   return (
     <div className="expanded-container">
-      <ExpandedView show={record.showExpanded || false} />
+      <ExpandedView showDataSource={record.showDataSource || false} />
       <div className="container">
         {!loadingRecord && !_.isEmpty(record) && (
           <div className="compound-row">

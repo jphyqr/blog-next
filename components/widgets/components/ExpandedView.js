@@ -61,7 +61,7 @@ const ExpandedView = ({ showDataSource }) => {
             bottom: 0;
             left: 0;
             width: 100%;
-            height: 300px;
+            height: 600px;
             background-color: green;
   
             z-Index:30;
@@ -80,27 +80,27 @@ const ExpandedView = ({ showDataSource }) => {
            }
            @keyframes example1 {
             0%   { 
-            -moz-transform: translateY(300px); /* Firefox bug fix */
-            -webkit-transform: translateY(300px); /* Firefox bug fix */
-            transform: translateY(300px); 	
+            -moz-transform: translateY(600px); /* Firefox bug fix */
+            -webkit-transform: translateY(600px); /* Firefox bug fix */
+            transform: translateY(600px); 	
              
             }
 
             20%,80% { 
                 -moz-transform: ${
-                  show ? `translateY(0px)` : `translateY(300px)`
+                  show ? `translateY(0px)` : `translateY(600px)`
                 };  /* Firefox bug fix */
                 -webkit-transform: ${
-                  show ? `translateY(0px)` : `translateY(300px)`
+                  show ? `translateY(0px)` : `translateY(600px)`
                 };  /* Firefox bug fix */
-                transform: ${show ? `translateY(0px)` : `translateY(300px)`}; 
+                transform: ${show ? `translateY(0px)` : `translateY(600px)`}; 
              
                 }
        
             100% { 
-                -moz-transform: translateY(300px); /* Firefox bug fix */
-                -webkit-transform: translateY(300px); /* Firefox bug fix */
-                transform: translateY(300px); 	
+                -moz-transform: translateY(600px); /* Firefox bug fix */
+                -webkit-transform: translateY(600px); /* Firefox bug fix */
+                transform: translateY(600px); 	
             }
 
         `}

@@ -8,7 +8,7 @@ const ExplainNext = () => {
       <style jsx>
         {`
           .container {
-            height: 430px;
+            height: 600px;
             width: 100%;
             background-color: ${themeColors.DataBackground};
             display: flex;

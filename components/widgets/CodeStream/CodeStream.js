@@ -231,7 +231,7 @@ const CodeStream = ({ id, widgetId }) => {
           }
 
           .expanded-container {
-            height: ${widgetHeight + 300}px;
+            height: ${600}px;
             width: 100%;
             position: relative;
             overflow: hidden;

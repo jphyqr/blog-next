@@ -15,7 +15,7 @@ import {
 
 import FocusesTicker from "./FocusesTicker/FocusesTicker";
 import TechStackTicker from "./TechStackTicker/TeckStackTicker";
-
+import ExpandedView from "../components/ExpandedView";
 import TitleTicker from "../common/TitleTicker/TitleTicker";
 import ProblemTicker from "./ProblemTicker/ProblemTicker";
 import TeachingTicker from "./TeachingTicker/TeachingTicker";
@@ -107,7 +107,8 @@ const CodeStream = ({ id, widgetId }) => {
   }, [widgetConfig]);
 
   return (
-    <div>
+    <div className="expanded-container">
+      <ExpandedView show={record.showExpanded || false} />
       <div className="container">
         {!loadingRecord && !_.isEmpty(record) && (
           <div className="compound-row">
@@ -229,10 +230,18 @@ const CodeStream = ({ id, widgetId }) => {
             z-index: 15;
           }
 
+          .expanded-container {
+            height: ${widgetHeight + 300}px;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+          }
           .container {
             display: flex;
             background-color: black;
-            position: relative;
+            bottom: 0;
+            width: 100%;
+            position: absolute;
             height: ${widgetHeight}px;
           }
 

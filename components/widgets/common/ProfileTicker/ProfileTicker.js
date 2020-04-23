@@ -1,38 +1,29 @@
-import React, { useRef, useEffect } from 'react'
+import React, { useRef, useEffect } from "react";
 
-import PassiveTicker from '../../components/PassiveTicker'
+import PassiveTicker from "../../components/PassiveTicker";
 
+const ProfileTicker = ({ record, ...props }) => {
+  const renderScrollItems = () => {
+    const { createdBy, twitter, github } = record || {};
 
-
-const ProfileTicker = ({record, ...props}) => {
-
-    const renderScrollItems = () =>{
-       
-        const {author, twitter, github} = record || {}
-
-     return (<span className='scroll-text'>{`Author: ${author} ${twitter? `| twitter: ${twitter}`   : "" } ${github? ` | github: ${github}`:``}`} 
+    return (
+      <span className="scroll-text">
+        {`Created By: ${createdBy} ${twitter ? `| twitter: ${twitter}` : ""} ${
+          github ? ` | github: ${github}` : ``
+        }`}
         <style jsx>
-        {`
-        .scroll-text{
-            font-size: 18px;
-            font-weight: bold;
-        }
-        `}
-    </style>
-     
-     
-     </span>)
-         
-                
+          {`
+            .scroll-text {
+              font-size: 18px;
+              font-weight: bold;
             }
+          `}
+        </style>
+      </span>
+    );
+  };
 
+  return <PassiveTicker renderScrollItems={renderScrollItems} {...props} />;
+};
 
-    return <PassiveTicker renderScrollItems={renderScrollItems} {...props} />
-
-
-}
-
-export default ProfileTicker
-
-
-
+export default ProfileTicker;

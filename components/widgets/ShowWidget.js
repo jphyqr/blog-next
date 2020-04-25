@@ -13,8 +13,6 @@ const ShowWidget = ({ widgetType, widgetId }) => {
 
     DynamicWidget = widgetComponent[`${widgetType}`];
     return <DynamicWidget id={widgetId} widgetId={widgetId} />;
-
-    return <div></div>;
   };
 
   return (

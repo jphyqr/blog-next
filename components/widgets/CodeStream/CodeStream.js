@@ -23,6 +23,7 @@ import LearningTicker from "./LearningTicker/LearningTicker";
 import ProfileTicker from "../common/ProfileTicker/ProfileTicker";
 import ScheduleTicker from "../common/ScheduleTicker/ScheduleTicker";
 import TickerManager from "../components/TickerManager";
+import _ from "lodash";
 import { themeColors } from "../../layout/themeConstants";
 
 const CodeStream = ({ id, widgetId }) => {
@@ -231,7 +232,7 @@ const CodeStream = ({ id, widgetId }) => {
           }
 
           .expanded-container {
-            height: ${600}px;
+            height: ${_.isEmpty(record.showDataSource) ? widgetHeight : 600}px;
             width: 100%;
             position: relative;
             overflow: hidden;

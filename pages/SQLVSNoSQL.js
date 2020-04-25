@@ -8,7 +8,7 @@ const SQLVSNoSQL = () => {
       <style jsx>
         {`
           .container {
-            height: 600px;
+            height: 450px;
             width: 100%;
             background-color: ${themeColors.DataBackground};
             display: flex;

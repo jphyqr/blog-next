@@ -8,7 +8,7 @@ import Router from "next/router";
 import DocumentEditor from "../../../components/DocumentEditor";
 import ShowWidget from "../../../components/widgets/ShowWidget";
 
-const EditWidget = ({ recordId, router, record, data_sources }) => {
+const EditWidget = ({ recordId, router, record, relics }) => {
   const firestore = firebase.firestore();
   const auth = useSelector((state) => state.firebase.auth || {});
 
@@ -121,52 +121,89 @@ const EditWidget = ({ recordId, router, record, data_sources }) => {
   }, [_record.showDataSource]);
 
   const renderControls = () => {
-    return data_sources.map((source) => {
+    return relics.map((source) => {
       return (
-        <button
-          disabled={blockControls}
-          onClick={() => updateShowDataSource(source.id)}
-        >
-          {source.title}
-        </button>
+        <div className="column">
+          <button
+            disabled={blockControls}
+            onClick={() => updateShowDataSource(source.id)}
+          >
+            {`${source.title}(${source.duration}s)`}
+          </button>
+
+          <button
+            onClick={() =>
+              Router.push("/relics/[relicId]", `/relics/${source.id}`)
+            }
+          >
+            Edit
+          </button>
+          <style jsx>
+            {`
+              .column {
+                display: flex;
+                flex-direction: column;
+                width: 150px;
+              }
+            `}
+          </style>
+        </div>
       );
     });
   };
 
   return (
-    <div>
-      <ShowWidget widgetType={_record.widgetName} widgetId={recordId} />
-      <div className="container">
-        <div className="column grow">
-          <button onClick={() => Router.push(`/widgets/user/${auth.uid}/`)}>
-            All Widgets
-          </button>
+    <div className="stacked-container">
+      <div className="column grow">
+        <button onClick={() => Router.push(`/widgets/user/${auth.uid}/`)}>
+          All Widgets
+        </button>
 
-          <DocumentEditor
-            updateDatabase={handleUpdateRecord}
-            loa
-            ing={loadingRecord}
-            document={filterViewableFields(_record)}
-            notEditable={_record.notEditable}
-          />
-        </div>
-        <div className="column">{renderControls()}</div>
-
-        <style jsx>{`
-          .container {
-            display: flex;
-          }
-
-          .column {
-            display: flex;
-            flex-direction: column;
-          }
-
-          .grow {
-            flex-grow: 1;
-          }
-        `}</style>
+        <DocumentEditor
+          updateDatabase={handleUpdateRecord}
+          loa
+          ing={loadingRecord}
+          document={filterViewableFields(_record)}
+          notEditable={_record.notEditable}
+        />
       </div>
+
+      <div className="overlap">
+        <ShowWidget widgetType={_record.widgetName} widgetId={recordId} />
+
+        <div className="row">{renderControls()}</div>
+      </div>
+
+      <style jsx>{`
+        .stacked-container {
+          position: relative;
+        }
+
+        .overlap {
+          position: fixed;
+          bottom: 0px;
+          z-index: 5;
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+        }
+
+        .container {
+          display: flex;
+        }
+
+        .column {
+          display: flex;
+          flex-direction: column;
+          overflow-y: scroll;
+          overflow-x: hidden;
+          height: 300px;
+        }
+
+        .grow {
+          flex-grow: 1;
+        }
+      `}</style>
     </div>
   );
 };
@@ -181,18 +218,18 @@ EditWidget.getInitialProps = async ({ store, query }) => {
   let recordSnap = await recordRef.get();
   let record = recordSnap.data();
 
-  const dataRef = firestore.collection("data_sources");
+  const dataRef = firestore.collection("relics");
   let dataSnapShot = await dataRef.get();
 
-  let data_sources = [];
+  let relics = [];
   dataSnapShot.forEach((doc) => {
-    data_sources.push({
+    relics.push({
       id: doc.id,
       ...doc.data(),
     });
   });
 
-  return { record, recordId: query.widgetId, data_sources };
+  return { record, recordId: query.widgetId, relics };
 };
 
 export default EditWidget;

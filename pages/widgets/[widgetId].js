@@ -6,21 +6,6 @@ import CodeStream from "../../components/widgets/CodeStream/CodeStream";
 import PokerStream from "../../components/widgets/PokerStream/PokerStream";
 import ShowWidget from "../../components/widgets/ShowWidget";
 const WidgetComponent = ({ widgetType, widgetId }) => {
-  //   let widgetComponent = {};
-  //   widgetComponent[widgets.CodeStream] = CodeStream;
-  //   widgetComponent[widgets.PokerStream] = PokerStream;
-
-  //   console.log({ widgetComponent });
-
-  //   const renderWidget = () => {
-  //     let ShowWidget;
-
-  //     ShowWidget = widgetComponent[`${widgetType}`];
-  //     return <ShowWidget id={widgetId} widgetId={widgetId} />;
-
-  //     return <div></div>;
-  //   };
-
   return (
     <div className="container">
       <ShowWidget widgetType={widgetType} widgetId={widgetId} />

@@ -3,7 +3,10 @@ import _ from "lodash";
 import firebase from "../../../firebase";
 import ExplainNext from "../../../pages/ExplainNext";
 import SQLVSNoSQL from "../../../pages/SQLVSNoSQL";
-import { dataSourceComponents } from "../../../utils/dataConstants";
+import { rel } from "../../../utils/dataConstants";
+import { relicMap } from "../../relics/relicConstants";
+import Animations from "../../relics/Animations";
+
 const ExpandedView = ({ showDataSource }) => {
   const [, rerender] = useState(false);
   const [_record, setRecord] = useState({});
@@ -13,8 +16,7 @@ const ExpandedView = ({ showDataSource }) => {
 
   let dataComponent = {};
 
-  dataComponent[dataSourceComponents.ExplainNext] = ExplainNext;
-  dataComponent[dataSourceComponents.SQLVSNoSQL] = SQLVSNoSQL;
+  dataComponent[relicMap.Animations] = Animations;
 
   const renderDataComponent = () => {
     let ShowDataComponent;
@@ -32,9 +34,7 @@ const ExpandedView = ({ showDataSource }) => {
     //get the record it should have
     const getDataSourceById = async () => {
       if (!_.isEmpty(showDataSource)) {
-        const recordRef = firestore
-          .collection("data_sources")
-          .doc(showDataSource);
+        const recordRef = firestore.collection("relics").doc(showDataSource);
         let recordSnap = await recordRef.get();
         let record = recordSnap.data();
 
@@ -61,46 +61,46 @@ const ExpandedView = ({ showDataSource }) => {
             bottom: 0;
             left: 0;
             width: 100%;
-            height: 600px;
+            height: 450px;
             background-color: green;
   
             z-Index:30;
             animation: example1 ${_record.duration || "2"}s linear forwards;
 
           } 
-          @-moz-keyframes example1 {
-            0%   { -moz-transform: translateY(50px); }
-      
-            100% { -moz-transform: translateY(0px); }
-           }
-           @-webkit-keyframes example1 {
-            0%   { -moz-transform: translateY(100%); }
          
-            100% { -moz-transform: translateY(-150%); }
-           }
+
+
+         @keyframes open {
+            0% { transform: translateY(450px);
+            
+             opacity: 0;
+            }
+            20% { transform : translateY(0px);
+             opacity: 1;
+            }
+        } 
+
+         @keyframes close {
+
+         }
+
            @keyframes example1 {
             0%   { 
-            -moz-transform: translateY(600px); /* Firefox bug fix */
-            -webkit-transform: translateY(600px); /* Firefox bug fix */
-            transform: translateY(600px); 	
-             
+
+            transform: translateY(450px); 	
+             opacity: 0;
             }
 
-            20%,80% { 
-                -moz-transform: ${
-                  show ? `translateY(0px)` : `translateY(600px)`
-                };  /* Firefox bug fix */
-                -webkit-transform: ${
-                  show ? `translateY(0px)` : `translateY(600px)`
-                };  /* Firefox bug fix */
-                transform: ${show ? `translateY(0px)` : `translateY(600px)`}; 
-             
+            10%,90% { 
+           
+                transform: ${show ? `translateY(0px)` : `translateY(450px)`}; 
+               opacity: 1;
                 }
        
             100% { 
-                -moz-transform: translateY(600px); /* Firefox bug fix */
-                -webkit-transform: translateY(600px); /* Firefox bug fix */
-                transform: translateY(600px); 	
+                 transform: translateY(450px); 	
+                 opacity: 0;
             }
 
         `}

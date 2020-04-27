@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { relicStyles } from "./relicConstants";
 
 const Animations = () => {
+  const [clicked, setClicked] = useState(false);
   return (
     <div className="container">
       Animations
+      <button onClick={() => setClicked(!clicked)}>Click</button>
+      {clicked && <span>Clicked</span>}
       <style jsx>
         {`
           .container {

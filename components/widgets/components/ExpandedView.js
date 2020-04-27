@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import _ from "lodash";
 import firebase from "../../../firebase";
-import ExplainNext from "../../../pages/ExplainNext";
-import SQLVSNoSQL from "../../../pages/SQLVSNoSQL";
+
 import { rel } from "../../../utils/dataConstants";
 import { relicMap } from "../../relics/relicConstants";
 import Animations from "../../relics/Animations";

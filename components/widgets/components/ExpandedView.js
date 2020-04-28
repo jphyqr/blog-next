@@ -61,7 +61,7 @@ const ExpandedView = ({ showDataSource }) => {
             left: 0;
             width: 100%;
             height: 450px;
-            background-color: green;
+           
   
             z-Index:30;
             animation: example1 ${_record.duration || "2"}s linear forwards;

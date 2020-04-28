@@ -12,16 +12,36 @@ const CoinFlip = () => {
   const str = "call";
   return (
     <div className="container">
+      <div className="result"> {shouldCall ? "🤤" : "🥱"} </div>
       {shouldCall ? <div className="call"></div> : <div className="fold" />}
 
       <style jsx>
         {`
+          .container {
+            position: relative;
+            width: auto;
+            height: auto;
+            font-family: sans-sarif;
+            font-size:20px;
+            color: gold
+            font-style: bold;
+          }
+          .result {
+            position: absolute;
+            left: -80px;
+            top: -35px;
+            font-size: 80px;
+            opacity: 0;
+            animation: happy 0s linear 2.5s forwards;
+          }
+
           .call {
             height: 100px;
             width: 100px;
+            border 2px solid gold;
             border-radius: 50%;
-            background-color: gold;
-            animation: loading 2s ease-out 1s forwards;
+            background-color: purple;
+            animation: loading 2s ease forwards;
 
             display: flex;
             justify-content: center;
@@ -32,9 +52,10 @@ const CoinFlip = () => {
           .fold {
             height: 100px;
             width: 100px;
+           border 2px solid gold;
             border-radius: 50%;
-            background-color: silver;
-            animation: loading 2s ease-out 1s forwards;
+            background-color: red;
+            animation: loading 2s ease forwards;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -43,9 +64,10 @@ const CoinFlip = () => {
 
           .call:before {
             content: "CALL";
-            animation: call 2s ease-out 1s;
+            animation: call 2s ease;
             height: 100%;
             width: 100%;
+
             border-radius: 50%;
             display: flex;
             justify-content: center;
@@ -54,7 +76,7 @@ const CoinFlip = () => {
 
           .fold:before {
             content: "FOLD";
-            animation: fold 2s ease-out 1s;
+            animation: fold 2s ease;
             height: 100%;
             width: 100%;
             border-radius: 50%;
@@ -62,63 +84,81 @@ const CoinFlip = () => {
             justify-content: center;
             align-items: center;
           }
+
+          @keyframes happy {
+            0%,
+            100% {
+              opacity: 1;
+            }
+          }
+
           @keyframes call {
             0%,
-            10%,
             20%,
-            30%,
             40%,
-            50%,
             60%,
-            80%,
+            80% {
+                content: "FOLD";
+                background: silver;
+              }
             100% {
               content: "CALL";
-              background: gold;
+              background: purple;
             }
 
-            5%,
-            15%,
-            25%,
-            35%,
-            45%,
-            55% {
+            10%,
+            30%,
+            50%,
+            70% {
               content: "FOLD";
               background: silver;
             }
           }
-
           @keyframes fold {
             0%,
-            10%,
             20%,
-            30%,
             40%,
-            50%,
             60%,
-            80%,
+            80% {
+                content: "FOLD";
+                background: silver;
+              }
             100% {
               content: "FOLD";
-              background: silver;
+              background: red;
             }
-            5%,
-            15%,
-            25%,
-            35%,
-            45%,
-            55% {
+
+            10%,
+            30%,
+            50%,
+            70% {
               content: "CALL";
-              background: gold;
+              background: silver;
             }
           }
 
           @keyframes loading {
             0% {
-              transform: rotateX(90deg);
+              transform: rotateX(0deg);
             }
-
-            80%,
+            90%,
+            95% {
+              transform: rotateX(1710deg);
+            }
+            96% {
+              transform: rotateX(1715deg);
+            }
+            97% {
+              transform: rotateX(1720deg);
+            }
+            98% {
+              transform: rotateX(1726deg);
+            }
+            99% {
+              transform: rotateX(1740deg);
+            }
             100% {
-              transform: rotateX(3640deg);
+              transform: rotateX(1750deg);
             }
           }
         `}

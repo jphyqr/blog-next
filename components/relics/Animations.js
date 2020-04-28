@@ -6,7 +6,9 @@ const Animations = () => {
   const [clicked, setClicked] = useState(false);
   return (
     <div className="container">
-      <video className="cover" autoPlay src="/coinflip2.mp4"></video>
+      {/* <video className="cover" autoPlay src="/coinflip2.mp4"></video>
+       */}
+
       <div className="coin">
         <CoinFlip />
       </div>
@@ -27,9 +29,9 @@ const Animations = () => {
           .coin {
             position: absolute;
             zindex: 5;
-            left: 45%;
+            left: 90px;
             bottom: 30px;
-            animation: jump 2s 0.8s;
+            animation: jump 2s forwards;
             opacity: 1;
           }
 
@@ -43,7 +45,7 @@ const Animations = () => {
             }
 
             100% {
-              transform: translateY(0px);
+              transform: translateY(50px);
             }
           }
         `}

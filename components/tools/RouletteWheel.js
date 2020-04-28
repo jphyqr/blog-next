@@ -21,11 +21,11 @@ const RouletteWheel = () => {
               content: "";
               height: 100%;
               position: absolute;
-              background: red;
 
               width: 100%;
             }
             .segment:before {
+              background: ${i % 2 == 0 ? "red" : "black"};
               content: "";
               height: 100%;
               position: absolute;
@@ -42,8 +42,11 @@ const RouletteWheel = () => {
   };
 
   return (
-    <div className="container">
-      <div className="wheel">{renderSegments()}</div>
+    <div className="outer">
+      <div className="container">
+        <div className="wheel">{renderSegments()}</div>
+      </div>
+
       <style jsx>
         {`
           .container {
@@ -53,7 +56,6 @@ const RouletteWheel = () => {
             display: flex;
             align-items: center;
             justify-content: center;
-            position: relative;
           }
           .wheel {
             height: 100%;
@@ -64,6 +66,21 @@ const RouletteWheel = () => {
             top: 0;
             left: 0;
             overflow: hidden;
+            animation: spin 7s ease-in-out;
+          }
+
+          .outer {
+            display: flex;
+            flex-direction: column;
+          }
+
+          @keyframes spin {
+            0% {
+              transform: rotate(0deg);
+            }
+            100% {
+              transform: rotate(2160deg);
+            }
           }
         `}
       </style>

@@ -183,6 +183,40 @@ const JamStacks = () => {
 .outer-ul li:nth-child(16) {
     animation-delay: 1.1s, 3.5s;
 }
+.outer-ul li:nth-child(17) {
+    animation-delay: 1.15s, 3.55s;
+}
+.outer-ul li:nth-child(18) {
+    animation-delay: 1.2s, 3.6s;
+}
+.outer-ul li:nth-child(19) {
+    animation-delay: 1.25s, 3.65s;
+}
+.outer-ul li:nth-child(20) {
+    animation-delay: 1.3s, 3.7s;
+}
+.outer-ul li:nth-child(21) {
+    animation-delay: 1.35s, 3.75s;
+}
+.outer-ul li:nth-child(22) {
+    animation-delay:  1.4s, 3.8s;
+}
+.outer-ul li:nth-child(23) {
+    animation-delay: 1.4s, 3.85s;
+}
+.outer-ul li:nth-child(24) {
+    animation-delay: 1.4s, 3.9s;
+}
+.outer-ul li:nth-child(25) {
+    animation-delay: 1.4s, 3.95s;
+}
+.outer-ul li:nth-child(26) {
+    animation-delay: 1.4s, 4s;
+}
+.outer-ul li:nth-child(27) {
+    animation-delay: 1.6s, 4.05s;
+}
+
 
 
           .container {

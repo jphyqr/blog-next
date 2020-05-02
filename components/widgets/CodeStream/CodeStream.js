@@ -25,6 +25,8 @@ import ScheduleTicker from "../common/ScheduleTicker/ScheduleTicker";
 import TickerManager from "../components/TickerManager";
 import _ from "lodash";
 import { themeColors } from "../../layout/themeConstants";
+import AvatarSquare from "../common/AvatarSquare/AvatarSquare";
+import WebsiteTicker from "../common/WebsiteTicker/WebsiteTicker";
 
 const CodeStream = ({ id, widgetId }) => {
   const widgetHeight = widgetHeights.Medium;
@@ -38,6 +40,8 @@ const CodeStream = ({ id, widgetId }) => {
   tickerComponent[highPriorityTickerMap.ProblemTicker] = ProblemTicker;
   tickerComponent[highPriorityTickerMap.TeachingTicker] = TeachingTicker;
   tickerComponent[highPriorityTickerMap.LearningTicker] = LearningTicker;
+  tickerComponent[newsTickerMap.WebsiteTicker] = WebsiteTicker;
+
   tickerComponent[newsTickerMap.ProfileTicker] = ProfileTicker;
   tickerComponent[newsTickerMap.ScheduleTicker] = ScheduleTicker;
 
@@ -110,17 +114,19 @@ const CodeStream = ({ id, widgetId }) => {
   return (
     <div className="expanded-container">
       <ExpandedView showDataSource={record.showDataSource || false} />
+      <div className="square">
+        <AvatarSquare />
+      </div>
       <div className="container">
         {!loadingRecord && !_.isEmpty(record) && (
           <div className="compound-row">
-            <div className="logo-square">
-              <img className="logo" src={"/File.jpg"} />
-            </div>
+            <div className="logo-square"></div>
             <div className="ticker-column">
               <div className="fade-to-black-left" />
               <div className="fade-to-black-right" />
               <TickerManager
                 widgetHeight={widgetHeight}
+                pulsing
                 color={themeColors.Secondary}
                 height={tickerManagerHeights.Third}
                 key={0}
@@ -156,6 +162,7 @@ const CodeStream = ({ id, widgetId }) => {
                 speed={tickerSpeeds.Fixed20}
                 name={"NewsTicker"}
                 autoScroll
+                avatarSync
                 record={record}
                 filteredTickers={filterObjFromObj(
                   tickerComponent,
@@ -236,6 +243,15 @@ const CodeStream = ({ id, widgetId }) => {
             width: 100%;
             position: relative;
             overflow: hidden;
+          }
+
+          .square {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 130px;
+            width: 100%;
+            z-index: 10;
           }
           .container {
             display: flex;

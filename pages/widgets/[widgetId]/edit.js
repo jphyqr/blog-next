@@ -15,7 +15,6 @@ const EditWidget = ({ recordId, router, record, relics }) => {
   if (auth.isLoaded && auth.isEmpty) Router.push("/");
 
   const [_record, setRecord] = useState(record);
-
   const blockControls = !_.isEmpty(_record.showDataSource);
   const recordQuery = useMemo(
     () => ({

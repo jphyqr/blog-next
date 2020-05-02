@@ -8,20 +8,14 @@ const CanvasChild = ({
   handleHover,
   child,
   handleDrag,
-  handleKeyboardInput,
   draggedPosition,
   updateParent,
-  updateChildColorInParent,
 
   updateItem,
 }) => {
   let childRef = useRef(null);
   const [showControls, setShowControls] = useState(false);
   const [editable, edit] = useState(false);
-  const [position, setPosition] = useState({
-    x: child?.x - childRef?.current?.offsetLeft / 2 || null,
-    y: child?.y - childRef?.current?.offsetHeight / 2 || null,
-  });
 
   const [value, setValue] = useState(child?.value || "");
   useEffect(() => {
@@ -34,10 +28,6 @@ const CanvasChild = ({
   useEffect(() => {
     console.log({ childRef });
   }, [draggedPosition]);
-
-  const handleUpdateColor = (property, color) => {
-    updateChildColorInParent(property, color, child);
-  };
 
   return (
     <div

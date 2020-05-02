@@ -2,17 +2,15 @@ import React, { useState, useRef, useEffect } from "react";
 import _ from "lodash";
 const toolsMap = {
   RelicLabel: "RelicLabel",
-  RelicApp: "RelicApp",
-  RelicVideo: "RelicVideo",
-  RelicImage: "RelicImage",
+  HandChart: "HandChart",
 };
 
-const Edit = ({ relic }) => {
+const Edit = ({ data }) => {
   //eventually probably stored in firestore
   //so will be array of objects
 
   const [grabbedElement, grabElement] = useState(null);
-  const [canvasChildren, setCanvasChildren] = useState(relic.children || []);
+  const [canvasChildren, setCanvasChildren] = useState(data?.children || []);
   const [counter, count] = useState(0);
   const [hoveredItem, hover] = useState(null);
   const [selectedForEdit, selectForEdit] = useState(null);
@@ -99,10 +97,10 @@ const Edit = ({ relic }) => {
 
     setCanvasChildren(updatedChildren);
 
-    let updatedRelic = relic;
+    let updatedRelic = data;
     updatedRelic.children = updatedChildren;
 
-    await firestore.set(`relics/${relic.id}`, { ...updatedRelic });
+    await firestore.set(`relics/${data.id}`, { ...updatedRelic });
   };
 
   const renderChildren = () => {
@@ -144,10 +142,10 @@ const Edit = ({ relic }) => {
 
     updatedChildren[indexOfObject] = newChild;
 
-    let updatedRelic = relic;
+    let updatedRelic = data;
     updatedRelic.children = updatedChildren;
 
-    await firestore.set(`relics/${relic.id}`, { ...updatedRelic });
+    await firestore.set(`relics/${data.id}`, { ...updatedRelic });
   };
 
   const handleDropInCanvas = async (e) => {
@@ -199,10 +197,10 @@ const Edit = ({ relic }) => {
       console.log("FOUND ITEM AT INDEX", indexOfObject);
       updatedChildren[indexOfObject] = newChild;
 
-      let updatedRelic = relic;
+      let updatedRelic = data;
       updatedRelic.children = updatedChildren;
 
-      await firestore.set(`relics/${relic.id}`, { ...updatedRelic });
+      await firestore.set(`relics/${data.id}`, { ...updatedRelic });
     }
 
     setCanvasChildren(updatedChildren);
@@ -279,7 +277,7 @@ Edit.getInitialProps = async (context) => {
   let snap = await ref.get();
   let record = snap.data();
 
-  return { relic: Object.assign(record, { id: query.relicId }) };
+  return { data: Object.assign(record, { id: query.relicId }) };
 };
 
 export default Edit;

@@ -2,10 +2,10 @@ import React from "react";
 import firebase from "../../firebase";
 
 import ShowRelic from "../../components/relics/ShowRelic";
-const Relic = ({ relic }) => {
+const Relic = ({ data }) => {
   return (
     <div className="container">
-      <ShowRelic relic={relic} />
+      <ShowRelic data={data} />
 
       <style jsx>
         {`
@@ -21,13 +21,13 @@ Relic.getInitialProps = async ({ query }) => {
   const firestore = firebase.firestore();
   const relicRef = firestore.collection("relics").doc(query.relicId);
   let relicSnap = await relicRef.get();
-  let relic = relicSnap.data();
+  let data = relicSnap.data();
 
-  Object.assign(relic, { id: query.relicId });
+  Object.assign(data, { id: query.relicId });
 
-  console.log("relic ssr", relic);
+  console.log("relic ssr", data);
 
-  return { relic };
+  return { data };
 };
 
 export default Relic;

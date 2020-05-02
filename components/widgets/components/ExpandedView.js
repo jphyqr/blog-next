@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import _ from "lodash";
 import firebase from "../../../firebase";
 
-import { rel } from "../../../utils/dataConstants";
 import { relicMap } from "../../relics/relicConstants";
 import Animations from "../../relics/Animations";
+import HandRange from "../../relics/HandRange";
 
 const ExpandedView = ({ showDataSource }) => {
   const [, rerender] = useState(false);
@@ -16,12 +16,13 @@ const ExpandedView = ({ showDataSource }) => {
   let dataComponent = {};
 
   dataComponent[relicMap.Animations] = Animations;
+  dataComponent[relicMap.HandRange] = HandRange;
 
   const renderDataComponent = () => {
     let ShowDataComponent;
     if (!_.isEmpty(_record.component)) {
       ShowDataComponent = dataComponent[`${_record.component}`];
-      return <ShowDataComponent />;
+      return <ShowDataComponent data={_record} />;
     }
 
     return <div></div>;

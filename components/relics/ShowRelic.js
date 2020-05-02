@@ -2,15 +2,17 @@ import React from "react";
 import { relicMap, relicStyles } from "./relicConstants";
 import Animations from "./Animations";
 import Router from "next/router";
-const ShowRelic = ({ relic }) => {
+import HandRange from "./HandRange";
+const ShowRelic = ({ data }) => {
   let relicComponent = {};
   relicComponent[relicMap.Animations] = Animations;
+  relicComponent[relicMap.HandRange] = HandRange;
 
   const renderRelic = () => {
     let DynamicRelic;
 
-    DynamicRelic = relicComponent[`${relic.component}`];
-    return <DynamicRelic relic={relic} />;
+    DynamicRelic = relicComponent[`${data.component}`];
+    return <DynamicRelic data={data} />;
   };
 
   return (
@@ -22,6 +24,7 @@ const ShowRelic = ({ relic }) => {
             .container {
               width: 100%;
               height: ${relicStyles.height}px;
+              position: relative;
               background-color: ${relicStyles.BackgroundColor};
             }
           `}
@@ -29,7 +32,7 @@ const ShowRelic = ({ relic }) => {
       </div>
       <button
         onClick={() =>
-          Router.push("/relics/[relicId]/edit", `/relics/${relic.id}/edit`)
+          Router.push("/relics/[relicId]/edit", `/relics/${data.id}/edit`)
         }
       >
         Edit

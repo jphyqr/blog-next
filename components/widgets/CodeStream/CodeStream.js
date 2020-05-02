@@ -239,7 +239,7 @@ const CodeStream = ({ id, widgetId }) => {
           }
 
           .expanded-container {
-            height: ${600}px;
+            height: ${record?.dataSource ? 600 : widgetHeight}px;
             width: 100%;
             position: relative;
             overflow: hidden;

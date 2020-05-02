@@ -185,6 +185,7 @@ const EditWidget = ({ recordId, router, record, relics }) => {
           width: 100%;
           display: flex;
           flex-direction: column;
+          height: auto;
         }
 
         .container {

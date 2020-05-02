@@ -17,7 +17,7 @@ const AvatarSquare = () => {
 
   return (
     <div className="logo-square">
-      {avatarSync === "ScheduleTicker" || avatarSync === "WebsiteTicker" ? (
+      {avatarSync === "WebsiteTicker" ? (
         <JamStacks />
       ) : (
         <img className="logo" src={"/File.jpg"} />

@@ -30,6 +30,16 @@ const JamStacks = () => {
         <li>O</li>
         <li>L</li>
         <li>S</li>
+        <li>🔨</li>
+        <li>O</li>
+        <li>N</li>
+        <li>💉</li>
+        <li>R</li>
+        <li>O</li>
+        <li>I</li>
+        <li>D</li>
+        <li>S</li>
+        <li>💉</li>
       </ul>
 
       <div className="container">

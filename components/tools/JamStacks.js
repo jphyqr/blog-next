@@ -119,7 +119,7 @@ const JamStacks = () => {
     padding:0;
     display: flex;
     position:absolute;
-    bottom:5px;
+    bottom:0px;
     animation show-ul 0s forwards 2.5s;
     left: 133px;
 }

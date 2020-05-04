@@ -85,37 +85,39 @@ const EditWidget = ({ recordId, router, record, relics }) => {
     setExpansion(true);
   };
 
-  useEffect(() => {
-    console.log("USE EFFECT EXPANSION", expansion);
+  // useEffect(() => {
+  //   console.log("USE EFFECT EXPANSION", expansion);
 
-    const clearDataSourceFromDB = async () => {
-      await firestore
-        .collection("all_widgets")
-        .doc(router?.query?.widgetId)
-        .update({
-          showDataSource: "",
-        });
+  //   const clearDataSourceFromDB = async () => {
+  //     // await firestore
+  //     //   .collection("all_widgets")
+  //     //   .doc(router?.query?.widgetId)
+  //     //   .update({
+  //     //     showDataSource: "",
+  //     //   });
 
-      setExpansion(false);
-    };
+  //     setExpansion(false);
+  //   };
 
-    if (expansion) {
-      console.log("THIS GOT RAN AAAA");
-      const timer = setTimeout(() => {
-        clearDataSourceFromDB();
-      }, 5000);
-    }
+  //   if (expansion) {
+  //     console.log("THIS GOT RAN AAAA");
+  //     const timer = setTimeout(() => {
+  //       clearDataSourceFromDB();
+  //     }, 5000);
+  //   }
 
-    console.log("THIS DIDNT RUN!! ");
+  //   console.log("THIS DIDNT RUN!! ");
 
-    return clearTimeout();
-  }, [expansion]);
+  //   return clearTimeout();
+  // }, [expansion]);
 
   useEffect(() => {
     console.log("SHOW DATA SOURCE USE EFFECT");
     if (_.isEmpty(_record.showDataSource)) {
       console.log("SHOW DATA SOURCE USE EFFECT IS EMPTY");
       setExpansion(false);
+    } else {
+      setExpansion(true);
     }
   }, [_record.showDataSource]);
 

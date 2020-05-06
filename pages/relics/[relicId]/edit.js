@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import _ from "lodash";
+import Router from "next/router";
 const toolsMap = {
   RelicLabel: "RelicLabel",
   HandChart: "HandChart",
@@ -8,6 +9,10 @@ const toolsMap = {
 const Edit = ({ data }) => {
   //eventually probably stored in firestore
   //so will be array of objects
+
+  const auth = useSelector((state) => state.firebase.auth || {});
+
+  if (auth.isLoaded && auth.isEmpty) Router.push("/");
 
   const [grabbedElement, grabElement] = useState(null);
   const [canvasChildren, setCanvasChildren] = useState(data?.children || []);

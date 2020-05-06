@@ -4,7 +4,7 @@ import { themeColors } from "../../../layout/themeConstants";
 import JamStacks from "../../../tools/JamStacks";
 import { useSelector } from "react-redux";
 
-const AvatarSquare = () => {
+const AvatarSquare = ({ navbar }) => {
   const [animation, showAnimation] = useState(true);
   useEffect(() => {
     const delay = tickerSpeeds.Fixed20 * 1000;
@@ -17,7 +17,7 @@ const AvatarSquare = () => {
 
   return (
     <div className="logo-square">
-      {avatarSync === "WebsiteTicker" ? (
+      {avatarSync === "WebsiteTicker" || navbar ? (
         <JamStacks />
       ) : (
         <img className="logo" src={"/File.jpg"} />
@@ -36,6 +36,7 @@ const AvatarSquare = () => {
             align-items: center;
             justify-content: center;
             height: 100%;
+            overflow: ${navbar ? "hidden" : ""};
             width: ${widgetHeights.Medium}px;
             border: 2px solid ${themeColors.Secondary};
             box-sizing: border-box;

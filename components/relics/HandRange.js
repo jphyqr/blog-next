@@ -2,8 +2,14 @@ import React, { useState, useEffect } from "react";
 import { cards } from "./relicConstants";
 import { useFirestore } from "react-redux-firebase";
 import firebase from "../../firebase";
-const HandRange = ({ data }) => {
-  const [handRange, updateHandRange] = useState(data?.handRange || {});
+const HandRange = ({ comparison, left, right, data }) => {
+  const [handRange, updateHandRange] = useState(
+    left
+      ? data?.leftRange || {}
+      : right
+      ? data?.rightRange || {}
+      : data?.handRange || {}
+  );
   const [counter, count] = useState(0);
   const [handsByEquity, setHandsByEquity] = useState([]);
   const [handsByRank, setHandsByRank] = useState([]);
@@ -93,9 +99,18 @@ const HandRange = ({ data }) => {
 
     console.log({ bestHands });
     updateHandRange(bestHands);
-    await firestore.update(`relics/${data.id}`, {
-      handRange: bestHands,
-    });
+
+    left
+      ? await firestore.update(`relics/${data.id}`, {
+          leftRange: bestHands,
+        })
+      : right
+      ? await firestore.update(`relics/${data.id}`, {
+          rightRange: bestHands,
+        })
+      : await firestore.update(`relics/${data.id}`, {
+          handRange: bestHands,
+        });
   };
 
   const updateRangeByPercent = (increment = true) => {
@@ -117,9 +132,17 @@ const HandRange = ({ data }) => {
     setCombos(comboCount);
     setRangePercent(calculateRangePercent(comboCount));
 
-    await firestore.update(`relics/${data.id}`, {
-      handRange: updatedHandRange,
-    });
+    left
+      ? await firestore.update(`relics/${data.id}`, {
+          leftRange: updatedHandRange,
+        })
+      : right
+      ? await firestore.update(`relics/${data.id}`, {
+          rightRange: updatedHandRange,
+        })
+      : await firestore.update(`relics/${data.id}`, {
+          handRange: updatedHandRange,
+        });
   };
 
   const calculateRangePercent = (combos) => {
@@ -184,7 +207,7 @@ const HandRange = ({ data }) => {
           .container {
             width: 273px;
             height: auto;
-            position: absolute;
+            position: ${comparison ? "" : "absolute"};
             background-color: black;
             bottom: 0;
             left: 0;

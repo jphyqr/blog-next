@@ -1,13 +1,10 @@
 import React from "react";
-import { relicMap, relicStyles } from "./relicConstants";
+import { relicMap, relicStyles, relicComponent } from "./relicConstants";
 import Animations from "./Animations";
 import Router from "next/router";
 import HandRange from "./HandRange";
+import Hanimation from "./Hanimations";
 const ShowRelic = ({ data }) => {
-  let relicComponent = {};
-  relicComponent[relicMap.Animations] = Animations;
-  relicComponent[relicMap.HandRange] = HandRange;
-
   const renderRelic = () => {
     let DynamicRelic;
 

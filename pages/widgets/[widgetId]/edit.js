@@ -62,9 +62,7 @@ const EditWidget = ({ recordId, router, record, relics }) => {
   };
 
   const filterViewableFields = (document) => {
-    console.log("Filterviewabfields before", document);
     const { notViewable, notEditable, ...fields } = document || {};
-    console.log("Filterviewabfields after", fields);
 
     notViewable &&
       Object.keys(notViewable).map((field) => {
@@ -211,9 +209,6 @@ const EditWidget = ({ recordId, router, record, relics }) => {
 };
 
 EditWidget.getInitialProps = async ({ store, query }) => {
-  console.log("SSR edit page store", store);
-  console.log("SSR edit page query", query);
-
   const firestore = firebase.firestore();
 
   const recordRef = firestore.collection("all_widgets").doc(query.widgetId);

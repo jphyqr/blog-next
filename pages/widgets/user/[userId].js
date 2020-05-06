@@ -2,8 +2,12 @@ import React, { useMemo } from "react";
 import { useFirestore, useFirestoreConnect } from "react-redux-firebase";
 import { useSelector } from "react-redux";
 import firebase from "firebase";
-
+import Router from "next/router";
 const UserWidgets = ({ router }) => {
+  const auth = useSelector((state) => state.firebase.auth || {});
+
+  if (auth.isLoaded && auth.isEmpty) Router.push("/");
+
   const widgetQuery = useMemo(
     () => ({
       collection: "widgets",

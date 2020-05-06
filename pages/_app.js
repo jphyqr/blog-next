@@ -5,6 +5,7 @@ import firebase from "../firebase";
 import { ReactReduxFirebaseProvider } from "react-redux-firebase";
 import { createFirestoreInstance } from "redux-firestore";
 import App from "next/app";
+
 function MyApp({ Component, pageProps, store, ...otherProps }) {
   const rrfConfig = {
     userProfile: "users",

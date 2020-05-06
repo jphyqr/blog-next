@@ -12,7 +12,7 @@ const Hanimation = ({ data }) => {
       <style jsx>
         {`
           .container {
-            height: 630px;
+            height: 580px;
             width: 1130px;
             border: 5px solid red;
             background-color: grey;

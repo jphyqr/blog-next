@@ -1,0 +1,21 @@
+{
+  "name": "jamstacks",
+  "displayName": "Jamstacks",
+  "description": "snippets for all the courses on jamstacks.com  snippets for Next.js, React, Hooks, Redux, Firebase",
+  "version": "0.2.0",
+  "publisher": "JohnHashem",
+  "engines": {
+    "vscode": "^1.45.0"
+  },
+  "categories": [
+    "Snippets"
+  ],
+  "contributes": {
+    "snippets": [
+      {
+        "language": "javascript",
+        "path": "./snippets/snippets.code-snippets"
+      }
+    ]
+  }
+}

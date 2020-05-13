@@ -5,7 +5,7 @@ import firebase from "../../../firebase";
 import { relicMap, relicComponent } from "../../relics/relicConstants";
 import Animations from "../../relics/Animations";
 import HandRange from "../../relics/HandRange";
-import Hanimation from "../../relics/Hanimations";
+import Hanimation from "../../relics/Hanimation/Hanimation";
 
 const ExpandedView = ({ showDataSource }) => {
   const [, rerender] = useState(false);

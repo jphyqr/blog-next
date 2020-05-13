@@ -1,6 +1,9 @@
 import Animations from "./Animations";
 import HandRange from "./HandRange";
-import Hanimation from "./Hanimations";
+import Hanimation from "./Hanimation/Hanimation";
+import AppIntro from "./CSEducation/AppIntro";
+import WebAppIntro from "./CSEducation/WebAppIntro";
+import JamStackIntro from "./CSEducation/JamStackIntro";
 
 export const relicMap = {
   Animations: "Animations",
@@ -8,12 +11,19 @@ export const relicMap = {
   NoSQL: "NoSQL",
   HandRange: "HandRange",
   Hanimation: "Hanimation",
+  AppIntro: "AppIntro", //DB Server client
+  WebAppIntro: "WebAppIntro", //Types of Apps, Use of internet, Web Servers
+  JamStackIntro: "JamStackIntro", //Mobile+Web, API
 };
 
 let relicCompTemp = {};
 relicCompTemp[relicMap.Animations] = Animations;
 relicCompTemp[relicMap.HandRange] = HandRange;
 relicCompTemp[relicMap.Hanimation] = Hanimation;
+
+relicCompTemp[relicMap.AppIntro] = AppIntro;
+relicCompTemp[relicMap.WebAppIntro] = WebAppIntro;
+relicCompTemp[relicMap.JamStackIntro] = JamStackIntro;
 export const relicComponent = Object.assign({}, relicCompTemp);
 
 export const relicStyles = {

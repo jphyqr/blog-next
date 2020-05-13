@@ -157,18 +157,16 @@ const EditWidget = ({ recordId, router, record, relics }) => {
         <button onClick={() => Router.push(`/widgets/user/${auth.uid}/`)}>
           All Widgets
         </button>
-
         <DocumentEditor
           updateDatabase={handleUpdateRecord}
-          loa
-          ing={loadingRecord}
+          loading={loadingRecord}
           document={filterViewableFields(_record)}
           notEditable={_record.notEditable}
         />
       </div>
 
       <div className="overlap">
-        <ShowWidget widgetType={_record.widgetName} widgetId={recordId} />
+        {/* <ShowWidget widgetType={_record.widgetName} widgetId={recordId} /> */}
 
         <div className="row">{renderControls()}</div>
       </div>

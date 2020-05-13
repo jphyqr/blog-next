@@ -1,0 +1,93 @@
+{
+  // Place your global snippets here. Each snippet is defined under a snippet name and has a scope, prefix, body and
+  // description. Add comma separated ids of the languages where the snippet is applicable in the scope field. If scope
+  // is left empty or omitted, the snippet gets applied to all languages. The prefix is what is
+  // used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+  // $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders.
+  // Placeholders with the same ids are connected.
+  // Example:
+  // "Print to console": {
+  // 	"scope": "javascript,typescript",
+  // 	"prefix": "log",
+  // 	"body": [
+  // 		"console.log('$1');",
+  // 		"$2"
+  // 	],
+  // 	"description": "Log output to console"
+  // }
+  "react styled functional component ": {
+    "prefix": "rsfc",
+    "body": [
+      "import React from 'react'",
+      "",
+      "",
+      "const ${1:Name} = () => {",
+      "",
+      "",
+      "return (<div className='${2:className}'>",
+      "",
+      "<style jsx>",
+      "{`",
+      ".${2:className}{",
+      "",
+      "}",
+      "`}",
+      "</style>",
+      "</div>)",
+      "",
+      "",
+      "}",
+      "",
+      "export default ${1:Name}"
+    ],
+    "description": "react styled functional component "
+  },
+  "get initial props firestore record": {
+    "prefix": "gipr",
+    "body": [
+      "${1:CLASSNAME}.getInitialProps = async (context) => {",
+      "",
+      "const {query} = context || {}",
+      "//const {store} = context || {}",
+      "",
+      "  const firestore = firebase.firestore();",
+      "",
+      "  const ref= firestore.collection(\"${4:COLLECTIONAME}\").doc(query.${2:ROUTEIDNAME});",
+      "  let snap = await ref.get();",
+      "  let record = snap.data();",
+      "",
+      "  return { ${3:RETURNAME}: Object.assign(record, {id:query.${2:ROUTEIDNAME}}) }",
+      "",
+      "}"
+    ],
+    "description": "get initial props firestore record"
+  },
+
+  "sjgf": {
+    "prefix": "sjgf",
+    "body": [
+      "const ${1:example}= () => {",
+      "    return (",
+      "      <div className=\"container\">",
+      "  ",
+      "        <style jsx>{`",
+      "          .container{",
+      "            display: grid;",
+      "            grid-template-columns: 50% 50%;",
+      "            grid-template-rows: auto;",
+      "            grid-template-areas:",
+      "              \"header header\"",
+      "              \"sub sub\"",
+      "              \"application system\"",
+      "              \"both both\"",
+      "              \"footer footer\";",
+      "          }",
+      "  ",
+      "        `}</style>",
+      "      </div>",
+      "    );",
+      "  };"
+    ],
+    "description": "sjgf"
+  }
+}

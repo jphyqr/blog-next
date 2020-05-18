@@ -1,7 +1,392 @@
 import React, { useState } from "react";
+import EngineeringDecisions from "./EngineeringDecisions";
 
 const AppIntro = () => {
-  const [content, selectContent] = useState("phase2stack");
+  const [content, selectContent] = useState("engineeringDecisions");
+  const [sidebar, hoverSidebar] = useState(false);
+  const renderBuildPlan = () => {
+    return (
+      <div className="container">
+        <h1>What are we building?</h1>
+        <div className="block app">
+          <h3>
+            We have 60 hours to build an app we don't need now, but we should be
+            able to turn it into somtehing great later.
+          </h3>
+          <h4>
+            Lets build an app that one day could be an online store, a social
+            network, a blog, a game. Lets over-build the core as a "Progressive
+            Web App" =>Should feel like a native app, should work anywhere, and
+            should have an great user experience.
+          </h4>
+
+          <div className="two-column-grid">
+            <div className="row title">
+              <span>Features</span>
+              <span>Benefits</span>
+            </div>
+
+            <div className="row">
+              <span>Smooth, Fast, Interactive UI</span>
+              <span>Great User Exerpience</span>
+            </div>
+
+            <div className="row">
+              <span>Use Cloud services/Database and Third party APIs</span>
+              <span>Scalable, Security, Extensability, Maintenance</span>
+            </div>
+
+            <div className="row">
+              <span>Static Site</span>
+              <span>Hackers cant infiltrate a server thats not there</span>
+            </div>
+
+            <div className="row">
+              <span>Globally served over a CDN</span>
+              <span>Fast Load times, even with high traffic</span>
+            </div>
+            <div className="row">
+              <span>Commuicate with Third Party APIs</span>
+              <span>Easy to extend functionality</span>
+            </div>
+
+            <div className="row">
+              <span>Progressive Web App</span>
+              <span>Security, Speed, Responsiveness</span>
+            </div>
+
+            <div className="row">
+              <span>Have a service worker</span>
+              <span>Work offline</span>
+            </div>
+          </div>
+
+          <div className="row title">
+            <span>Limitations</span>
+            <span>Constraints</span>
+          </div>
+
+          <div className="row">
+            <span>Budget</span>
+            <span>Open source libraries</span>
+          </div>
+          <div className="row">
+            <span>Developer Skill</span>
+            <span>Avoid unecessary optimizations</span>
+          </div>
+
+          <h3>Key Metrics of Success</h3>
+          <ol>
+            <li>Accessability</li>
+            <li>User experience </li>
+            <li>Maintainable Code</li>
+            <li>Security </li>
+            <li>Performance</li>
+            <li>Feature Set</li>
+          </ol>
+        </div>
+
+        {/* <div className="block house">
+          <h3>We have $1,000,000 to build a house we don't need</h3>
+          <h4>
+            {" "}
+            Instead, lets get a huge piece of land, build a big, strong,
+            building to "lock up", and decide what to do later
+          </h4>
+
+          <span>House That Has:</span>
+          <ol>
+            <li>Big, solid lot+foundation</li>
+            <li>On Demand services (power/gas/water/sewage)</li>
+            <li>Exterior walls, Windows and Roof</li>
+            <li>Space to add Garage, Pool, Etc</li>
+            <li>Furnace and Cameras to know if anything goes wrong</li>
+          </ol>
+          <p>
+            Such a house would be easy to sell, or easy to take over and DIY the
+            home of your dreams.
+          </p>
+        </div> */}
+        <style jsx>{`
+          h1 {
+            grid-area: header;
+          }
+
+          h2 {
+            grid-area: sub;
+          }
+
+          span {
+            grid-area: sub2;
+          }
+
+          .row {
+            width: 100%;
+            justify-content: space-between;
+            display: flex;
+            background-color: grey;
+          }
+
+          .row:nth-child(odd) {
+            background-color: silver;
+          }
+          .title {
+            background-color: purple;
+          }
+
+          .row span {
+            width: 50%;
+          }
+          .app {
+            grid-area: app;
+          }
+
+          .block {
+            display: flex;
+            flex-direction: column;
+          }
+          .block span {
+            color: white;
+            font-size: 24px;
+          }
+
+          .two-column-grid {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+
+            grid-area: app;
+          }
+          .container {
+            display: grid;
+            grid-template-columns: 100%;
+            grid-template-rows: auto;
+            grid-template-areas:
+              "header"
+              "sub"
+              "sub2"
+              "app";
+
+            grid-gap: 10px 10px;
+          }
+        `}</style>
+      </div>
+    );
+  };
+
+  const renderFullStack = () => {
+    return (
+      <div className="container">
+        <h1>Full App Architecture</h1>
+
+        <div className="card ui">
+          <span className="app">Client</span>
+          <div className="sub">Frameworks</div>
+          <div className="multi-logo">
+            <img src="/nextlogo.jpg" />
+
+            <img src="/reactlogo.jpg" />
+          </div>
+          <div className="sub2">Hosted on</div>
+          <div className="specs local">
+            <span className="title">Local</span>
+            <img src="/firebaselogo.jpg" />
+          </div>
+          <div className="specs remote">
+            {" "}
+            <span className="title">Remote</span>
+            <img src="/githublogo.jpg" />
+          </div>
+          <div className="specs host">
+            {" "}
+            <span className="title">Webhost</span>
+            <img src="/vercellogo.jpg" />
+          </div>
+        </div>
+
+        <div className="card db">
+          <span className="app">Database</span>
+          <div className="sub">Type</div>
+          <div className="multi-logo">
+            <img src="/firebaselogo.jpg" />
+          </div>
+          <div className="sub2">Hosted on</div>
+          <div className="specs local">
+            <span className="title">Local</span>
+          </div>
+          <div className="specs remote">
+            {" "}
+            <span className="title">Remote</span>
+          </div>
+          <div className="specs host">
+            {" "}
+            <span className="title">Webhost</span>
+            <img src="/googlecloudlogo.jpg" />
+          </div>
+        </div>
+
+        <div className="card vercel">
+          <span className="app">APIs</span>
+          <div className="sub">Language</div>
+          <div className="multi-logo">
+            <img src="/nodelogo.jpg" />
+          </div>
+          <div className="sub2">Hosted on</div>
+          <div className="specs local">
+            <span className="title">Local</span>
+            <img src="/firebaselogo.jpg" />
+          </div>
+          <div className="specs remote">
+            {" "}
+            <span className="title">Remote</span>
+            <img src="/githublogo.jpg" />
+          </div>
+          <div className="specs host">
+            {" "}
+            <span className="title">Webhost</span>
+            <img src="/vercellogo.jpg" />
+          </div>
+        </div>
+
+        <div className="card firestore">
+          <span className="app">APIs</span>
+          <div className="sub">Language</div>
+          <div className="multi-logo">
+            <img src="/nodelogo.jpg" />
+          </div>
+          <div className="sub2">Hosted on</div>
+          <div className="specs local">
+            <span className="title">Local</span>
+            <img src="/firebaselogo.jpg" />
+          </div>
+          <div className="specs remote">
+            {" "}
+            <span className="title">Remote</span>
+            <img src="/githublogo.jpg" />
+          </div>
+          <div className="specs host">
+            {" "}
+            <span className="title">Webhost</span>
+            <img src="/googlecloudlogo.jpg" />
+          </div>
+        </div>
+
+        <style jsx>{`
+          .h1 {
+            grid-area: header;
+          }
+
+
+          .firestore{
+            grid-area: firestore;
+          }
+
+          .vercel{
+            grid-area: vercel;
+          }
+
+          .db{
+            grid-area: db;
+          }
+
+          .sub, .sub2 {
+            grid-area: sub;
+            background-color: pink;
+            color white;
+            width: 100%;
+            text-align: center;
+          }
+
+          .sub2{
+            grid-area: sub2;
+            background-color: green;
+          }
+          .app {
+            grid-area: app;
+            place-self: center;
+            background-color: purple;
+            color: white;
+            width: 100%;
+            text-align: center;
+            font-size: 24px;
+          }
+          .specs {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+          }
+          .specs span {
+            width: 100%;
+            background-color: black;
+            color: white;
+            text-align: center;
+          }
+
+          .specs img{
+            height: 50px;
+            width: 50px;
+          }
+
+          .header {
+            grid-area: header;
+          }
+          img {
+            height: 100px;
+            width: 100px;
+          }
+
+          .ui {
+            grid-area: ui;
+            place-self: center;
+          }
+
+          .local {
+            grid-area: local;
+          }
+          .remote {
+            grid-area: remote;
+          }
+          .host {
+            grid-area: host;
+          }
+
+          .multi-logo {
+            grid-area: img;
+            place-self: center;
+            position: relative;
+          }
+
+          .card {
+            background-color: white;
+            border: 3px solid purple;
+            height: auto;
+            width: auto;
+            display: grid;
+            grid-template-columns: 1fv 1fv 1fv;
+            grid-template-rows: auto;
+            grid-template-areas:
+              "app app app"
+              "sub sub sub"
+              "img img img"
+              "sub2 sub2 sub2"
+              "local remote host";
+          }
+
+          .container {
+            display: grid;
+            grid-template-columns: 50% 50%;
+            grid-template-rows: auto;
+            grid-template-areas:
+              "header header"
+              "ui ui"
+              "vercel firestore"
+              "db db"
+              "footer footer";
+          }
+        `}</style>
+      </div>
+    );
+  };
 
   const renderPhase2Stack = () => {
     return (
@@ -1810,61 +2195,91 @@ const AppIntro = () => {
   return (
     <div className="container">
       <div className="header">Introduction to Apps</div>
+      <div
+        className="sidebar-container"
+        onMouseEnter={() => hoverSidebar(true)}
+        onMouseLeave={() => hoverSidebar(false)}
+      >
+        <div className="sidebar">
+          <div
+            className="sidebar-item software"
+            onClick={() => selectContent("engineeringDecisions")}
+          >
+            Software
+          </div>
+          <div
+            className="sidebar-item apps"
+            onClick={() => selectContent("apps")}
+          >
+            Apps
+          </div>
+          <div
+            className="sidebar-item database"
+            onClick={() => selectContent("database")}
+          >
+            Database
+          </div>
+          <div
+            className="sidebar-item server"
+            onClick={() => selectContent("server")}
+          >
+            Client/Server
+          </div>
 
-      <div className="sidebar">
-        <div
-          className="sidebar-item software"
-          onClick={() => selectContent("software")}
-        >
-          Software
-        </div>
-        <div
-          className="sidebar-item apps"
-          onClick={() => selectContent("apps")}
-        >
-          Apps
-        </div>
-        <div
-          className="sidebar-item database"
-          onClick={() => selectContent("database")}
-        >
-          Database
-        </div>
-        <div
-          className="sidebar-item server"
-          onClick={() => selectContent("server")}
-        >
-          Client/Server
-        </div>
-        <div
-          className="sidebar-item phase1stack"
-          onClick={() => selectContent("phase1stack")}
-        >
-          Phase 1 Stack
-        </div>
+          <div
+            className="sidebar-item buildplan"
+            onClick={() => selectContent("buildplan")}
+          >
+            Build Plan
+          </div>
 
-        <div
-          className="sidebar-item phase2stack"
-          onClick={() => selectContent("phase2stack")}
-        >
-          Phase 2 Stack
+          <div
+            className="sidebar-item phase1stack"
+            onClick={() => selectContent("phase1stack")}
+          >
+            Phase 1 Stack
+          </div>
+
+          <div
+            className="sidebar-item phase2stack"
+            onClick={() => selectContent("phase2stack")}
+          >
+            Phase 2 Stack
+          </div>
+          <div
+            className="sidebar-item fullStack"
+            onClick={() => selectContent("fullStack")}
+          >
+            Full Stack
+          </div>
+          <div
+            className="sidebar-item engineeringDecisions"
+            onClick={() => selectContent("engineeringDecisions")}
+          >
+            Engineering Decisions
+          </div>
         </div>
       </div>
-
       <div className="main">
-        {content === "software"
-          ? renderSoftware()
-          : content === "apps"
-          ? renderApps()
-          : content === "database"
-          ? renderDatabase()
-          : content === "server"
-          ? renderServer()
-          : content === "phase1stack"
-          ? renderLanguages()
-          : content === "phase2stack"
-          ? renderPhase2Stack()
-          : null}
+        {content === "software" ? (
+          renderSoftware()
+        ) : content === "apps" ? (
+          renderApps()
+        ) : content === "database" ? (
+          renderDatabase()
+        ) : content === "server" ? (
+          renderServer()
+        ) : content === "phase1stack" ? (
+          renderLanguages()
+        ) : content === "phase2stack" ? (
+          renderPhase2Stack()
+        ) : content === "fullStack" ? (
+          renderFullStack()
+        ) : content === "buildplan" ? (
+          renderBuildPlan()
+        ) : content === "engineeringDecisions" ? (
+          <EngineeringDecisions />
+        ) : null}
       </div>
       <style jsx>
         {`
@@ -1878,20 +2293,64 @@ const AppIntro = () => {
             font-size: 24px;
             padding: 10px 0px;
           }
-          .sidebar {
-            grid-area: sidebar;
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
 
-            grid-gap: 1rem;
+          .sidebar-container {
+            overflow: hidden;
+            grid-area: sidebar;
+            position: relative;
+          }
+          .sidebar {
+            background-color: grey;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            top: 0;
+            left: ${sidebar ? 0 : "-99%"};
+            transition: 1s ease;
+          }
+          .sidebar-container:after {
+            content: "⚙";
+            position: absolute;
+            font-size: 50px;
+            color: grey;
+            top: 0;
+            left: 0;
+            opacity: ${sidebar ? 0 : 1};
+            transition: 1s ease;
           }
           .sidebar-item {
             text-align: center;
             font-size: 20px;
+            padding: 10px 0px;
             text-transform: uppercase;
             align-self: center;
+            width: 100%;
+            background-color: silver;
+            font-weight: bold;
+            font-family: sans-serif;
           }
 
+          .sidebar-item:nth-child(odd) {
+            background-color: lightgrey;
+          }
+
+          .sidebar-item::hover {
+            background-color: red;
+          }
+
+          .engineeringDecisions {
+            background-color: ${content === "engineeringDecisions"
+              ? "green"
+              : ""};
+          }
+
+          .buildplan {
+            background-color: ${content === "buildplan" ? "green" : ""};
+          }
+          .fullStack {
+            background-color: ${content === "fullStack" ? "green" : ""};
+          }
           .phase1stack {
             background-color: ${content === "phase1stack" ? "green" : ""};
           }
@@ -1919,13 +2378,13 @@ const AppIntro = () => {
             display: grid;
             font-family: sans-serif;
             background-color: gainsboro;
-            grid-template-columns: 100px 800px;
-            grid-template-rows: 50px 700px;
+            grid-template-columns: 170px 800px;
+            grid-template-rows: 50px 1000px;
             grid-template-areas:
               "header header"
               "sidebar main";
           }
-          grid-gap: 10px 70px;
+          grid-gap: 10px;
         `}
       </style>
     </div>

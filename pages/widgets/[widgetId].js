@@ -57,9 +57,6 @@ export async function getStaticPaths() {
 
   const paths = loadedRelics.map((post) => `/widgets/${post.id}`);
 
-  const pathsedit = loadedRelics.map((post) => `/widgets/${post.id}/edit`);
-
-  Object.assign([], ...paths, ...pathsedit);
   console.log("GET STATIC PATHS", paths);
   // We'll pre-render only these paths at build time.
   // { fallback: false } means other routes should 404.

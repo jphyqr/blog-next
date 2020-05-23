@@ -28,7 +28,10 @@ import { themeColors } from "../../layout/themeConstants";
 import AvatarSquare from "../common/AvatarSquare/AvatarSquare";
 import WebsiteTicker from "../common/WebsiteTicker/WebsiteTicker";
 
-const CodeStream = ({ id, widgetId }) => {
+const CodeStream = ({ data }) => {
+  const widgetId = data.id;
+
+  console.log("codestream", data);
   const widgetHeight = widgetHeights.Medium;
 
   let tickerComponent = {};
@@ -54,7 +57,7 @@ const CodeStream = ({ id, widgetId }) => {
 
       storeAs: "widgetConfig",
     }),
-    [id, widgetId]
+    [widgetId]
   );
   useFirestoreConnect(widgetQuery);
   const widgetConfig = useSelector(
@@ -96,7 +99,7 @@ const CodeStream = ({ id, widgetId }) => {
 
   useEffect(() => {
     const getRecordById = async () => {
-      if (!_.isEmpty(id) && !_.isEmpty(widgetId)) {
+      if (!_.isEmpty(widgetId) && !_.isEmpty(widgetId)) {
         const recordRef = firestore.collection("all_widgets").doc(widgetId);
         let recordSnap = await recordRef.get();
         let record = recordSnap.data();

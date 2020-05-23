@@ -7,6 +7,8 @@ import { createFirestoreInstance } from "redux-firestore";
 import App from "next/app";
 
 function MyApp({ Component, pageProps, store, ...otherProps }) {
+  console.log({ otherProps });
+
   const rrfConfig = {
     userProfile: "users",
     useFirestoreForProfile: true, // Firestore for Profile instead of Realtime DB
@@ -28,10 +30,10 @@ function MyApp({ Component, pageProps, store, ...otherProps }) {
   );
 }
 
-MyApp.getInitialProps = async (appContext) => {
-  const appProps = await App.getInitialProps(appContext);
-  console.log({ appProps });
-  return { ...appProps };
-};
+// MyApp.getInitialProps = async (appContext) => {
+//   const appProps = await App.getInitialProps(appContext);
+//   console.log({ appProps });
+//   return { ...appProps };
+// };
 
 export default withRedux(initializeStore)(MyApp);

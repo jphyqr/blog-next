@@ -8,7 +8,10 @@ import Router from "next/router";
 import DocumentEditor from "../../../components/DocumentEditor";
 import ShowWidget from "../../../components/widgets/ShowWidget";
 
-const EditWidget = ({ recordId, router, record, relics }) => {
+const EditWidget = ({ data }) => {
+  console.log("editwidget", data);
+
+  const { relics, id: recordId, ...record } = data || [];
   const firestore = firebase.firestore();
   const auth = useSelector((state) => state.firebase.auth || {});
 
@@ -73,12 +76,9 @@ const EditWidget = ({ recordId, router, record, relics }) => {
   };
 
   const updateShowDataSource = async (id) => {
-    await firestore
-      .collection("all_widgets")
-      .doc(router?.query?.widgetId)
-      .update({
-        showDataSource: id,
-      });
+    await firestore.collection("all_widgets").doc(recordId).update({
+      showDataSource: id,
+    });
 
     setExpansion(true);
   };
@@ -206,12 +206,16 @@ const EditWidget = ({ recordId, router, record, relics }) => {
   );
 };
 
-EditWidget.getInitialProps = async ({ store, query }) => {
+export async function getStaticProps({ params, preview = false }) {
+  console.log("GET STATIC PROPS", params);
   const firestore = firebase.firestore();
+  const relicsRef = firestore.collection("all_widgets").doc(params?.widgetId);
 
-  const recordRef = firestore.collection("all_widgets").doc(query.widgetId);
-  let recordSnap = await recordRef.get();
-  let record = recordSnap.data();
+  let relicsSnap = await relicsRef.get();
+
+  let data = await relicsSnap.data();
+  console.log("GET STATIC PROPS", data);
+  Object.assign(data, { id: params.widgetId });
 
   const dataRef = firestore.collection("relics");
   let dataSnapShot = await dataRef.get();
@@ -224,7 +228,32 @@ EditWidget.getInitialProps = async ({ store, query }) => {
     });
   });
 
-  return { record, recordId: query.widgetId, relics };
-};
+  Object.assign(data, { relics });
+
+  return { props: { data: data } };
+}
+
+export async function getStaticPaths() {
+  // Call an external API endpoint to get posts
+  const firestore = firebase.firestore();
+  const relicsRef = firestore.collection("all_widgets");
+
+  let relicsSnap = await relicsRef.get();
+
+  let loadedRelics = [];
+
+  relicsSnap.forEach((doc) => {
+    loadedRelics.push({
+      id: doc.id,
+      ...doc.data(),
+    });
+  });
+
+  const paths = loadedRelics.map((post) => `/widgets/${post.id}/edit`);
+  console.log("GET STATIC PATHS", paths);
+  // We'll pre-render only these paths at build time.
+  // { fallback: false } means other routes should 404.
+  return { paths, fallback: false };
+}
 
 export default EditWidget;

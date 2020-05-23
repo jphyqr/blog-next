@@ -3,7 +3,7 @@ import CodeStream from "./CodeStream/CodeStream";
 import PokerStream from "./PokerStream/PokerStream";
 import { widgets } from "./widgetConstants";
 
-const ShowWidget = ({ widgetType, widgetId }) => {
+const ShowWidget = ({ data }) => {
   let widgetComponent = {};
   widgetComponent[widgets.CodeStream] = CodeStream;
   widgetComponent[widgets.PokerStream] = PokerStream;
@@ -11,8 +11,8 @@ const ShowWidget = ({ widgetType, widgetId }) => {
   const renderWidget = () => {
     let DynamicWidget;
 
-    DynamicWidget = widgetComponent[`${widgetType}`];
-    return <DynamicWidget id={widgetId} widgetId={widgetId} />;
+    DynamicWidget = widgetComponent[`${data.widgetName}`];
+    return <DynamicWidget data={data} />;
   };
 
   return (

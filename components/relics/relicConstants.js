@@ -4,6 +4,7 @@ import Hanimation from "./Hanimation/Hanimation";
 import AppIntro from "./CSEducation/AppIntro";
 import WebAppIntro from "./CSEducation/WebAppIntro";
 import JamStackIntro from "./CSEducation/JamStackIntro";
+import SSG from "./CSEducation/DesignPatterns/SSG";
 
 export const relicMap = {
   Animations: "Animations",
@@ -14,6 +15,7 @@ export const relicMap = {
   AppIntro: "AppIntro", //DB Server client
   WebAppIntro: "WebAppIntro", //Types of Apps, Use of internet, Web Servers
   JamStackIntro: "JamStackIntro", //Mobile+Web, API
+  SSG: "SSG",
 };
 
 let relicCompTemp = {};
@@ -24,6 +26,7 @@ relicCompTemp[relicMap.Hanimation] = Hanimation;
 relicCompTemp[relicMap.AppIntro] = AppIntro;
 relicCompTemp[relicMap.WebAppIntro] = WebAppIntro;
 relicCompTemp[relicMap.JamStackIntro] = JamStackIntro;
+relicCompTemp[relicMap.SSG] = SSG;
 export const relicComponent = Object.assign({}, relicCompTemp);
 
 export const relicStyles = {

@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import EngineeringDecisions from "./EngineeringDecisions";
+import DesignPatterns from "./DesignPatterns/DesignPatterns";
 
 const AppIntro = () => {
-  const [content, selectContent] = useState("engineeringDecisions");
+  const [content, selectContent] = useState("designPatterns");
   const [sidebar, hoverSidebar] = useState(false);
   const renderBuildPlan = () => {
     return (
@@ -37,27 +38,21 @@ const AppIntro = () => {
             </div>
 
             <div className="row">
-              <span>Static Site</span>
-              <span>Hackers cant infiltrate a server thats not there</span>
+              <span>Static serve when possible</span>
+              <span>
+                Hackers cant hijack a server that doesn't exist. No server wait.
+                Caching on CDN
+              </span>
             </div>
 
             <div className="row">
               <span>Globally served over a CDN</span>
               <span>Fast Load times, even with high traffic</span>
             </div>
-            <div className="row">
-              <span>Commuicate with Third Party APIs</span>
-              <span>Easy to extend functionality</span>
-            </div>
 
             <div className="row">
               <span>Progressive Web App</span>
-              <span>Security, Speed, Responsiveness</span>
-            </div>
-
-            <div className="row">
-              <span>Have a service worker</span>
-              <span>Work offline</span>
+              <span>Security, Speed, Caching</span>
             </div>
           </div>
 
@@ -75,14 +70,19 @@ const AppIntro = () => {
             <span>Avoid unecessary optimizations</span>
           </div>
 
-          <h3>Key Metrics of Success</h3>
+          <h3>Key Requirements</h3>
           <ol>
-            <li>Accessability</li>
-            <li>User experience </li>
-            <li>Maintainable Code</li>
-            <li>Security </li>
+            <li>User Experience</li>
+            <li>SEO</li>
+            <li>Scalable</li>
             <li>Performance</li>
-            <li>Feature Set</li>
+            <li>Security</li>
+          </ol>
+
+          <h3>Key Limitations</h3>
+          <ol>
+            <li>Developer Skill</li>
+            <li>Budget</li>
           </ol>
         </div>
 
@@ -2248,6 +2248,13 @@ const AppIntro = () => {
           </div>
           <div
             className="sidebar-item fullStack"
+            onClick={() => selectContent("designPatterns")}
+          >
+            Design Patterns
+          </div>
+
+          <div
+            className="sidebar-item fullStack"
             onClick={() => selectContent("fullStack")}
           >
             Full Stack
@@ -2279,6 +2286,8 @@ const AppIntro = () => {
           renderBuildPlan()
         ) : content === "engineeringDecisions" ? (
           <EngineeringDecisions />
+        ) : content === "designPatterns" ? (
+          <DesignPatterns />
         ) : null}
       </div>
       <style jsx>
@@ -2343,6 +2352,10 @@ const AppIntro = () => {
             background-color: ${content === "engineeringDecisions"
               ? "green"
               : ""};
+          }
+
+          .designPatterns {
+            background-color: ${content === "designPatterns" ? "green" : ""};
           }
 
           .buildplan {

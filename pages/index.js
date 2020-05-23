@@ -67,11 +67,4 @@ const Index = () => {
   );
 };
 
-Index.getInitialProps = async (context) => {
-  console.log("GIP", context);
-  return {
-    props: { test: "test" },
-  };
-};
-
 export default Index;

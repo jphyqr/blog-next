@@ -8,25 +8,25 @@ import Router from "next/router";
 import DocumentEditor from "../../../components/DocumentEditor";
 import ShowWidget from "../../../components/widgets/ShowWidget";
 
-const EditWidget = ({ data }) => {
-  console.log("editwidget", data);
+const EditWidget = ({ router }) => {
+  console.log("editwidget", router);
 
-  const { relics, id: recordId, ...record } = data || [];
   const firestore = firebase.firestore();
   const auth = useSelector((state) => state.firebase.auth || {});
 
   if (auth.isLoaded && auth.isEmpty) Router.push("/");
 
-  const [_record, setRecord] = useState(record);
+  const [_id, setId] = useState(router?.query?.widgetId || {});
+  const [_record, setRecord] = useState({});
   const blockControls = !_.isEmpty(_record.showDataSource);
   const recordQuery = useMemo(
     () => ({
       collection: "all_widgets",
-      doc: record.id,
+      doc: router?.query?.widgetId,
 
       storeAs: "recordSnap",
     }),
-    [record.id]
+    [router]
   );
   useFirestoreConnect(recordQuery);
   const recordSnap = useSelector(
@@ -38,7 +38,9 @@ const EditWidget = ({ data }) => {
 
   useEffect(() => {
     const getRecordById = async () => {
-      const recordRef = firestore.collection("all_widgets").doc(recordId);
+      const recordRef = firestore
+        .collection("all_widgets")
+        .doc(router?.query?.widgetId);
       let recordSnap = await recordRef.get();
       let updatedRecord = recordSnap.data();
 
@@ -119,37 +121,37 @@ const EditWidget = ({ data }) => {
     }
   }, [_record.showDataSource]);
 
-  const renderControls = () => {
-    return relics.map((source) => {
-      return (
-        <div className="column">
-          <button
-            disabled={blockControls}
-            onClick={() => updateShowDataSource(source.id)}
-          >
-            {`${source.title}(${source.duration}s)`}
-          </button>
+  // const renderControls = () => {
+  //   return relics.map((source) => {
+  //     return (
+  //       <div className="column">
+  //         <button
+  //           disabled={blockControls}
+  //           onClick={() => updateShowDataSource(source.id)}
+  //         >
+  //           {`${source.title}(${source.duration}s)`}
+  //         </button>
 
-          <button
-            onClick={() =>
-              Router.push("/relics/[relicId]", `/relics/${source.id}`)
-            }
-          >
-            Edit
-          </button>
-          <style jsx>
-            {`
-              .column {
-                display: flex;
-                flex-direction: column;
-                width: 150px;
-              }
-            `}
-          </style>
-        </div>
-      );
-    });
-  };
+  //         <button
+  //           onClick={() =>
+  //             Router.push("/relics/[relicId]", `/relics/${source.id}`)
+  //           }
+  //         >
+  //           Edit
+  //         </button>
+  //         <style jsx>
+  //           {`
+  //             .column {
+  //               display: flex;
+  //               flex-direction: column;
+  //               width: 150px;
+  //             }
+  //           `}
+  //         </style>
+  //       </div>
+  //     );
+  //   });
+  // };
 
   return (
     <div className="stacked-container">
@@ -168,7 +170,7 @@ const EditWidget = ({ data }) => {
       <div className="overlap">
         {/* <ShowWidget widgetType={_record.widgetName} widgetId={recordId} /> */}
 
-        <div className="row">{renderControls()}</div>
+        {/* <div className="row">{renderControls()}</div> */}
       </div>
 
       <style jsx>{`
@@ -206,54 +208,54 @@ const EditWidget = ({ data }) => {
   );
 };
 
-export async function getStaticProps({ params, preview = false }) {
-  console.log("GET STATIC PROPS", params);
-  const firestore = firebase.firestore();
-  const relicsRef = firestore.collection("all_widgets").doc(params?.widgetId);
+// export async function getStaticProps({ params, preview = false }) {
+//   console.log("GET STATIC PROPS", params);
+//   const firestore = firebase.firestore();
+//   const relicsRef = firestore.collection("all_widgets").doc(params?.widgetId);
 
-  let relicsSnap = await relicsRef.get();
+//   let relicsSnap = await relicsRef.get();
 
-  let data = await relicsSnap.data();
-  console.log("GET STATIC PROPS", data);
-  Object.assign(data, { id: params.widgetId });
+//   let data = await relicsSnap.data();
+//   console.log("GET STATIC PROPS", data);
+//   Object.assign(data, { id: params.widgetId });
 
-  const dataRef = firestore.collection("relics");
-  let dataSnapShot = await dataRef.get();
+//   const dataRef = firestore.collection("relics");
+//   let dataSnapShot = await dataRef.get();
 
-  let relics = [];
-  dataSnapShot.forEach((doc) => {
-    relics.push({
-      id: doc.id,
-      ...doc.data(),
-    });
-  });
+//   let relics = [];
+//   dataSnapShot.forEach((doc) => {
+//     relics.push({
+//       id: doc.id,
+//       ...doc.data(),
+//     });
+//   });
 
-  Object.assign(data, { relics });
+//   Object.assign(data, { relics });
 
-  return { props: { data: data } };
-}
+//   return { props: { data: data } };
+// }
 
-export async function getStaticPaths() {
-  // Call an external API endpoint to get posts
-  const firestore = firebase.firestore();
-  const relicsRef = firestore.collection("all_widgets");
+// export async function getStaticPaths() {
+//   // Call an external API endpoint to get posts
+//   const firestore = firebase.firestore();
+//   const relicsRef = firestore.collection("all_widgets");
 
-  let relicsSnap = await relicsRef.get();
+//   let relicsSnap = await relicsRef.get();
 
-  let loadedRelics = [];
+//   let loadedRelics = [];
 
-  relicsSnap.forEach((doc) => {
-    loadedRelics.push({
-      id: doc.id,
-      ...doc.data(),
-    });
-  });
+//   relicsSnap.forEach((doc) => {
+//     loadedRelics.push({
+//       id: doc.id,
+//       ...doc.data(),
+//     });
+//   });
 
-  const paths = loadedRelics.map((post) => `/widgets/${post.id}/edit`);
-  console.log("GET STATIC PATHS", paths);
-  // We'll pre-render only these paths at build time.
-  // { fallback: false } means other routes should 404.
-  return { paths, fallback: false };
-}
+//   const paths = loadedRelics.map((post) => `/widgets/${post.id}/edit`);
+//   console.log("GET STATIC PATHS", paths);
+//   // We'll pre-render only these paths at build time.
+//   // { fallback: false } means other routes should 404.
+//   return { paths, fallback: false };
+// }
 
 export default EditWidget;
